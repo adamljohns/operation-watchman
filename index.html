@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Operation Watchman</title>
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#D4AF37" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #D4AF37;
+      --gold-light: #F0D060;
+      --gold-dark: #A8881C;
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --bg3: #1a1a1a;
+      --border: #2a2a2a;
+      --text: #e8e8e8;
+      --text-muted: #888;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Open Sans', sans-serif;
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(180deg, #0a0a0a 0%, #111 100%);
+      border-bottom: 2px solid var(--gold);
+      padding: 20px 16px 16px;
+      text-align: center;
+    }
+    header .eagle {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 6px;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      line-height: 1.2;
+    }
+    header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* DAY COUNTER */
+    .day-banner {
+      background: var(--gold);
+      color: #000;
+      text-align: center;
+      padding: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .day-banner span {
+      font-size: 0.85rem;
+      font-family: 'Open Sans', sans-serif;
+      display: block;
+      font-weight: 400;
+      opacity: 0.75;
+    }
+
+    /* STREAK */
+    .streak-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
+    .streak-bar .flame { font-size: 1.4rem; }
+    .streak-bar .streak-info {
+      text-align: center;
+    }
+    .streak-bar .streak-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .streak-bar .streak-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .streak-bar .progress-wrap {
+      flex: 1;
+      max-width: 200px;
+    }
+    .streak-bar .progress-track {
+      background: var(--border);
+      border-radius: 4px;
+      height: 8px;
+      overflow: hidden;
+    }
+    .streak-bar .progress-fill {
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+    .streak-bar .progress-pct {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+      text-align: right;
+    }
+
+    /* MAIN CONTENT */
+    main {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* SECTION CARDS */
+    .card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: var(--bg3);
+      border-bottom: 1px solid var(--border);
+    }
+    .card-header .icon { font-size: 1.1rem; }
+    .card-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--gold);
+      letter-spacing: 0.03em;
+    }
+    .card-header .badge {
+      margin-left: auto;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      background: var(--border);
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+    .card-header .badge.done {
+      background: rgba(212, 175, 55, 0.2);
+      color: var(--gold);
+    }
+
+    /* CHECKLIST */
+    .checklist { padding: 8px 0; }
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .check-item:last-child { border-bottom: none; }
+    .check-item:active { background: rgba(212, 175, 55, 0.05); }
+
+    .check-box {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .check-item.checked .check-box {
+      border-color: var(--gold);
+      background: var(--gold);
+    }
+    .check-box::after {
+      content: '';
+      width: 6px;
+      height: 10px;
+      border-right: 2px solid #000;
+      border-bottom: 2px solid #000;
+      transform: rotate(45deg) translateY(-1px);
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .check-item.checked .check-box::after { opacity: 1; }
+
+    .check-label {
+      flex: 1;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .check-item.checked .check-label {
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+    .check-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* DATE DISPLAY */
+    .date-display {
+      text-align: center;
+      padding: 8px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* RESET BUTTON */
+    .reset-wrap {
+      text-align: center;
+      margin-top: 8px;
+    }
+    .btn-reset {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      font-family: 'Open Sans', sans-serif;
+      letter-spacing: 0.05em;
+      transition: all 0.2s;
+    }
+    .btn-reset:hover {
+      border-color: var(--gold-dark);
+      color: var(--gold);
+    }
+
+    /* TOAST */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(60px);
+      background: var(--gold);
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 24px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      opacity: 0;
+      transition: all 0.3s;
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 999;
+    }
+    #toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* INSTALL BANNER */
+    #install-banner {
+      display: none;
+      background: rgba(212,175,55,0.1);
+      border: 1px solid var(--gold-dark);
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.82rem;
+    }
+    #install-banner.visible { display: flex; }
+    #install-banner button {
+      margin-left: auto;
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="eagle">⚔️</span>
+  <h1>Operation Watchman</h1>
+  <h2>90-Day Men's Formation</h2>
+</header>
+
+<div class="day-banner" id="dayBanner">
+  Day — of 90
+  <span id="dayDate">—</span>
+</div>
+
+<div class="streak-bar">
+  <span class="flame">🔥</span>
+  <div class="streak-info">
+    <div class="streak-num" id="streakNum">0</div>
+    <div class="streak-label">Day Streak</div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    </div>
+    <div class="progress-pct" id="progressPct">0 / 90 days</div>
+  </div>
+</div>
+
+<main>
+
+  <!-- INSTALL BANNER -->
+  <div id="install-banner">
+    📲 Install Watchman on your home screen for offline access
+    <button id="installBtn">Install</button>
+  </div>
+
+  <!-- READINGS -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">📖</span>
+      <h3>Today's Readings</h3>
+      <span class="badge" id="readingsBadge">0 / 5</span>
+    </div>
+    <div class="checklist" id="readingsList">
+      <div class="check-item" data-group="readings" data-key="morning_wisdom" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-label">
+          Morning Wisdom
+          <span class="check-sub">Proverbs · Psalms · Wisdom literature</span>
+        </div>
+      </div>
+      <div class="check-item" data-group="readings" data-key="husbands_post" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-label">
+          Husband's Post
+          <span class="check-sub">Ephesians · Marriage & love passages</span>
+        </div>
+      </div>
+      <div class="check-item" data-group="readings" data-key="fathers_charge" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-label">
+          Father's Charge
+          <span class="check-sub">Deuteronomy · Legacy & instruction</span>
+        </div>
+      </div>
+      <div class="check-item" data-group="readings" data-key="citizens_stand" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-label">
+          Citizen's Stand
+          <span class="check-sub">Romans · Civic duty & righteousness</span>
+        </div>
+      </div>
+      <div class="check-item" data-group="readings" data-key="evening_peace" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-label">
+          Evening Peace
+          <span class="check-sub">Reflection · Gratitude · Rest</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DISCIPLINES -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🛡️</span>
+      <h3>Daily Disciplines</h3>
+      <span class="badge" id="discBadge">0 / 6</span>
+    </div>
+    <div class="checklist" id="discList">
+      <div class="check-item" data-group="disc" data-key="cold_shower" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-label">
+          Cold Shower
+          <span class="check-sub">Discipline the body, strengthen the mind</span>
+        </div>
+      </div>
+      <div class="check-item" data-group="disc" data-key="fasting" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-label">
+          Fasting
+          <span class="check-sub">Skip a meal · Fast from distraction</span>
+        </div>
+      </div>
+      <div class="check-item" data-group="disc" data-key="no_alcohol" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-label">
+          No Alcohol
+          <span class="check-sub">Clear mind · Full presence</span>
+        </div>
+      </div>
+      <div class="check-item" data-group="disc" data-key="no_screens" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-label">
+          No Screens After 9PM
+          <span class="check-sub">Protect sleep · Protect your mind</span>
+        </div>
+      </div>
+      <div class="check-item" data-group="disc" data-key="prayer_morning" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-label">
+          Morning Prayer
+          <span class="check-sub">Before the battle begins</span>
+        </div>
+      </div>
+      <div class="check-item" data-group="disc" data-key="prayer_evening" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div class="check-label">
+          Evening Prayer
+          <span class="check-sub">Account · Surrender · Rest</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="date-display" id="dateDisplay">—</div>
+
+  <div class="reset-wrap">
+    <button class="btn-reset" onclick="resetDay()">↺ Reset Today's Checks</button>
+  </div>
+
+</main>
+
+<div id="toast"></div>
+
+<script>
+  // ─────────────────────────────────────
+  // CONSTANTS
+  // ─────────────────────────────────────
+  const START_DATE_KEY  = 'ow_start_date';
+  const DAILY_KEY       = 'ow_daily_';       // + YYYY-MM-DD
+  const STREAK_KEY      = 'ow_streak';
+  const LAST_CHECK_KEY  = 'ow_last_checked';
+  const TOTAL_ITEMS     = 11; // 5 readings + 6 disciplines
+  const READINGS_COUNT  = 5;
+  const DISC_COUNT      = 6;
+
+  // ─────────────────────────────────────
+  // DATE HELPERS
+  // ─────────────────────────────────────
+  function todayStr() {
+    const d = new Date();
+    return d.toISOString().split('T')[0];
+  }
+
+  function getStartDate() {
+    let sd = localStorage.getItem(START_DATE_KEY);
+    if (!sd) {
+      sd = todayStr();
+      localStorage.setItem(START_DATE_KEY, sd);
+    }
+    return sd;
+  }
+
+  function getDayNumber() {
+    const start = new Date(getStartDate() + 'T00:00:00');
+    const today = new Date(todayStr() + 'T00:00:00');
+    const diff = Math.floor((today - start) / 86400000) + 1;
+    return Math.min(diff, 90);
+  }
+
+  function formatDateDisplay(dateStr) {
+    const d = new Date(dateStr + 'T00:00:00');
+    return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  }
+
+  // ─────────────────────────────────────
+  // DATA LOAD / SAVE
+  // ─────────────────────────────────────
+  function getTodayData() {
+    const raw = localStorage.getItem(DAILY_KEY + todayStr());
+    return raw ? JSON.parse(raw) : {};
+  }
+
+  function saveTodayData(data) {
+    localStorage.setItem(DAILY_KEY + todayStr(), JSON.stringify(data));
+  }
+
+  // ─────────────────────────────────────
+  // STREAK CALCULATION
+  // ─────────────────────────────────────
+  function isDayComplete(dateStr) {
+    const raw = localStorage.getItem(DAILY_KEY + dateStr);
+    if (!raw) return false;
+    const data = JSON.parse(raw);
+    // All 11 items must be checked
+    const keys = [
+      'morning_wisdom','husbands_post','fathers_charge','citizens_stand','evening_peace',
+      'cold_shower','fasting','no_alcohol','no_screens','prayer_morning','prayer_evening'
+    ];
+    return keys.every(k => data[k] === true);
+  }
+
+  function calculateStreak() {
+    let streak = 0;
+    const today = new Date(todayStr() + 'T00:00:00');
+    // Walk backwards from yesterday (today might still be in progress)
+    for (let i = 1; i <= 90; i++) {
+      const d = new Date(today);
+      d.setDate(d.getDate() - i);
+      const ds = d.toISOString().split('T')[0];
+      if (isDayComplete(ds)) {
+        streak++;
+      } else {
+        break;
+      }
+    }
+    // If today is already complete, add 1
+    if (isDayComplete(todayStr())) streak++;
+    return streak;
+  }
+
+  // ─────────────────────────────────────
+  // RENDER
+  // ─────────────────────────────────────
+  function render() {
+    const today = todayStr();
+    const data  = getTodayData();
+    const dayNum = getDayNumber();
+
+    // Day banner
+    document.getElementById('dayBanner').childNodes[0].textContent = `Day ${dayNum} of 90`;
+    document.getElementById('dayDate').textContent = formatDateDisplay(today);
+    document.getElementById('dateDisplay').textContent = `Tracking: ${formatDateDisplay(today)}`;
+
+    // Restore checkboxes
+    document.querySelectorAll('.check-item').forEach(item => {
+      const key = item.dataset.key;
+      if (data[key]) {
+        item.classList.add('checked');
+      } else {
+        item.classList.remove('checked');
+      }
+    });
+
+    // Update badges
+    const readingsDone = ['morning_wisdom','husbands_post','fathers_charge','citizens_stand','evening_peace']
+      .filter(k => data[k]).length;
+    const discDone = ['cold_shower','fasting','no_alcohol','no_screens','prayer_morning','prayer_evening']
+      .filter(k => data[k]).length;
+
+    const rBadge = document.getElementById('readingsBadge');
+    rBadge.textContent = `${readingsDone} / 5`;
+    rBadge.className = 'badge' + (readingsDone === 5 ? ' done' : '');
+
+    const dBadge = document.getElementById('discBadge');
+    dBadge.textContent = `${discDone} / 6`;
+    dBadge.className = 'badge' + (discDone === 6 ? ' done' : '');
+
+    // Streak
+    const streak = calculateStreak();
+    document.getElementById('streakNum').textContent = streak;
+
+    // Progress bar (days completed out of 90)
+    const pct = Math.round((dayNum / 90) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPct').textContent = `Day ${dayNum} of 90`;
+
+    // All done today toast check
+    if (readingsDone === 5 && discDone === 6) {
+      const lastCheck = localStorage.getItem(LAST_CHECK_KEY);
+      if (lastCheck !== today) {
+        localStorage.setItem(LAST_CHECK_KEY, today);
+        setTimeout(() => showToast('🔥 Day ' + dayNum + ' Complete! Watchman stands.'), 400);
+      }
+    }
+  }
+
+  // ─────────────────────────────────────
+  // TOGGLE
+  // ─────────────────────────────────────
+  function toggle(el) {
+    const key   = el.dataset.key;
+    const data  = getTodayData();
+    data[key]   = !data[key];
+    saveTodayData(data);
+    render();
+  }
+
+  // ─────────────────────────────────────
+  // RESET
+  // ─────────────────────────────────────
+  function resetDay() {
+    if (!confirm('Reset all checks for today?')) return;
+    localStorage.removeItem(DAILY_KEY + todayStr());
+    localStorage.removeItem(LAST_CHECK_KEY);
+    render();
+    showToast('Today reset.');
+  }
+
+  // ─────────────────────────────────────
+  // TOAST
+  // ─────────────────────────────────────
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  // ─────────────────────────────────────
+  // PWA INSTALL PROMPT
+  // ─────────────────────────────────────
+  let deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById('install-banner').classList.add('visible');
+  });
+  document.getElementById('installBtn').addEventListener('click', () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(() => {
+        deferredPrompt = null;
+        document.getElementById('install-banner').classList.remove('visible');
+      });
+    }
+  });
+
+  // ─────────────────────────────────────
+  // SERVICE WORKER REGISTRATION
+  // ─────────────────────────────────────
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(err => {
+        console.warn('SW registration failed:', err);
+      });
+    });
+  }
+
+  // ─────────────────────────────────────
+  // INIT
+  // ─────────────────────────────────────
+  getStartDate(); // ensure start date is set
+  render();
+</script>
+</body>
+</html>
