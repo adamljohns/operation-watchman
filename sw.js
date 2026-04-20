@@ -5,15 +5,14 @@ const CACHE_NAME = 'watchman-v1';
 const PRECACHE_URLS = [
   '/',
   '/index.html',
-  '/manifest.json',
-  'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap'
+  '/manifest.json'
 ];
 
 // ── Install: pre-cache core assets ──
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(PRECACHE_URLS.filter(u => !u.startsWith('http'))))
+      .then(cache => cache.addAll(PRECACHE_URLS))
       .then(() => self.skipWaiting())
   );
 });
@@ -51,10 +50,11 @@ self.addEventListener('fetch', event => {
           caches.open(CACHE_NAME).then(cache => cache.put(event.request, cloned));
           return response;
         }).catch(() => {
-          // Offline fallback for navigation
+          // Offline fallback for navigation when no cached match exists
           if (event.request.mode === 'navigate') {
             return caches.match('/index.html');
           }
+          return Response.error();
         });
       })
     );
