@@ -1,11 +1,12 @@
 // Operation Watchman — Service Worker
 // Provides offline support via cache-first strategy
 
-const CACHE_NAME = 'watchman-v1';
+const CACHE_NAME = 'watchman-v2';
 const PRECACHE_URLS = [
   '/',
   '/index.html',
-  '/manifest.json'
+  '/manifest.json',
+  '/content/plans/watchman-90.json'
 ];
 
 // ── Install: pre-cache core assets ──

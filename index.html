@@ -297,6 +297,29 @@
       font-size: 0.82rem;
     }
     #install-banner.visible { display: flex; }
+
+    /* REFLECTION PROMPT */
+    .reflection {
+      display: none;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--text);
+    }
+    .reflection.visible { display: block; }
+    .reflection .reflection-label {
+      display: block;
+      font-size: 0.68rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 6px;
+      font-family: 'Playfair Display', serif;
+    }
     #install-banner button {
       margin-left: auto;
       background: var(--gold);
@@ -444,6 +467,11 @@
     </div>
   </div>
 
+  <div class="reflection" id="reflection">
+    <span class="reflection-label">Evening Examination</span>
+    <span id="reflectionText"></span>
+  </div>
+
   <div class="date-display" id="dateDisplay">—</div>
 
   <div class="reset-wrap">
@@ -465,6 +493,9 @@
   const TOTAL_ITEMS     = 11; // 5 readings + 6 disciplines
   const READINGS_COUNT  = 5;
   const DISC_COUNT      = 6;
+  const PLAN_URL        = 'content/plans/watchman-90.json';
+
+  let plan = null;  // loaded from PLAN_URL; null means "use theme fallbacks"
 
   // ─────────────────────────────────────
   // DATE HELPERS
@@ -649,6 +680,60 @@
   });
 
   // ─────────────────────────────────────
+  // PLAN LOADER
+  // ─────────────────────────────────────
+  // Cache original .check-sub text so we can fall back cleanly
+  // if the plan fails to load or doesn't cover today.
+  function cacheThemeLabels() {
+    document.querySelectorAll('.check-item .check-sub').forEach(el => {
+      if (!el.dataset.fallback) el.dataset.fallback = el.textContent;
+    });
+  }
+
+  async function loadPlan() {
+    try {
+      const res = await fetch(PLAN_URL, { cache: 'default' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      plan = await res.json();
+    } catch (e) {
+      console.warn('Plan load failed; using theme fallbacks:', e);
+      plan = null;
+    }
+  }
+
+  function applyPlan() {
+    const dayNum = getDayNumber();
+    const dayEntry = plan && plan.days && plan.days.find(d => d.day === dayNum);
+
+    // Update reading labels
+    document.querySelectorAll('.check-item[data-group="readings"]').forEach(item => {
+      const key    = item.dataset.key;
+      const subEl  = item.querySelector('.check-sub');
+      if (!subEl) return;
+      const reading = dayEntry && dayEntry.readings && dayEntry.readings[key];
+      if (reading && reading.ref) {
+        subEl.textContent = reading.note
+          ? `${reading.ref} — ${reading.note}`
+          : reading.ref;
+      } else {
+        // Fall back to original theme text
+        subEl.textContent = subEl.dataset.fallback || subEl.textContent;
+      }
+    });
+
+    // Update reflection prompt
+    const refWrap = document.getElementById('reflection');
+    const refText = document.getElementById('reflectionText');
+    const prompt  = dayEntry && dayEntry.reflection_prompt;
+    if (prompt) {
+      refText.textContent = prompt;
+      refWrap.classList.add('visible');
+    } else {
+      refWrap.classList.remove('visible');
+    }
+  }
+
+  // ─────────────────────────────────────
   // SERVICE WORKER REGISTRATION
   // ─────────────────────────────────────
   if ('serviceWorker' in navigator) {
@@ -662,8 +747,10 @@
   // ─────────────────────────────────────
   // INIT
   // ─────────────────────────────────────
-  getStartDate(); // ensure start date is set
+  getStartDate();       // ensure start date is set
+  cacheThemeLabels();   // preserve fallback text before any overwrites
   render();
+  loadPlan().then(applyPlan);
 </script>
 </body>
 </html>
