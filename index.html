@@ -712,9 +712,16 @@
       if (!subEl) return;
       const reading = dayEntry && dayEntry.readings && dayEntry.readings[key];
       if (reading && reading.ref) {
-        subEl.textContent = reading.note
-          ? `${reading.ref} — ${reading.note}`
-          : reading.ref;
+        // Optional virtue prefix (e.g. "Reject Passivity · ") and ring qualifier
+        // for the citizen's stand (e.g. "Remembering (your city) · ").
+        let virtuePrefix = '';
+        if (reading.virtue) {
+          virtuePrefix = reading.ring
+            ? `${reading.virtue} (${reading.ring}) · `
+            : `${reading.virtue} · `;
+        }
+        const noteSuffix = reading.note ? ` — ${reading.note}` : '';
+        subEl.textContent = `${virtuePrefix}${reading.ref}${noteSuffix}`;
       } else {
         // Fall back to original theme text
         subEl.textContent = subEl.dataset.fallback || subEl.textContent;
