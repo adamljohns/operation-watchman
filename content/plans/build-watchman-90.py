@@ -61,9 +61,51 @@ RESOLUTE = ["Remembering", "Equipped", "Serving", "Outreaching",
 RINGS = ["your city", "your state", "your nation"]
 
 
+# ── Canonical book order for chronological-leaning sort ─────────────────────
+# NT in canonical order (Matt → Rev), OT after. Each virtue bank is sorted so
+# that as cycles roll forward, the user moves Matt → Rev through that virtue.
+BOOK_ORDER = {
+    # NT canonical
+    "Matthew": 1, "Mark": 2, "Luke": 3, "John": 4, "Acts": 5,
+    "Romans": 6, "1 Corinthians": 7, "2 Corinthians": 8, "Galatians": 9,
+    "Ephesians": 10, "Philippians": 11, "Colossians": 12,
+    "1 Thessalonians": 13, "2 Thessalonians": 14, "1 Timothy": 15,
+    "2 Timothy": 16, "Titus": 17, "Philemon": 18, "Hebrews": 19,
+    "James": 20, "1 Peter": 21, "2 Peter": 22, "1 John": 23,
+    "2 John": 24, "3 John": 25, "Jude": 26, "Revelation": 27,
+    # OT (after NT for NT-focused plan)
+    "Genesis": 100, "Exodus": 101, "Leviticus": 102, "Numbers": 103,
+    "Deuteronomy": 104, "Joshua": 105, "Judges": 106, "Ruth": 107,
+    "1 Samuel": 108, "2 Samuel": 109, "1 Kings": 110, "2 Kings": 111,
+    "1 Chronicles": 112, "2 Chronicles": 113, "Ezra": 114, "Nehemiah": 115,
+    "Esther": 116, "Job": 117, "Psalm": 118, "Proverbs": 119,
+    "Ecclesiastes": 120, "Song of Solomon": 121, "Isaiah": 122,
+    "Jeremiah": 123, "Lamentations": 124, "Ezekiel": 125, "Daniel": 126,
+    "Hosea": 127, "Joel": 128, "Amos": 129, "Obadiah": 130, "Jonah": 131,
+    "Micah": 132, "Nahum": 133, "Habakkuk": 134, "Zephaniah": 135,
+    "Haggai": 136, "Zechariah": 137, "Malachi": 138,
+}
+
+
+def book_sort_key(ref):
+    """Return canonical-order index for a scripture reference like '1 Corinthians 4:1-2'."""
+    # Match longest book name first so '1 Corinthians' doesn't lose to 'Corinthians'.
+    for book in sorted(BOOK_ORDER.keys(), key=lambda b: -len(b)):
+        if ref.startswith(book + " ") or ref == book:
+            return BOOK_ORDER[book]
+    return 999
+
+
+def sort_bank(bank):
+    """Sort each virtue's passage list by canonical book order."""
+    return {v: sorted(passages, key=lambda p: book_sort_key(p[0]))
+            for v, passages in bank.items()}
+
+
 # ── Scripture banks ──────────────────────────────────────────────────────────
 # Each virtue maps to a list of (reference, short note) tuples.
 # Rotation picks bank[(cycle_index) % len(bank)] so longer banks reduce repeats.
+# Banks are sorted by canonical order at module load (see sort_bank() below).
 
 MORNING_NT_BANK = {
     "Reject Passivity": [
@@ -387,8 +429,18 @@ CITIZEN_BANK = {
     ],
 }
 
-# Psalms for Evening Peace (days 8-90). Days 1-7 already use 1, 23, 46, 91, 103, 121, 139.
-# Psalm 119 stanzas distributed periodically. Other Psalms selected for the evening watch.
+# Sort each bank by canonical NT order (OT books slide to the end). Cycles
+# advance the reader Matt → Rev within each virtue across the 90 days.
+MORNING_NT_BANK = sort_bank(MORNING_NT_BANK)
+HUSBAND_BANK = sort_bank(HUSBAND_BANK)
+FATHER_BANK = sort_bank(FATHER_BANK)
+CITIZEN_BANK = sort_bank(CITIZEN_BANK)
+
+
+# Psalm 119 stanzas — placed in MORNING WISDOM (wisdom literature), not Evening
+# Peace. Per Adam: "if we do it in morning wisdom, we don't need to do it in the
+# evening piece." Stanzas distribute across days 32-90 (the NT phase) alongside
+# the rotating NT wisdom passages.
 PSALM_119_STANZAS = [
     ("Psalm 119:1-8 (Aleph)",   "Blessed are the undefiled in the way."),
     ("Psalm 119:9-16 (Beth)",   "Wherewithal shall a young man cleanse his way? By taking heed thereto according to Thy word."),
@@ -414,7 +466,9 @@ PSALM_119_STANZAS = [
     ("Psalm 119:169-176 (Tau)", "Let my cry come near before Thee, O LORD. Give me understanding according to Thy word."),
 ]
 
-# Other Psalms selected for evening — order curated by tone (trust, rest, refuge, providence)
+# Other Psalms selected for evening — curated by tone (trust, rest, refuge,
+# providence). Excludes Psalm 119 (now in Morning Wisdom) and the seven Psalms
+# already used in the days 1-7 sample week (1, 23, 46, 91, 103, 121, 139).
 EVENING_PSALMS = [
     ("Psalm 4",  "I will both lay me down in peace, and sleep. Thou alone makest me dwell in safety."),
     ("Psalm 16", "I have set the LORD always before me. He is at my right hand. I shall not be moved."),
@@ -463,7 +517,6 @@ EVENING_PSALMS = [
     ("Psalm 113","Praise, O ye servants of the LORD. Praise the name of the LORD."),
     ("Psalm 117","O praise the LORD, all ye nations. Praise Him, all ye people."),
     ("Psalm 120","In my distress I cried unto the LORD. He heard me."),
-    ("Psalm 121","I will lift up mine eyes unto the hills. From whence cometh my help."),  # also day 6 — kept distinct
     ("Psalm 122","I was glad when they said unto me, Let us go into the house of the LORD."),
     ("Psalm 123","Unto Thee lift I up mine eyes — O Thou that dwellest in the heavens."),
     ("Psalm 124","If it had not been the LORD who was on our side. Our help is in the name of the LORD."),
@@ -472,12 +525,35 @@ EVENING_PSALMS = [
     ("Psalm 127","Except the LORD build the house, they labor in vain that build it."),
     ("Psalm 128","Blessed is every one that feareth the LORD. That walketh in His ways."),
     ("Psalm 134","Bless the LORD, all ye servants of the LORD."),
-    ("Psalm 139","O LORD, Thou hast searched me, and known me."),  # also day 7 — extended
     ("Psalm 141","Set a watch, O LORD, before my mouth. Keep the door of my lips."),
     ("Psalm 142","With my voice I cried unto the LORD. I poured out my complaint before Him."),
     ("Psalm 25", "Unto Thee, O LORD, do I lift up my soul. O my God, I trust in Thee."),
     ("Psalm 26", "Examine me, O LORD, and prove me. Try my reins and my heart."),
     ("Psalm 41", "Blessed is he that considereth the poor. The LORD will deliver him in time of trouble."),
+    # Additional curated Psalms to round out the 83-day evening rotation
+    ("Psalm 11", "In the LORD put I my trust. The LORD trieth the righteous."),
+    ("Psalm 15", "Who shall abide in Thy tabernacle? He that walketh uprightly, and worketh righteousness."),
+    ("Psalm 22", "My God, my God, why hast Thou forsaken me? — yet I will declare Thy name unto my brethren."),
+    ("Psalm 24", "The earth is the LORD's, and the fulness thereof. Who shall ascend into the hill of the LORD?"),
+    ("Psalm 29", "Give unto the LORD glory and strength. The voice of the LORD is upon the waters."),
+    ("Psalm 36", "Thy mercy, O LORD, is in the heavens. With Thee is the fountain of life."),
+    ("Psalm 47", "O clap your hands, all ye people. God is gone up with a shout."),
+    ("Psalm 48", "Great is the LORD, and greatly to be praised in the city of our God."),
+    ("Psalm 49", "Wherefore should I fear in the days of evil? They that trust in their wealth..."),
+    ("Psalm 66", "Make a joyful noise unto God, all ye lands. Sing forth the honour of His name."),
+    ("Psalm 68", "Let God arise. Let His enemies be scattered. As wax melteth before the fire."),
+    ("Psalm 72", "He shall come down like rain upon the mown grass. His enemies shall lick the dust."),
+    ("Psalm 78", "Give ear, O my people, to my law. I will utter dark sayings of old."),
+    ("Psalm 89", "I will sing of the mercies of the LORD for ever. With my mouth will I make known Thy faithfulness."),
+    ("Psalm 105","O give thanks unto the LORD; call upon His name. Make known His deeds among the people."),
+    ("Psalm 106","Praise ye the LORD. Who can utter the mighty acts of the LORD?"),
+    ("Psalm 111","Praise ye the LORD. I will praise the LORD with my whole heart."),
+    ("Psalm 112","Blessed is the man that feareth the LORD. He shall not be afraid of evil tidings."),
+    ("Psalm 115","Not unto us, O LORD, not unto us, but unto Thy name give glory."),
+    ("Psalm 133","Behold, how good and how pleasant it is for brethren to dwell together in unity."),
+    ("Psalm 136","O give thanks unto the LORD; for He is good. For His mercy endureth for ever."),
+    ("Psalm 144","Blessed be the LORD my strength, which teacheth my hands to war."),
+    ("Psalm 149","Sing unto the LORD a new song. His praise in the congregation of saints."),
 ]
 
 
@@ -603,18 +679,28 @@ DAYS_1_TO_7 = [
 
 
 # ── Evening Peace assignment for days 8-90 ───────────────────────────────────
-# Distribute Psalm 119 stanzas every ~4 days, fill with other Psalms.
+# Psalms only (no Psalm 119 — that lives in Morning Wisdom). EVENING_PSALMS has
+# 82 entries for the 83 days needed; one entry repeats once across the cycle.
 def evening_for_day(day):
     """Return (ref, note) for evening peace on this day. Days 1-7 are pre-set."""
-    # Position in days 8-90 (0-indexed)
-    pos = day - 8
-    # Every 4th day gets a Psalm 119 stanza
-    if pos % 4 == 0:
-        stanza_idx = (pos // 4) % len(PSALM_119_STANZAS)
-        return PSALM_119_STANZAS[stanza_idx]
-    # Other days: select from EVENING_PSALMS, skipping those covered in days 1-7
-    other_idx = (pos - pos // 4) % len(EVENING_PSALMS)
-    return EVENING_PSALMS[other_idx]
+    pos = day - 8  # 0-indexed position in days 8-90
+    return EVENING_PSALMS[pos % len(EVENING_PSALMS)]
+
+
+# ── Psalm 119 stanza scheduling for Morning Wisdom ───────────────────────────
+# 22 stanzas distributed across the 59 NT-phase days (32-90) by even spacing.
+def _psalm119_day_schedule():
+    """Return {day_number: stanza_index} for days that should serve Psalm 119."""
+    schedule = {}
+    n_days = 90 - 32 + 1  # 59
+    n_stanzas = len(PSALM_119_STANZAS)  # 22
+    for i in range(n_stanzas):
+        day = 32 + round(i * n_days / n_stanzas)
+        schedule[day] = i
+    return schedule
+
+
+PSALM_119_DAYS = _psalm119_day_schedule()
 
 
 # ── Morning Wisdom assignment ────────────────────────────────────────────────
@@ -660,8 +746,15 @@ def morning_for_day(day):
         return ref, virtue, notes_by_chapter.get(day, "Wisdom is the principal thing.")
     if day == 31:
         return "Proverbs 31", "Reject Passivity", "Who can find a virtuous woman? Her price is far above rubies."
-    # Days 32-90: NT wisdom rotating REAL MAN
-    cycle = (day - 32) // 7
+    # Days 32-90: alternate between NT wisdom (REAL MAN rotation) and Psalm 119
+    # stanzas. The Psalm 119 schedule replaces the NT slot on its assigned days.
+    if day in PSALM_119_DAYS:
+        ref, note = PSALM_119_STANZAS[PSALM_119_DAYS[day]]
+        return ref, virtue, note
+    # NT wisdom — count only NT-bank days when picking the cycle index so the
+    # rotation walks Matt → Rev across the NT slots without Psalm 119 skewing it.
+    nt_position = sum(1 for d in range(32, day) if d not in PSALM_119_DAYS)
+    cycle = nt_position // 7
     bank = MORNING_NT_BANK[virtue]
     ref, note = bank[cycle % len(bank)]
     return ref, virtue, note
@@ -736,9 +829,9 @@ def build_plan():
         "name": "Operation Watchman",
         "subtitle": "90-Day Men's Formation",
         "duration_days": 90,
-        "version": 2,
-        "scripture_focus": "New Testament (Matthew → Revelation) with Proverbs 1-31 anchoring the first month and Psalms running the evening watch through all 90 days.",
-        "notes": "v2 curriculum. Each watch rotates through a named acronym framework (REAL MAN / HHAAPPY / FULFILLED / RESOLUTE). Notes use generic phrasing — a future personalization layer will substitute the user's wife, children, city, state, and nation.",
+        "version": 3,
+        "scripture_focus": "New Testament (Matthew → Revelation) anchored chronologically: Gospels → Acts → Epistles → Revelation walked through each virtue across the 90 days. Proverbs 1-31 opens the first month in Morning Wisdom; Psalm 119 stanzas occupy the wisdom slot through the NT phase; Evening Peace cycles the remaining Psalter.",
+        "notes": "v3 curriculum. Each watch rotates through a named acronym framework (REAL MAN / HHAAPPY / FULFILLED / RESOLUTE). Within each virtue's passage bank, references are sorted by canonical NT order so cycles progress from the Gospels through the Epistles. Generic phrasing — a future personalization layer will substitute the user's wife, children, city, state, and nation.",
         "readings": [
             {"key": "morning_wisdom", "title": "Morning Wisdom", "theme": "Proverbs · Psalms · Wisdom literature"},
             {"key": "husbands_post",  "title": "Husband's Post", "theme": "Ephesians · Marriage & love passages"},

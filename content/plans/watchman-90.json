@@ -3,9 +3,9 @@
   "name": "Operation Watchman",
   "subtitle": "90-Day Men's Formation",
   "duration_days": 90,
-  "version": 2,
-  "scripture_focus": "New Testament (Matthew → Revelation) with Proverbs 1-31 anchoring the first month and Psalms running the evening watch through all 90 days.",
-  "notes": "v2 curriculum. Each watch rotates through a named acronym framework (REAL MAN / HHAAPPY / FULFILLED / RESOLUTE). Notes use generic phrasing — a future personalization layer will substitute the user's wife, children, city, state, and nation.",
+  "version": 3,
+  "scripture_focus": "New Testament (Matthew → Revelation) anchored chronologically: Gospels → Acts → Epistles → Revelation walked through each virtue across the 90 days. Proverbs 1-31 opens the first month in Morning Wisdom; Psalm 119 stanzas occupy the wisdom slot through the NT phase; Evening Peace cycles the remaining Psalter.",
+  "notes": "v3 curriculum. Each watch rotates through a named acronym framework (REAL MAN / HHAAPPY / FULFILLED / RESOLUTE). Within each virtue's passage bank, references are sorted by canonical NT order so cycles progress from the Gospels through the Epistles. Generic phrasing — a future personalization layer will substitute the user's wife, children, city, state, and nation.",
   "readings": [
     {
       "key": "morning_wisdom",
@@ -355,24 +355,24 @@
           "note": "Wisdom calls aloud in the street."
         },
         "husbands_post": {
-          "ref": "Ephesians 4:25",
+          "ref": "Galatians 2:11-14",
           "virtue": "Honest",
-          "note": "Put away lying. Speak truth, each with his neighbor."
+          "note": "Paul withstood Peter to the face. He was to be blamed."
         },
         "fathers_charge": {
-          "ref": "Hebrews 10:24-25",
+          "ref": "Romans 14:19",
           "virtue": "Encouraging",
-          "note": "Consider one another to provoke unto love and good works."
+          "note": "Let us therefore follow after the things which make for peace, and edify one another."
         },
         "citizens_stand": {
-          "ref": "Jeremiah 29:7",
+          "ref": "Matthew 5:13-16",
           "virtue": "Engaged",
           "ring": "your state",
-          "note": "Seek the peace of the city whither I have caused you to be carried away. Pray unto the LORD for it."
+          "note": "Ye are the light of the world. A city that is set on an hill cannot be hid."
         },
         "evening_peace": {
-          "ref": "Psalm 119:1-8 (Aleph)",
-          "note": "Blessed are the undefiled in the way."
+          "ref": "Psalm 4",
+          "note": "I will both lay me down in peace, and sleep. Thou alone makest me dwell in safety."
         }
       }
     },
@@ -386,20 +386,20 @@
           "note": "She has built her house. She has hewn her seven pillars."
         },
         "husbands_post": {
-          "ref": "1 Peter 3:7",
+          "ref": "Ephesians 5:25-33",
           "virtue": "Honors",
-          "note": "Dwell with her with understanding. Give honor — heir together of the grace of life."
+          "note": "Husbands, love your wives as Christ loved the church — and gave Himself for her."
         },
         "fathers_charge": {
-          "ref": "Deuteronomy 6:6-9",
+          "ref": "Matthew 28:18-20",
           "virtue": "Discipling",
-          "note": "Teach them diligently to thy children. Talk of them when thou sittest. When thou walkest."
+          "note": "Go ye therefore, and teach all nations — teaching them to observe all things."
         },
         "citizens_stand": {
-          "ref": "Joshua 4:1-7",
+          "ref": "Hebrews 13:7",
           "virtue": "Remembering",
           "ring": "your nation",
-          "note": "Twelve stones from the Jordan. So your children may ask: What mean these stones?"
+          "note": "Remember them which have the rule over you. Whose faith follow."
         },
         "evening_peace": {
           "ref": "Psalm 16",
@@ -417,9 +417,9 @@
           "note": "The mouth of the righteous is a fountain of life."
         },
         "husbands_post": {
-          "ref": "Psalm 1:1-3",
+          "ref": "Romans 8:9-11",
           "virtue": "Abiding",
-          "note": "Blessed is the man... his delight is in the law of the LORD."
+          "note": "If the Spirit of Him who raised Jesus dwells in you, He shall quicken you."
         },
         "fathers_charge": {
           "ref": "1 Corinthians 4:2",
@@ -427,10 +427,10 @@
           "note": "It is required in stewards that a man be found faithful."
         },
         "citizens_stand": {
-          "ref": "2 Timothy 3:16-17",
+          "ref": "Ephesians 6:10-18",
           "virtue": "Equipped",
           "ring": "your city",
-          "note": "All Scripture is profitable. That the man of God may be perfect, thoroughly furnished."
+          "note": "Put on the whole armor of God. Stand against the wiles of the devil."
         },
         "evening_peace": {
           "ref": "Psalm 27",
@@ -448,20 +448,20 @@
           "note": "When pride comes, then comes disgrace."
         },
         "husbands_post": {
-          "ref": "Proverbs 5:15-19",
+          "ref": "Genesis 24:67",
           "virtue": "Adoring",
-          "note": "Drink waters out of thine own cistern. Rejoice with the wife of thy youth."
+          "note": "Isaac brought her into Sarah's tent. He loved her, and was comforted."
         },
         "fathers_charge": {
-          "ref": "Ephesians 6:4",
+          "ref": "Luke 2:51-52",
           "virtue": "Understanding",
-          "note": "Provoke not your children to wrath."
+          "note": "Jesus increased in wisdom and stature, and in favor with God and man."
         },
         "citizens_stand": {
-          "ref": "Matthew 20:25-28",
+          "ref": "Mark 10:42-45",
           "virtue": "Serving",
           "ring": "your state",
-          "note": "Whosoever will be great among you, let him be your minister."
+          "note": "The Son of man came not to be ministered unto, but to minister."
         },
         "evening_peace": {
           "ref": "Psalm 34",
@@ -479,24 +479,24 @@
           "note": "He who tills his land will have plenty of bread."
         },
         "husbands_post": {
-          "ref": "Ephesians 5:25-27",
+          "ref": "Ephesians 6:10-18",
           "virtue": "Protecting",
-          "note": "He gave Himself for her — to sanctify and cleanse her with the washing of water by the word."
+          "note": "Put on the whole armor of God. Withstand in the evil day, and having done all, stand."
         },
         "fathers_charge": {
-          "ref": "1 John 4:7-21",
+          "ref": "Romans 12:9-10",
           "virtue": "Loving",
-          "note": "Beloved, let us love one another — for love is of God."
+          "note": "Let love be without dissimulation. Be kindly affectioned with brotherly love."
         },
         "citizens_stand": {
-          "ref": "Acts 1:8",
+          "ref": "Matthew 5:13-16",
           "virtue": "Outreaching",
           "ring": "your nation",
-          "note": "Ye shall be witnesses unto Me — in Jerusalem, in all Judaea and Samaria, unto the uttermost part of the earth."
+          "note": "Ye are the salt of the earth. Ye are the light of the world."
         },
         "evening_peace": {
-          "ref": "Psalm 119:9-16 (Beth)",
-          "note": "Wherewithal shall a young man cleanse his way? By taking heed thereto according to Thy word."
+          "ref": "Psalm 37",
+          "note": "Fret not thyself because of evildoers. Trust in the LORD, and do good."
         }
       }
     },
@@ -510,24 +510,24 @@
           "note": "He who walks with wise men shall be wise."
         },
         "husbands_post": {
-          "ref": "Proverbs 27:23-27",
+          "ref": "2 Thessalonians 3:10-12",
           "virtue": "Providing",
-          "note": "Be diligent to know the state of thy flocks. Riches are not forever."
+          "note": "If any would not work, neither should he eat."
         },
         "fathers_charge": {
-          "ref": "Ecclesiastes 3:1-8",
+          "ref": "Nehemiah 8:10",
           "virtue": "Fun",
-          "note": "To every thing there is a season. A time to weep, a time to laugh."
+          "note": "The joy of the LORD is your strength."
         },
         "citizens_stand": {
-          "ref": "Proverbs 18:24",
+          "ref": "2 Timothy 4:9-11",
           "virtue": "Loyal",
           "ring": "your city",
-          "note": "A man that hath friends must shew himself friendly. There is a friend that sticketh closer than a brother."
+          "note": "Demas hath forsaken me. Only Luke is with me."
         },
         "evening_peace": {
-          "ref": "Psalm 37",
-          "note": "Fret not thyself because of evildoers. Trust in the LORD, and do good."
+          "ref": "Psalm 42",
+          "note": "As the hart panteth after the water brooks, so panteth my soul after Thee, O God."
         }
       }
     },
@@ -541,24 +541,24 @@
           "note": "Every wise woman builds her house."
         },
         "husbands_post": {
-          "ref": "Ephesians 5:21",
+          "ref": "Romans 12:18",
           "virtue": "Yields",
-          "note": "Submitting yourselves one to another in the fear of God."
+          "note": "If it be possible, as much as lieth in you, live peaceably with all men."
         },
         "fathers_charge": {
-          "ref": "Ephesians 5:15-16",
+          "ref": "1 Thessalonians 2:11-12",
           "virtue": "Intentional",
-          "note": "See then that ye walk circumspectly. Redeeming the time, because the days are evil."
+          "note": "As a father deals with his own children — exhorting, comforting, charging."
         },
         "citizens_stand": {
-          "ref": "Psalm 133",
+          "ref": "Acts 4:32",
           "virtue": "United",
           "ring": "your state",
-          "note": "Behold, how good and how pleasant it is for brethren to dwell together in unity."
+          "note": "The multitude of them that believed were of one heart and of one soul."
         },
         "evening_peace": {
-          "ref": "Psalm 42",
-          "note": "As the hart panteth after the water brooks, so panteth my soul after Thee, O God."
+          "ref": "Psalm 51",
+          "note": "Create in me a clean heart, O God. Renew a right spirit within me."
         }
       }
     },
@@ -572,24 +572,24 @@
           "note": "A soft answer turns away wrath."
         },
         "husbands_post": {
-          "ref": "1 John 1:5-10",
+          "ref": "Ephesians 4:25",
           "virtue": "Honest",
-          "note": "If we walk in the light, the blood of Jesus cleanses us from all sin."
+          "note": "Put away lying. Speak truth, each with his neighbor."
         },
         "fathers_charge": {
-          "ref": "Proverbs 18:13",
+          "ref": "Hebrews 5:11-14",
           "virtue": "Listening",
-          "note": "He that answereth a matter before he heareth it — it is folly and shame unto him."
+          "note": "Strong meat belongs to them of full age. By use, senses are exercised to discern."
         },
         "citizens_stand": {
-          "ref": "2 Timothy 2:2",
+          "ref": "Acts 18:24-28",
           "virtue": "Teaching",
           "ring": "your nation",
-          "note": "The same commit thou to faithful men, who shall be able to teach others also."
+          "note": "Apollos, mighty in the Scriptures. Aquila and Priscilla expounded unto him the way of God more perfectly."
         },
         "evening_peace": {
-          "ref": "Psalm 51",
-          "note": "Create in me a clean heart, O God. Renew a right spirit within me."
+          "ref": "Psalm 62",
+          "note": "My soul, wait thou only upon God. From Him cometh my expectation."
         }
       }
     },
@@ -603,14 +603,14 @@
           "note": "Commit thy works unto the LORD, and thy thoughts shall be established."
         },
         "husbands_post": {
-          "ref": "Proverbs 31:28-31",
+          "ref": "Colossians 3:19",
           "virtue": "Honors",
-          "note": "Her children rise and call her blessed. Her husband also — he praises her."
+          "note": "Husbands, love your wives. Be not bitter against them."
         },
         "fathers_charge": {
-          "ref": "1 Timothy 3:4-5",
+          "ref": "1 Thessalonians 5:14",
           "virtue": "Leading",
-          "note": "One that ruleth well his own house, having his children in subjection."
+          "note": "Warn them that are unruly. Comfort the feebleminded. Support the weak. Be patient."
         },
         "citizens_stand": {
           "ref": "Romans 13:1-7",
@@ -619,8 +619,8 @@
           "note": "Let every soul be subject unto the higher powers. The powers that be are ordained of God."
         },
         "evening_peace": {
-          "ref": "Psalm 119:17-24 (Gimel)",
-          "note": "Open Thou mine eyes, that I may behold wondrous things out of Thy law."
+          "ref": "Psalm 63",
+          "note": "Early will I seek Thee. My soul thirsteth for Thee."
         }
       }
     },
@@ -634,24 +634,24 @@
           "note": "A merry heart doeth good like a medicine."
         },
         "husbands_post": {
-          "ref": "Colossians 3:1-4",
+          "ref": "Galatians 2:20",
           "virtue": "Abiding",
-          "note": "Set your mind on things above. Your life is hid with Christ in God."
+          "note": "I have been crucified with Christ. Yet I live; not I, but Christ in me."
         },
         "fathers_charge": {
-          "ref": "1 Thessalonians 5:11",
+          "ref": "Ephesians 4:29",
           "virtue": "Encouraging",
-          "note": "Comfort yourselves together, and edify one another."
+          "note": "Let no corrupt communication proceed out of your mouth — but that which is good to edify."
         },
         "citizens_stand": {
-          "ref": "Ecclesiastes 12:1",
+          "ref": "2 Peter 1:12-15",
           "virtue": "Remembering",
           "ring": "your state",
-          "note": "Remember now thy Creator in the days of thy youth."
+          "note": "I will not be negligent to put you always in remembrance — though ye know and be established."
         },
         "evening_peace": {
-          "ref": "Psalm 62",
-          "note": "My soul, wait thou only upon God. From Him cometh my expectation."
+          "ref": "Psalm 84",
+          "note": "Better is a day in Thy courts than a thousand."
         }
       }
     },
@@ -665,24 +665,24 @@
           "note": "The tongue has the power of life and death."
         },
         "husbands_post": {
-          "ref": "Song of Solomon 8:6-7",
+          "ref": "Proverbs 5:15-19",
           "virtue": "Adoring",
-          "note": "Set me as a seal upon thine heart. Love is strong as death."
+          "note": "Drink waters out of thine own cistern. Rejoice with the wife of thy youth."
         },
         "fathers_charge": {
-          "ref": "Matthew 28:18-20",
+          "ref": "1 Corinthians 11:1",
           "virtue": "Discipling",
-          "note": "Go ye therefore, and teach all nations — teaching them to observe all things."
+          "note": "Be ye followers of me, even as I also am of Christ."
         },
         "citizens_stand": {
-          "ref": "Psalm 144:1",
+          "ref": "Ephesians 4:11-16",
           "virtue": "Equipped",
           "ring": "your nation",
-          "note": "Blessed be the LORD my strength, which teacheth my hands to war."
+          "note": "Apostles, prophets, evangelists, pastors, teachers — for the perfecting of the saints."
         },
         "evening_peace": {
-          "ref": "Psalm 63",
-          "note": "Early will I seek Thee. My soul thirsteth for Thee."
+          "ref": "Psalm 90",
+          "note": "Lord, Thou hast been our dwelling place in all generations. Teach us to number our days."
         }
       }
     },
@@ -696,24 +696,24 @@
           "note": "Better is the poor that walks in his integrity."
         },
         "husbands_post": {
-          "ref": "Nehemiah 4:14",
+          "ref": "1 Peter 3:7",
           "virtue": "Protecting",
-          "note": "Fight for your brethren, your sons, your daughters, your wives, your houses."
+          "note": "Husbands, dwell with them according to knowledge. Give honor to the weaker vessel."
         },
         "fathers_charge": {
-          "ref": "Lamentations 3:22-23",
+          "ref": "2 Timothy 2:13",
           "virtue": "Faithful",
-          "note": "His mercies are new every morning. Great is Thy faithfulness."
+          "note": "If we are faithless, He remains faithful — He cannot deny Himself."
         },
         "citizens_stand": {
-          "ref": "Galatians 5:13",
+          "ref": "John 13:1-17",
           "virtue": "Serving",
           "ring": "your city",
-          "note": "By love serve one another."
+          "note": "Jesus girded Himself with a towel, and began to wash the disciples' feet."
         },
         "evening_peace": {
-          "ref": "Psalm 84",
-          "note": "Better is a day in Thy courts than a thousand."
+          "ref": "Psalm 100",
+          "note": "Make a joyful noise unto the LORD, all ye lands."
         }
       }
     },
@@ -727,24 +727,24 @@
           "note": "Wine is a mocker, strong drink is raging."
         },
         "husbands_post": {
-          "ref": "2 Thessalonians 3:10-12",
+          "ref": "1 Timothy 5:8",
           "virtue": "Providing",
-          "note": "If any would not work, neither should he eat."
+          "note": "He that provideth not for his own house is worse than an infidel."
         },
         "fathers_charge": {
-          "ref": "Proverbs 20:5",
+          "ref": "1 Corinthians 13:11",
           "virtue": "Understanding",
-          "note": "Counsel in the heart of man is like deep water. A man of understanding draws it out."
+          "note": "When I was a child, I spoke as a child. When I became a man, I put away childish things."
         },
         "citizens_stand": {
-          "ref": "2 Corinthians 5:18-21",
+          "ref": "Acts 1:8",
           "virtue": "Outreaching",
           "ring": "your state",
-          "note": "He hath given to us the ministry of reconciliation. We are ambassadors for Christ."
+          "note": "Ye shall be witnesses unto Me — in Jerusalem, in all Judaea and Samaria, unto the uttermost part of the earth."
         },
         "evening_peace": {
-          "ref": "Psalm 119:25-32 (Daleth)",
-          "note": "My soul cleaveth unto the dust. Quicken Thou me according to Thy word."
+          "ref": "Psalm 116",
+          "note": "I love the LORD, because He hath heard my voice and my supplications."
         }
       }
     },
@@ -758,24 +758,24 @@
           "note": "The king's heart is in the hand of the LORD."
         },
         "husbands_post": {
-          "ref": "1 Peter 5:5-6",
+          "ref": "Ephesians 5:21",
           "virtue": "Yields",
-          "note": "Be clothed with humility. God resisteth the proud."
+          "note": "Submitting yourselves one to another in the fear of God."
         },
         "fathers_charge": {
-          "ref": "John 13:34-35",
+          "ref": "1 Corinthians 13:4-7",
           "virtue": "Loving",
-          "note": "A new commandment I give unto you, that ye love one another."
+          "note": "Love suffers long, is kind. Beareth all things, hopeth all things, endureth all things."
         },
         "citizens_stand": {
-          "ref": "Proverbs 27:10",
+          "ref": "Hebrews 13:1",
           "virtue": "Loyal",
           "ring": "your nation",
-          "note": "Thine own friend, and thy father's friend, forsake not."
+          "note": "Let brotherly love continue."
         },
         "evening_peace": {
-          "ref": "Psalm 90",
-          "note": "Lord, Thou hast been our dwelling place in all generations. Teach us to number our days."
+          "ref": "Psalm 118",
+          "note": "This is the day which the LORD hath made. We will rejoice and be glad in it."
         }
       }
     },
@@ -789,24 +789,24 @@
           "note": "A good name is rather to be chosen than great riches."
         },
         "husbands_post": {
-          "ref": "James 5:16",
+          "ref": "Hebrews 4:12-13",
           "virtue": "Honest",
-          "note": "Confess your faults one to another. Pray for one another, that you may be healed."
+          "note": "The Word lays bare. All things are naked before His eyes."
         },
         "fathers_charge": {
-          "ref": "Ecclesiastes 9:7-10",
+          "ref": "Psalm 127:3-5",
           "virtue": "Fun",
-          "note": "Go thy way, eat thy bread with joy. Whatsoever thy hand findeth to do, do it with thy might."
+          "note": "Children are an heritage of the LORD. Like arrows in the hand of a mighty man."
         },
         "citizens_stand": {
-          "ref": "1 Corinthians 1:10",
+          "ref": "Romans 15:5-7",
           "virtue": "United",
           "ring": "your city",
-          "note": "That there be no divisions among you. Perfectly joined together in the same mind."
+          "note": "Be likeminded one toward another, according to Christ Jesus."
         },
         "evening_peace": {
-          "ref": "Psalm 100",
-          "note": "Make a joyful noise unto the LORD, all ye lands."
+          "ref": "Psalm 130",
+          "note": "Out of the depths have I cried unto Thee, O LORD."
         }
       }
     },
@@ -820,14 +820,14 @@
           "note": "When you sit to eat with a ruler, consider diligently what is before you."
         },
         "husbands_post": {
-          "ref": "Colossians 3:19",
+          "ref": "Hebrews 13:4",
           "virtue": "Honors",
-          "note": "Husbands, love your wives. Be not bitter against them."
+          "note": "Marriage is honorable in all. The bed undefiled."
         },
         "fathers_charge": {
-          "ref": "Proverbs 22:6",
+          "ref": "2 Timothy 3:14-17",
           "virtue": "Intentional",
-          "note": "Train up a child in the way he should go. When he is old, he will not depart from it."
+          "note": "From a child thou hast known the holy Scriptures. Profitable for doctrine, reproof, correction."
         },
         "citizens_stand": {
           "ref": "Ephesians 4:11-13",
@@ -836,8 +836,8 @@
           "note": "Pastors and teachers — for the perfecting of the saints, for the work of the ministry."
         },
         "evening_peace": {
-          "ref": "Psalm 116",
-          "note": "I love the LORD, because He hath heard my voice and my supplications."
+          "ref": "Psalm 131",
+          "note": "LORD, my heart is not haughty. I have behaved and quieted myself, as a child."
         }
       }
     },
@@ -851,24 +851,24 @@
           "note": "Be not envious of evil men."
         },
         "husbands_post": {
-          "ref": "Galatians 2:20",
+          "ref": "Ephesians 3:14-21",
           "virtue": "Abiding",
-          "note": "I have been crucified with Christ. Yet I live; not I, but Christ in me."
+          "note": "Rooted and grounded in love. Filled with all the fullness of God."
         },
         "fathers_charge": {
-          "ref": "Proverbs 19:20",
+          "ref": "James 1:19",
           "virtue": "Listening",
-          "note": "Hear counsel and receive instruction, that thou mayest be wise in thy latter end."
+          "note": "Swift to hear, slow to speak, slow to wrath."
         },
         "citizens_stand": {
-          "ref": "1 Peter 2:13-17",
+          "ref": "1 Corinthians 16:13-14",
           "virtue": "Engaged",
           "ring": "your nation",
-          "note": "Submit yourselves to every ordinance of man for the Lord's sake."
+          "note": "Watch ye, stand fast in the faith, quit you like men, be strong."
         },
         "evening_peace": {
-          "ref": "Psalm 119:33-40 (He)",
-          "note": "Teach me, O LORD, the way of Thy statutes. I shall keep it unto the end."
+          "ref": "Psalm 138",
+          "note": "Though I walk in the midst of trouble, Thou wilt revive me."
         }
       }
     },
@@ -887,19 +887,19 @@
           "note": "Whoso findeth a wife findeth a good thing — and obtaineth favour of the LORD."
         },
         "fathers_charge": {
-          "ref": "Joshua 24:15",
+          "ref": "1 Timothy 3:4-5",
           "virtue": "Leading",
-          "note": "As for me and my house, we will serve the LORD."
+          "note": "One that ruleth well his own house, having his children in subjection."
         },
         "citizens_stand": {
-          "ref": "Psalm 78:5-7",
+          "ref": "Deuteronomy 8:1-18",
           "virtue": "Remembering",
           "ring": "your city",
-          "note": "He commanded our fathers to make them known to their children — that the generation to come might know."
+          "note": "Beware lest thou forget the LORD thy God. Thou shalt remember all the way."
         },
         "evening_peace": {
-          "ref": "Psalm 118",
-          "note": "This is the day which the LORD hath made. We will rejoice and be glad in it."
+          "ref": "Psalm 143",
+          "note": "Cause me to hear Thy lovingkindness in the morning. For in Thee do I trust."
         }
       }
     },
@@ -913,24 +913,24 @@
           "note": "Answer not a fool according to his folly, lest thou be like him."
         },
         "husbands_post": {
-          "ref": "Psalm 91:1-4",
+          "ref": "Genesis 2:15",
           "virtue": "Protecting",
-          "note": "He shall cover thee with His feathers. His truth shall be thy shield."
+          "note": "The LORD put him into the garden to dress it and to keep it."
         },
         "fathers_charge": {
-          "ref": "Ephesians 4:29",
+          "ref": "Philippians 4:8",
           "virtue": "Encouraging",
-          "note": "Let no corrupt communication proceed out of your mouth — but that which is good to edify."
+          "note": "Whatsoever things are of good report — think on these things."
         },
         "citizens_stand": {
-          "ref": "Hebrews 4:12",
+          "ref": "1 Timothy 6:11-12",
           "virtue": "Equipped",
           "ring": "your state",
-          "note": "The Word of God is quick, and powerful, and sharper than any two-edged sword."
+          "note": "Flee these things. Fight the good fight of faith. Lay hold on eternal life."
         },
         "evening_peace": {
-          "ref": "Psalm 130",
-          "note": "Out of the depths have I cried unto Thee, O LORD."
+          "ref": "Psalm 145",
+          "note": "Every day will I bless Thee. I will praise Thy name for ever and ever."
         }
       }
     },
@@ -944,24 +944,24 @@
           "note": "Iron sharpens iron. A man sharpens the countenance of his friend."
         },
         "husbands_post": {
-          "ref": "Proverbs 13:22",
+          "ref": "Genesis 30:30",
           "virtue": "Providing",
-          "note": "A good man leaveth an inheritance to his children's children."
+          "note": "When shall I provide for mine own house also?"
         },
         "fathers_charge": {
-          "ref": "2 Timothy 2:2",
+          "ref": "Ephesians 6:4",
           "virtue": "Discipling",
-          "note": "Commit thou to faithful men, who shall be able to teach others also."
+          "note": "Bring them up in the nurture and admonition of the Lord."
         },
         "citizens_stand": {
-          "ref": "1 Peter 4:10",
+          "ref": "Acts 20:35",
           "virtue": "Serving",
           "ring": "your nation",
-          "note": "As every man hath received the gift, even so minister the same one to another."
+          "note": "It is more blessed to give than to receive."
         },
         "evening_peace": {
-          "ref": "Psalm 131",
-          "note": "LORD, my heart is not haughty. I have behaved and quieted myself, as a child."
+          "ref": "Psalm 146",
+          "note": "Praise the LORD, O my soul. While I live will I praise the LORD."
         }
       }
     },
@@ -975,14 +975,14 @@
           "note": "The wicked flee when no man pursues."
         },
         "husbands_post": {
-          "ref": "James 4:7-10",
+          "ref": "Philippians 2:3-11",
           "virtue": "Yields",
-          "note": "Submit yourselves therefore to God. Humble yourselves in the sight of the Lord."
+          "note": "In lowliness of mind let each esteem other better than themselves."
         },
         "fathers_charge": {
-          "ref": "2 Timothy 2:13",
+          "ref": "Hebrews 10:23",
           "virtue": "Faithful",
-          "note": "If we are faithless, He remains faithful — He cannot deny Himself."
+          "note": "Hold fast the profession of our faith without wavering."
         },
         "citizens_stand": {
           "ref": "Romans 10:13-15",
@@ -991,8 +991,8 @@
           "note": "How shall they hear without a preacher? How beautiful are the feet of them that preach the gospel."
         },
         "evening_peace": {
-          "ref": "Psalm 119:41-48 (Vau)",
-          "note": "Let Thy mercies come unto me, O LORD. So shall I have wherewith to answer him that reproacheth me."
+          "ref": "Psalm 147",
+          "note": "He healeth the broken in heart. He bindeth up their wounds."
         }
       }
     },
@@ -1006,24 +1006,24 @@
           "note": "He who is often reproved, and hardens his neck, shall suddenly be destroyed."
         },
         "husbands_post": {
-          "ref": "Proverbs 27:5-6",
+          "ref": "James 5:16",
           "virtue": "Honest",
-          "note": "Open rebuke is better than secret love. Faithful are the wounds of a friend."
+          "note": "Confess your faults one to another. Pray for one another, that you may be healed."
         },
         "fathers_charge": {
-          "ref": "Proverbs 19:14",
+          "ref": "Ephesians 6:4",
           "virtue": "Understanding",
-          "note": "Houses and riches are an inheritance from fathers — but a prudent wife from the LORD."
+          "note": "Provoke not your children to wrath."
         },
         "citizens_stand": {
-          "ref": "John 15:13",
+          "ref": "Ruth 1:16-17",
           "virtue": "Loyal",
           "ring": "your state",
-          "note": "Greater love hath no man than this — that a man lay down his life for his friends."
+          "note": "Whither thou goest, I will go. Thy people shall be my people, and thy God my God."
         },
         "evening_peace": {
-          "ref": "Psalm 138",
-          "note": "Though I walk in the midst of trouble, Thou wilt revive me."
+          "ref": "Psalm 148",
+          "note": "Let them praise the name of the LORD. His name alone is excellent."
         }
       }
     },
@@ -1037,24 +1037,24 @@
           "note": "Give me neither poverty nor riches. Feed me with food convenient for me."
         },
         "husbands_post": {
-          "ref": "Hebrews 13:4",
+          "ref": "1 Peter 3:7",
           "virtue": "Honors",
-          "note": "Marriage is honorable in all. The bed undefiled."
+          "note": "Dwell with her with understanding. Give honor — heir together of the grace of life."
         },
         "fathers_charge": {
-          "ref": "Romans 12:9-10",
+          "ref": "Ephesians 4:31-32",
           "virtue": "Loving",
-          "note": "Let love be without dissimulation. Be kindly affectioned with brotherly love."
+          "note": "Be ye kind one to another, tenderhearted, forgiving one another."
         },
         "citizens_stand": {
-          "ref": "John 17:20-23",
+          "ref": "1 Corinthians 1:10",
           "virtue": "United",
           "ring": "your nation",
-          "note": "That they all may be one. As Thou, Father, art in Me, and I in Thee."
+          "note": "That there be no divisions among you. Perfectly joined together in the same mind."
         },
         "evening_peace": {
-          "ref": "Psalm 143",
-          "note": "Cause me to hear Thy lovingkindness in the morning. For in Thee do I trust."
+          "ref": "Psalm 150",
+          "note": "Let every thing that hath breath praise the LORD."
         }
       }
     },
@@ -1073,19 +1073,19 @@
           "note": "Whatsoever is true, noble, just, pure — think on these things."
         },
         "fathers_charge": {
-          "ref": "Psalm 127:3-5",
+          "ref": "Proverbs 17:22",
           "virtue": "Fun",
-          "note": "Children are an heritage of the LORD. Like arrows in the hand of a mighty man."
+          "note": "A merry heart doeth good like a medicine. A broken spirit drieth the bones."
         },
         "citizens_stand": {
-          "ref": "Titus 2:1-15",
+          "ref": "Colossians 3:16",
           "virtue": "Teaching",
           "ring": "your city",
-          "note": "Speak thou the things which become sound doctrine. Aged men, aged women, young men."
+          "note": "Let the word of Christ dwell in you richly. Teaching and admonishing one another."
         },
         "evening_peace": {
-          "ref": "Psalm 145",
-          "note": "Every day will I bless Thee. I will praise Thy name for ever and ever."
+          "ref": "Psalm 8",
+          "note": "When I consider Thy heavens — what is man, that Thou art mindful of him?"
         }
       }
     },
@@ -1094,29 +1094,29 @@
       "reflection_prompt": "Where did your city, state, or nation need a Christian presence today — and were you there?",
       "readings": {
         "morning_wisdom": {
-          "ref": "Acts 4:13-31",
+          "ref": "Psalm 119:1-8 (Aleph)",
           "virtue": "Lead Courageously",
-          "note": "They marveled at the boldness of unschooled men. They had been with Jesus."
+          "note": "Blessed are the undefiled in the way."
         },
         "husbands_post": {
-          "ref": "Genesis 24:67",
+          "ref": "Ecclesiastes 9:9",
           "virtue": "Adoring",
-          "note": "Isaac brought her into Sarah's tent. He loved her, and was comforted."
+          "note": "Live joyfully with the wife whom thou lovest, all the days of thy life."
         },
         "fathers_charge": {
-          "ref": "Psalm 78:1-8",
+          "ref": "Deuteronomy 6:6-9",
           "virtue": "Intentional",
-          "note": "We will not hide them from their children. The next generation might know."
+          "note": "These words shall be in thine heart. Teach them diligently unto thy children."
         },
         "citizens_stand": {
-          "ref": "1 Timothy 2:1-4",
+          "ref": "Philippians 2:14-16",
           "virtue": "Engaged",
           "ring": "your state",
-          "note": "Supplications, prayers, intercessions — for kings, and for all that are in authority."
+          "note": "Do all things without murmurings and disputings. Shine as lights in the world."
         },
         "evening_peace": {
-          "ref": "Psalm 119:49-56 (Zain)",
-          "note": "Remember the word unto Thy servant — upon which Thou hast caused me to hope."
+          "ref": "Psalm 19",
+          "note": "The heavens declare the glory of God. The law of the LORD is perfect, converting the soul."
         }
       }
     },
@@ -1125,29 +1125,29 @@
       "reflection_prompt": "What did God entrust to you that you spent on yourself?",
       "readings": {
         "morning_wisdom": {
-          "ref": "Luke 16:10-13",
+          "ref": "Matthew 6:19-24",
           "virtue": "Manage Faithfully",
-          "note": "He who is faithful in least is faithful in much. You cannot serve two masters."
+          "note": "Treasures in heaven. Where your treasure is, your heart will be."
         },
         "husbands_post": {
-          "ref": "Proverbs 24:11-12",
+          "ref": "1 Samuel 30:18-19",
           "virtue": "Protecting",
-          "note": "Deliver those drawn unto death. He that pondereth the heart, considereth it."
+          "note": "David recovered all. Nothing lacking — small or great, sons or daughters."
         },
         "fathers_charge": {
-          "ref": "Ecclesiastes 5:1",
+          "ref": "Proverbs 18:13",
           "virtue": "Listening",
-          "note": "Keep thy foot when thou goest to the house of God. Be more ready to hear."
+          "note": "He that answereth a matter before he heareth it — it is folly and shame unto him."
         },
         "citizens_stand": {
-          "ref": "1 Corinthians 11:23-26",
+          "ref": "Deuteronomy 32:7",
           "virtue": "Remembering",
           "ring": "your nation",
-          "note": "This do in remembrance of Me. As often as ye eat this bread."
+          "note": "Remember the days of old. Ask thy father, and he will shew thee."
         },
         "evening_peace": {
-          "ref": "Psalm 146",
-          "note": "Praise the LORD, O my soul. While I live will I praise the LORD."
+          "ref": "Psalm 30",
+          "note": "Weeping may endure for a night. But joy cometh in the morning."
         }
       }
     },
@@ -1156,29 +1156,29 @@
       "reflection_prompt": "Does she feel covered today — not just paid for?",
       "readings": {
         "morning_wisdom": {
-          "ref": "Hebrews 13:17",
+          "ref": "Matthew 12:36-37",
           "virtue": "Account Accurately",
-          "note": "Submit to those who watch for your souls — they shall give account."
+          "note": "By your words you will be justified — and by your words condemned."
         },
         "husbands_post": {
-          "ref": "Genesis 30:30",
+          "ref": "Proverbs 27:23-27",
           "virtue": "Providing",
-          "note": "When shall I provide for mine own house also?"
+          "note": "Be diligent to know the state of thy flocks. Riches are not forever."
         },
         "fathers_charge": {
-          "ref": "Deuteronomy 6:4-9",
+          "ref": "Hebrews 13:7",
           "virtue": "Leading",
-          "note": "Thou shalt love the LORD thy God with all thine heart. These words shall be in thine heart."
+          "note": "Remember them which have the rule over you. Follow their faith."
         },
         "citizens_stand": {
-          "ref": "1 Peter 3:15",
+          "ref": "2 Timothy 3:16-17",
           "virtue": "Equipped",
           "ring": "your city",
-          "note": "Be ready always to give an answer to every man — with meekness and fear."
+          "note": "All Scripture is profitable. That the man of God may be perfect, thoroughly furnished."
         },
         "evening_peace": {
-          "ref": "Psalm 147",
-          "note": "He healeth the broken in heart. He bindeth up their wounds."
+          "ref": "Psalm 32",
+          "note": "Blessed is he whose transgression is forgiven. I acknowledged my sin unto Thee."
         }
       }
     },
@@ -1187,29 +1187,29 @@
       "reflection_prompt": "Whose courage did you build up today, and whose did you tear down?",
       "readings": {
         "morning_wisdom": {
-          "ref": "Galatians 6:9",
+          "ref": "Psalm 119:9-16 (Beth)",
           "virtue": "Never Quit",
-          "note": "Be not weary in well-doing. In due season we shall reap, if we faint not."
+          "note": "Wherewithal shall a young man cleanse his way? By taking heed thereto according to Thy word."
         },
         "husbands_post": {
-          "ref": "Matthew 26:39",
+          "ref": "Colossians 3:12-14",
           "virtue": "Yields",
-          "note": "Not as I will, but as Thou wilt."
+          "note": "Put on bowels of mercies, kindness, humbleness, meekness, longsuffering."
         },
         "fathers_charge": {
-          "ref": "Proverbs 12:25",
+          "ref": "Colossians 3:21",
           "virtue": "Encouraging",
-          "note": "Heaviness in the heart maketh it stoop. A good word maketh it glad."
+          "note": "Fathers, provoke not your children to anger — lest they be discouraged."
         },
         "citizens_stand": {
-          "ref": "Philippians 2:3-8",
+          "ref": "Romans 12:9-13",
           "virtue": "Serving",
           "ring": "your state",
-          "note": "Look not every man on his own things — but every man also on the things of others."
+          "note": "Distributing to the necessity of saints. Given to hospitality."
         },
         "evening_peace": {
-          "ref": "Psalm 148",
-          "note": "Let them praise the name of the LORD. His name alone is excellent."
+          "ref": "Psalm 33",
+          "note": "Sing unto Him a new song. The eye of the LORD is upon them that fear Him."
         }
       }
     },
@@ -1223,24 +1223,24 @@
           "note": "Bury the talent or trade with it. Passivity is theft from the Master."
         },
         "husbands_post": {
-          "ref": "Hebrews 4:12-13",
+          "ref": "1 John 1:5-10",
           "virtue": "Honest",
-          "note": "The Word lays bare. All things are naked before His eyes."
+          "note": "If we walk in the light, the blood of Jesus cleanses us from all sin."
         },
         "fathers_charge": {
-          "ref": "Proverbs 22:6",
+          "ref": "2 Timothy 2:2",
           "virtue": "Discipling",
-          "note": "Train up a child in the way he should go. When he is old, he will not depart from it."
+          "note": "Commit thou to faithful men, who shall be able to teach others also."
         },
         "citizens_stand": {
-          "ref": "Matthew 5:13-16",
+          "ref": "2 Corinthians 5:18-21",
           "virtue": "Outreaching",
           "ring": "your nation",
-          "note": "Ye are the salt of the earth. Ye are the light of the world."
+          "note": "He hath given to us the ministry of reconciliation. We are ambassadors for Christ."
         },
         "evening_peace": {
-          "ref": "Psalm 119:57-64 (Cheth)",
-          "note": "Thou art my portion, O LORD. I have said that I would keep Thy words."
+          "ref": "Psalm 40",
+          "note": "I waited patiently for the LORD. He inclined unto me, and heard my cry."
         }
       }
     },
@@ -1249,29 +1249,29 @@
       "reflection_prompt": "What did you give your full presence to — and what did you only half-show up for?",
       "readings": {
         "morning_wisdom": {
-          "ref": "Matthew 5:13-16",
+          "ref": "Psalm 119:17-24 (Gimel)",
           "virtue": "Engage Intentionally",
-          "note": "Salt that loses its savor is trampled. Light that hides is wasted."
+          "note": "Open Thou mine eyes, that I may behold wondrous things out of Thy law."
         },
         "husbands_post": {
-          "ref": "1 Corinthians 11:7",
+          "ref": "Genesis 2:18-25",
           "virtue": "Honors",
-          "note": "The woman is the glory of the man."
+          "note": "Bone of my bones, flesh of my flesh. He shall cleave unto his wife."
         },
         "fathers_charge": {
-          "ref": "Joshua 24:14-15",
+          "ref": "Deuteronomy 7:9",
           "virtue": "Faithful",
-          "note": "As for me and my house, we will serve the LORD."
+          "note": "The LORD thy God, the faithful God, keeping covenant to a thousand generations."
         },
         "citizens_stand": {
-          "ref": "Ruth 1:16-17",
+          "ref": "2 Samuel 23:13-17",
           "virtue": "Loyal",
           "ring": "your city",
-          "note": "Whither thou goest, I will go. Thy people shall be my people, and thy God my God."
+          "note": "David's mighty men brake through the host of the Philistines. He poured the water out unto the LORD."
         },
         "evening_peace": {
-          "ref": "Psalm 150",
-          "note": "Let every thing that hath breath praise the LORD."
+          "ref": "Psalm 56",
+          "note": "What time I am afraid, I will trust in Thee."
         }
       }
     },
@@ -1280,29 +1280,29 @@
       "reflection_prompt": "Is your marriage running on your spiritual fumes or on Christ's fullness?",
       "readings": {
         "morning_wisdom": {
-          "ref": "Luke 15:11-32",
+          "ref": "Matthew 25:31-46",
           "virtue": "Accept Responsibility",
-          "note": "The prodigal came to himself. The first step home is owning it."
+          "note": "Sheep or goat. The line is drawn by what you did, not what you said."
         },
         "husbands_post": {
-          "ref": "Ephesians 3:14-21",
+          "ref": "Colossians 3:1-4",
           "virtue": "Abiding",
-          "note": "Rooted and grounded in love. Filled with all the fullness of God."
+          "note": "Set your mind on things above. Your life is hid with Christ in God."
         },
         "fathers_charge": {
-          "ref": "Matthew 18:1-6",
+          "ref": "Psalm 139:13-16",
           "virtue": "Understanding",
-          "note": "Except ye be converted and become as little children, ye shall not enter the kingdom."
+          "note": "Thou hast covered me in my mother's womb. Fearfully and wonderfully made."
         },
         "citizens_stand": {
-          "ref": "Philippians 2:1-2",
+          "ref": "Ephesians 4:1-6",
           "virtue": "United",
           "ring": "your state",
-          "note": "Be likeminded, having the same love, being of one accord, of one mind."
+          "note": "One body, one Spirit, one hope, one Lord, one faith, one baptism, one God and Father."
         },
         "evening_peace": {
-          "ref": "Psalm 8",
-          "note": "When I consider Thy heavens — what is man, that Thou art mindful of him?"
+          "ref": "Psalm 61",
+          "note": "From the end of the earth will I cry unto Thee, when my heart is overwhelmed."
         }
       }
     },
@@ -1311,29 +1311,29 @@
       "reflection_prompt": "Did your children feel loved today, or just managed?",
       "readings": {
         "morning_wisdom": {
-          "ref": "2 Timothy 1:7",
+          "ref": "Acts 4:13-31",
           "virtue": "Lead Courageously",
-          "note": "Not a spirit of fear, but of power, of love, and of a sound mind."
+          "note": "They marveled at the boldness of unschooled men. They had been with Jesus."
         },
         "husbands_post": {
-          "ref": "Ecclesiastes 9:9",
+          "ref": "Song of Solomon 4:1-7",
           "virtue": "Adoring",
-          "note": "Live joyfully with the wife whom thou lovest, all the days of thy life."
+          "note": "You have ravished my heart, my sister, my spouse."
         },
         "fathers_charge": {
-          "ref": "1 John 3:16-18",
+          "ref": "Ephesians 3:14-19",
           "virtue": "Loving",
-          "note": "Let us not love in word, but in deed and in truth."
+          "note": "That ye may know the love of Christ, which passeth knowledge."
         },
         "citizens_stand": {
-          "ref": "Deuteronomy 6:6-7",
+          "ref": "1 Timothy 4:11-13",
           "virtue": "Teaching",
           "ring": "your nation",
-          "note": "Teach them diligently to thy children. Talk of them when thou sittest. When thou walkest."
+          "note": "These things command and teach. Give attendance to reading, to exhortation, to doctrine."
         },
         "evening_peace": {
-          "ref": "Psalm 19",
-          "note": "The heavens declare the glory of God. The law of the LORD is perfect, converting the soul."
+          "ref": "Psalm 65",
+          "note": "Praise waiteth for Thee, O God, in Sion. Thou art the confidence of all the ends of the earth."
         }
       }
     },
@@ -1342,29 +1342,29 @@
       "reflection_prompt": "Where did your city, state, or nation need a Christian presence today — and were you there?",
       "readings": {
         "morning_wisdom": {
-          "ref": "1 Corinthians 4:1-2",
+          "ref": "Psalm 119:25-32 (Daleth)",
           "virtue": "Manage Faithfully",
-          "note": "Stewards of the mysteries of God. Required of stewards: be found faithful."
+          "note": "My soul cleaveth unto the dust. Quicken Thou me according to Thy word."
         },
         "husbands_post": {
-          "ref": "Ephesians 6:10-18",
+          "ref": "Nehemiah 4:14",
           "virtue": "Protecting",
-          "note": "Put on the whole armor of God. Withstand in the evil day, and having done all, stand."
+          "note": "Fight for your brethren, your sons, your daughters, your wives, your houses."
         },
         "fathers_charge": {
-          "ref": "Nehemiah 8:10",
+          "ref": "Proverbs 15:13",
           "virtue": "Fun",
-          "note": "The joy of the LORD is your strength."
+          "note": "A merry heart maketh a cheerful countenance."
         },
         "citizens_stand": {
-          "ref": "Titus 3:1-2",
+          "ref": "1 Timothy 2:1-4",
           "virtue": "Engaged",
           "ring": "your city",
-          "note": "Put them in mind to be subject to principalities and powers. To be ready to every good work."
+          "note": "Supplications, prayers, intercessions — for kings, and for all that are in authority."
         },
         "evening_peace": {
-          "ref": "Psalm 119:65-72 (Teth)",
-          "note": "Thou hast dealt well with Thy servant. It is good for me that I have been afflicted."
+          "ref": "Psalm 67",
+          "note": "God be merciful unto us, and bless us. Cause His face to shine upon us."
         }
       }
     },
@@ -1378,9 +1378,9 @@
           "note": "By your words you will be justified — and by your words condemned."
         },
         "husbands_post": {
-          "ref": "Proverbs 6:6-11",
+          "ref": "Proverbs 13:22",
           "virtue": "Providing",
-          "note": "Go to the ant, thou sluggard. Consider her ways and be wise."
+          "note": "A good man leaveth an inheritance to his children's children."
         },
         "fathers_charge": {
           "ref": "Joshua 24:15",
@@ -1388,320 +1388,10 @@
           "note": "Choose you this day whom ye will serve. As for me and my house — the LORD."
         },
         "citizens_stand": {
-          "ref": "2 Peter 1:12-15",
+          "ref": "Joshua 4:1-7",
           "virtue": "Remembering",
           "ring": "your state",
-          "note": "I will not be negligent to put you always in remembrance — though ye know and be established."
-        },
-        "evening_peace": {
-          "ref": "Psalm 30",
-          "note": "Weeping may endure for a night. But joy cometh in the morning."
-        }
-      }
-    },
-    {
-      "day": 42,
-      "reflection_prompt": "When she spoke, did you actually change — or did you do what you already planned?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "2 Timothy 4:7",
-          "virtue": "Never Quit",
-          "note": "I have fought the good fight. I have finished my course. I have kept the faith."
-        },
-        "husbands_post": {
-          "ref": "Proverbs 19:11",
-          "virtue": "Yields",
-          "note": "The discretion of a man defers his anger. It is his glory to overlook a transgression."
-        },
-        "fathers_charge": {
-          "ref": "Hebrews 5:11-14",
-          "virtue": "Listening",
-          "note": "Strong meat belongs to them of full age. By use, senses are exercised to discern."
-        },
-        "citizens_stand": {
-          "ref": "2 Corinthians 10:3-5",
-          "virtue": "Equipped",
-          "ring": "your nation",
-          "note": "The weapons of our warfare are not carnal — but mighty through God."
-        },
-        "evening_peace": {
-          "ref": "Psalm 32",
-          "note": "Blessed is he whose transgression is forgiven. I acknowledged my sin unto Thee."
-        }
-      }
-    },
-    {
-      "day": 43,
-      "reflection_prompt": "Where are you leading your family — and do they know?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Ephesians 5:14-17",
-          "virtue": "Reject Passivity",
-          "note": "Awake, O sleeper. Walk circumspectly. The days are evil."
-        },
-        "husbands_post": {
-          "ref": "Matthew 5:37",
-          "virtue": "Honest",
-          "note": "Let your yes be yes, your no be no. More than this is from the evil one."
-        },
-        "fathers_charge": {
-          "ref": "1 Peter 5:2-4",
-          "virtue": "Leading",
-          "note": "Feed the flock of God which is among you. Not by constraint, but willingly."
-        },
-        "citizens_stand": {
-          "ref": "Acts 20:35",
-          "virtue": "Serving",
-          "ring": "your city",
-          "note": "It is more blessed to give than to receive."
-        },
-        "evening_peace": {
-          "ref": "Psalm 33",
-          "note": "Sing unto Him a new song. The eye of the LORD is upon them that fear Him."
-        }
-      }
-    },
-    {
-      "day": 44,
-      "reflection_prompt": "Whose name did you carry to God today that does not yet know Him?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Colossians 4:5-6",
-          "virtue": "Engage Intentionally",
-          "note": "Walk in wisdom toward outsiders. Speech with grace, seasoned with salt."
-        },
-        "husbands_post": {
-          "ref": "Genesis 2:18-25",
-          "virtue": "Honors",
-          "note": "Bone of my bones, flesh of my flesh. He shall cleave unto his wife."
-        },
-        "fathers_charge": {
-          "ref": "Hebrews 3:13",
-          "virtue": "Encouraging",
-          "note": "Exhort one another daily, while it is called To day. Lest any be hardened."
-        },
-        "citizens_stand": {
-          "ref": "1 Peter 3:15",
-          "virtue": "Outreaching",
-          "ring": "your state",
-          "note": "Be ready always to give an answer to every man — with meekness and fear."
-        },
-        "evening_peace": {
-          "ref": "Psalm 119:73-80 (Jod)",
-          "note": "Thy hands have made me and fashioned me. Give me understanding, that I may learn."
-        }
-      }
-    },
-    {
-      "day": 45,
-      "reflection_prompt": "Whose fault did you blame today that was actually yours?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Matthew 25:31-46",
-          "virtue": "Accept Responsibility",
-          "note": "Sheep or goat. The line is drawn by what you did, not what you said."
-        },
-        "husbands_post": {
-          "ref": "1 John 2:6",
-          "virtue": "Abiding",
-          "note": "He who says he abides in Him ought himself to walk as He walked."
-        },
-        "fathers_charge": {
-          "ref": "3 John 4",
-          "virtue": "Discipling",
-          "note": "I have no greater joy than to hear that my children walk in truth."
-        },
-        "citizens_stand": {
-          "ref": "2 Samuel 23:13-17",
-          "virtue": "Loyal",
-          "ring": "your nation",
-          "note": "David's mighty men brake through the host of the Philistines. He poured the water out unto the LORD."
-        },
-        "evening_peace": {
-          "ref": "Psalm 40",
-          "note": "I waited patiently for the LORD. He inclined unto me, and heard my cry."
-        }
-      }
-    },
-    {
-      "day": 46,
-      "reflection_prompt": "When was the last time you looked at your wife the way you did when you were dating?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "1 Corinthians 16:13-14",
-          "virtue": "Lead Courageously",
-          "note": "Watch ye. Stand fast in the faith. Quit you like men. Be strong."
-        },
-        "husbands_post": {
-          "ref": "Song of Solomon 7:10",
-          "virtue": "Adoring",
-          "note": "I am my beloved's, and his desire is toward me."
-        },
-        "fathers_charge": {
-          "ref": "Hebrews 10:23",
-          "virtue": "Faithful",
-          "note": "Hold fast the profession of our faith without wavering."
-        },
-        "citizens_stand": {
-          "ref": "Romans 15:5-7",
-          "virtue": "United",
-          "ring": "your city",
-          "note": "Be likeminded one toward another, according to Christ Jesus."
-        },
-        "evening_peace": {
-          "ref": "Psalm 56",
-          "note": "What time I am afraid, I will trust in Thee."
-        }
-      }
-    },
-    {
-      "day": 47,
-      "reflection_prompt": "What does each of your children need from you that no one else can give them?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "1 Peter 4:10-11",
-          "virtue": "Manage Faithfully",
-          "note": "Each man, as he has received a gift, minister it as a good steward."
-        },
-        "husbands_post": {
-          "ref": "Genesis 2:15",
-          "virtue": "Protecting",
-          "note": "The LORD put him into the garden to dress it and to keep it."
-        },
-        "fathers_charge": {
-          "ref": "Luke 2:51-52",
-          "virtue": "Understanding",
-          "note": "Jesus increased in wisdom and stature, and in favor with God and man."
-        },
-        "citizens_stand": {
-          "ref": "Colossians 3:16",
-          "virtue": "Teaching",
-          "ring": "your state",
-          "note": "Let the word of Christ dwell in you richly. Teaching and admonishing one another."
-        },
-        "evening_peace": {
-          "ref": "Psalm 61",
-          "note": "From the end of the earth will I cry unto Thee, when my heart is overwhelmed."
-        }
-      }
-    },
-    {
-      "day": 48,
-      "reflection_prompt": "Where did your city, state, or nation need a Christian presence today — and were you there?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "1 Peter 3:15-16",
-          "virtue": "Account Accurately",
-          "note": "Be ready always to give an answer — with meekness and fear."
-        },
-        "husbands_post": {
-          "ref": "Proverbs 22:29",
-          "virtue": "Providing",
-          "note": "Seest thou a man diligent in his business? He shall stand before kings."
-        },
-        "fathers_charge": {
-          "ref": "Ephesians 4:31-32",
-          "virtue": "Loving",
-          "note": "Be ye kind one to another, tenderhearted, forgiving one another."
-        },
-        "citizens_stand": {
-          "ref": "Matthew 5:13-16",
-          "virtue": "Engaged",
-          "ring": "your nation",
-          "note": "Ye are the light of the world. A city that is set on an hill cannot be hid."
-        },
-        "evening_peace": {
-          "ref": "Psalm 119:81-88 (Caph)",
-          "note": "My soul fainteth for Thy salvation. I hope in Thy word."
-        }
-      }
-    },
-    {
-      "day": 49,
-      "reflection_prompt": "What is God asking you to keep doing past the point you wanted to stop?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Hebrews 12:1-3",
-          "virtue": "Never Quit",
-          "note": "Run with patience. Looking unto Jesus, the author and finisher of our faith."
-        },
-        "husbands_post": {
-          "ref": "Romans 12:18",
-          "virtue": "Yields",
-          "note": "If it be possible, as much as lieth in you, live peaceably with all men."
-        },
-        "fathers_charge": {
-          "ref": "Zephaniah 3:17",
-          "virtue": "Fun",
-          "note": "He will rejoice over thee with joy. He will joy over thee with singing."
-        },
-        "citizens_stand": {
-          "ref": "Hebrews 13:7",
-          "virtue": "Remembering",
-          "ring": "your city",
-          "note": "Remember them which have the rule over you. Whose faith follow."
-        },
-        "evening_peace": {
-          "ref": "Psalm 65",
-          "note": "Praise waiteth for Thee, O God, in Sion. Thou art the confidence of all the ends of the earth."
-        }
-      }
-    },
-    {
-      "day": 50,
-      "reflection_prompt": "What did your wife need you to say today that you didn't say?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "James 4:17",
-          "virtue": "Reject Passivity",
-          "note": "He who knows the right and does it not — to him it is sin."
-        },
-        "husbands_post": {
-          "ref": "Galatians 2:11-14",
-          "virtue": "Honest",
-          "note": "Paul withstood Peter to the face. He was to be blamed."
-        },
-        "fathers_charge": {
-          "ref": "Proverbs 4:1-9",
-          "virtue": "Intentional",
-          "note": "Hear, ye children, the instruction of a father. Get wisdom; get understanding."
-        },
-        "citizens_stand": {
-          "ref": "1 Timothy 6:11-12",
-          "virtue": "Equipped",
-          "ring": "your state",
-          "note": "Flee these things. Fight the good fight of faith. Lay hold on eternal life."
-        },
-        "evening_peace": {
-          "ref": "Psalm 67",
-          "note": "God be merciful unto us, and bless us. Cause His face to shine upon us."
-        }
-      }
-    },
-    {
-      "day": 51,
-      "reflection_prompt": "What did one of your children say today that you almost missed?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Ephesians 5:15-21",
-          "virtue": "Engage Intentionally",
-          "note": "See then that you walk circumspectly — not as fools, but as wise."
-        },
-        "husbands_post": {
-          "ref": "Song of Solomon 2:10-13",
-          "virtue": "Honors",
-          "note": "Rise up, my love, my fair one, and come away."
-        },
-        "fathers_charge": {
-          "ref": "Matthew 18:15-17",
-          "virtue": "Listening",
-          "note": "If thy brother shall trespass against thee, go and tell him his fault — between thee and him alone."
-        },
-        "citizens_stand": {
-          "ref": "John 13:1-17",
-          "virtue": "Serving",
-          "ring": "your nation",
-          "note": "Jesus girded Himself with a towel, and began to wash the disciples' feet."
+          "note": "Twelve stones from the Jordan. So your children may ask: What mean these stones?"
         },
         "evening_peace": {
           "ref": "Psalm 71",
@@ -1710,60 +1400,29 @@
       }
     },
     {
-      "day": 52,
-      "reflection_prompt": "Whose name did you carry to God today that does not yet know Him?",
+      "day": 42,
+      "reflection_prompt": "When she spoke, did you actually change — or did you do what you already planned?",
       "readings": {
         "morning_wisdom": {
-          "ref": "Romans 14:10-12",
-          "virtue": "Accept Responsibility",
-          "note": "Each of us shall give account of himself to God."
+          "ref": "Romans 5:1-5",
+          "virtue": "Never Quit",
+          "note": "Tribulation works patience. Patience, experience. Experience, hope."
         },
         "husbands_post": {
-          "ref": "Romans 8:9-11",
-          "virtue": "Abiding",
-          "note": "If the Spirit of Him who raised Jesus dwells in you, He shall quicken you."
+          "ref": "James 4:7-10",
+          "virtue": "Yields",
+          "note": "Submit yourselves therefore to God. Humble yourselves in the sight of the Lord."
         },
         "fathers_charge": {
-          "ref": "Hebrews 13:7",
-          "virtue": "Leading",
-          "note": "Remember them which have the rule over you. Follow their faith."
+          "ref": "Proverbs 19:20",
+          "virtue": "Listening",
+          "note": "Hear counsel and receive instruction, that thou mayest be wise in thy latter end."
         },
         "citizens_stand": {
-          "ref": "Colossians 4:2-6",
-          "virtue": "Outreaching",
-          "ring": "your city",
-          "note": "Walk in wisdom toward them that are without. Redeeming the time."
-        },
-        "evening_peace": {
-          "ref": "Psalm 119:89-96 (Lamed)",
-          "note": "For ever, O LORD, Thy word is settled in heaven."
-        }
-      }
-    },
-    {
-      "day": 53,
-      "reflection_prompt": "Where did you fear man more than God today?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Hebrews 13:6",
-          "virtue": "Lead Courageously",
-          "note": "The Lord is my helper. I will not fear what man shall do to me."
-        },
-        "husbands_post": {
-          "ref": "Ephesians 5:28-29",
-          "virtue": "Adoring",
-          "note": "He that loveth his wife loveth himself. No man ever yet hated his own flesh."
-        },
-        "fathers_charge": {
-          "ref": "Colossians 3:21",
-          "virtue": "Encouraging",
-          "note": "Fathers, provoke not your children to anger — lest they be discouraged."
-        },
-        "citizens_stand": {
-          "ref": "2 Timothy 4:9-11",
-          "virtue": "Loyal",
-          "ring": "your state",
-          "note": "Demas hath forsaken me. Only Luke is with me."
+          "ref": "Hebrews 4:12",
+          "virtue": "Equipped",
+          "ring": "your nation",
+          "note": "The Word of God is quick, and powerful, and sharper than any two-edged sword."
         },
         "evening_peace": {
           "ref": "Psalm 73",
@@ -1772,29 +1431,29 @@
       }
     },
     {
-      "day": 54,
-      "reflection_prompt": "What is encroaching on her peace that you've been ignoring?",
+      "day": 43,
+      "reflection_prompt": "Where are you leading your family — and do they know?",
       "readings": {
         "morning_wisdom": {
-          "ref": "Matthew 6:19-24",
-          "virtue": "Manage Faithfully",
-          "note": "Treasures in heaven. Where your treasure is, your heart will be."
+          "ref": "Psalm 119:33-40 (He)",
+          "virtue": "Reject Passivity",
+          "note": "Teach me, O LORD, the way of Thy statutes. I shall keep it unto the end."
         },
         "husbands_post": {
-          "ref": "1 Samuel 30:18-19",
-          "virtue": "Protecting",
-          "note": "David recovered all. Nothing lacking — small or great, sons or daughters."
+          "ref": "Psalm 139:23-24",
+          "virtue": "Honest",
+          "note": "Search me, O God. See if there be any wicked way in me."
         },
         "fathers_charge": {
-          "ref": "Ephesians 6:4",
-          "virtue": "Discipling",
-          "note": "Bring them up in the nurture and admonition of the Lord."
+          "ref": "1 Peter 5:2-4",
+          "virtue": "Leading",
+          "note": "Feed the flock of God which is among you. Not by constraint, but willingly."
         },
         "citizens_stand": {
-          "ref": "Colossians 3:12-15",
-          "virtue": "United",
-          "ring": "your nation",
-          "note": "Above all these things put on charity, which is the bond of perfectness."
+          "ref": "Galatians 5:13",
+          "virtue": "Serving",
+          "ring": "your city",
+          "note": "By love serve one another."
         },
         "evening_peace": {
           "ref": "Psalm 86",
@@ -1803,535 +1462,8 @@
       }
     },
     {
-      "day": 55,
-      "reflection_prompt": "What did your children see you keep that no one would have known if you'd broken?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "James 3:1-12",
-          "virtue": "Account Accurately",
-          "note": "Not many should be teachers. We shall receive a stricter judgment."
-        },
-        "husbands_post": {
-          "ref": "Matthew 6:25-34",
-          "virtue": "Providing",
-          "note": "Seek first the kingdom of God — and all these things shall be added."
-        },
-        "fathers_charge": {
-          "ref": "Deuteronomy 7:9",
-          "virtue": "Faithful",
-          "note": "The LORD thy God, the faithful God, keeping covenant to a thousand generations."
-        },
-        "citizens_stand": {
-          "ref": "1 Timothy 4:11-13",
-          "virtue": "Teaching",
-          "ring": "your city",
-          "note": "These things command and teach. Give attendance to reading, to exhortation, to doctrine."
-        },
-        "evening_peace": {
-          "ref": "Psalm 92",
-          "note": "It is a good thing to give thanks unto the LORD. To shew forth Thy lovingkindness in the morning."
-        }
-      }
-    },
-    {
-      "day": 56,
-      "reflection_prompt": "Where did your city, state, or nation need a Christian presence today — and were you there?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "James 1:2-4",
-          "virtue": "Never Quit",
-          "note": "Count it all joy when you fall into trials. Let patience have her perfect work."
-        },
-        "husbands_post": {
-          "ref": "Colossians 3:12-14",
-          "virtue": "Yields",
-          "note": "Put on bowels of mercies, kindness, humbleness, meekness, longsuffering."
-        },
-        "fathers_charge": {
-          "ref": "1 Corinthians 13:11",
-          "virtue": "Understanding",
-          "note": "When I was a child, I spoke as a child. When I became a man, I put away childish things."
-        },
-        "citizens_stand": {
-          "ref": "1 Corinthians 16:13-14",
-          "virtue": "Engaged",
-          "ring": "your state",
-          "note": "Watch ye, stand fast in the faith, quit you like men, be strong."
-        },
-        "evening_peace": {
-          "ref": "Psalm 119:97-104 (Mem)",
-          "note": "O how I love Thy law! It is my meditation all the day."
-        }
-      }
-    },
-    {
-      "day": 57,
-      "reflection_prompt": "Where did you wait today when God called you to move?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Hebrews 6:11-12",
-          "virtue": "Reject Passivity",
-          "note": "Not sluggish. Imitators of those who through faith inherit the promises."
-        },
-        "husbands_post": {
-          "ref": "Psalm 139:23-24",
-          "virtue": "Honest",
-          "note": "Search me, O God. See if there be any wicked way in me."
-        },
-        "fathers_charge": {
-          "ref": "Colossians 3:12-14",
-          "virtue": "Loving",
-          "note": "Above all these things put on charity, which is the bond of perfectness."
-        },
-        "citizens_stand": {
-          "ref": "Deuteronomy 32:7",
-          "virtue": "Remembering",
-          "ring": "your nation",
-          "note": "Remember the days of old. Ask thy father, and he will shew thee."
-        },
-        "evening_peace": {
-          "ref": "Psalm 95",
-          "note": "O come, let us worship and bow down. Let us kneel before the LORD our maker."
-        }
-      }
-    },
-    {
-      "day": 58,
-      "reflection_prompt": "When she heard you talking about her — to anyone — was she honored?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "1 Corinthians 9:24-27",
-          "virtue": "Engage Intentionally",
-          "note": "All run, but one receives the prize. So run that you may obtain."
-        },
-        "husbands_post": {
-          "ref": "Ephesians 5:25-33",
-          "virtue": "Honors",
-          "note": "Husbands, love your wives as Christ loved the church — and gave Himself for her."
-        },
-        "fathers_charge": {
-          "ref": "Luke 15:22-24",
-          "virtue": "Fun",
-          "note": "Bring forth the best robe and put it on him. Let us eat and be merry."
-        },
-        "citizens_stand": {
-          "ref": "Ephesians 4:11-16",
-          "virtue": "Equipped",
-          "ring": "your city",
-          "note": "Apostles, prophets, evangelists, pastors, teachers — for the perfecting of the saints."
-        },
-        "evening_peace": {
-          "ref": "Psalm 96",
-          "note": "Sing unto the LORD a new song. Sing unto the LORD, all the earth."
-        }
-      }
-    },
-    {
-      "day": 59,
-      "reflection_prompt": "Are you discipling your children — or just supervising them?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "2 Corinthians 5:9-11",
-          "virtue": "Accept Responsibility",
-          "note": "The judgment seat of Christ. The fear of the Lord persuades men."
-        },
-        "husbands_post": {
-          "ref": "John 15:1-11",
-          "virtue": "Abiding",
-          "note": "Abide in Me. The branch cannot bear fruit by itself."
-        },
-        "fathers_charge": {
-          "ref": "2 Timothy 3:14-17",
-          "virtue": "Intentional",
-          "note": "From a child thou hast known the holy Scriptures. Profitable for doctrine, reproof, correction."
-        },
-        "citizens_stand": {
-          "ref": "Romans 12:9-13",
-          "virtue": "Serving",
-          "ring": "your state",
-          "note": "Distributing to the necessity of saints. Given to hospitality."
-        },
-        "evening_peace": {
-          "ref": "Psalm 98",
-          "note": "Sing unto the LORD a new song. For He hath done marvellous things."
-        }
-      }
-    },
-    {
-      "day": 60,
+      "day": 44,
       "reflection_prompt": "Whose name did you carry to God today that does not yet know Him?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Ephesians 6:10-13",
-          "virtue": "Lead Courageously",
-          "note": "Be strong in the Lord. Put on the whole armor. Stand."
-        },
-        "husbands_post": {
-          "ref": "Song of Solomon 4:1-7",
-          "virtue": "Adoring",
-          "note": "You have ravished my heart, my sister, my spouse."
-        },
-        "fathers_charge": {
-          "ref": "Proverbs 18:2",
-          "virtue": "Listening",
-          "note": "A fool hath no delight in understanding — but in that his heart may discover itself."
-        },
-        "citizens_stand": {
-          "ref": "James 5:19-20",
-          "virtue": "Outreaching",
-          "ring": "your nation",
-          "note": "If any of you do err from the truth, and one convert him — he shall save a soul from death."
-        },
-        "evening_peace": {
-          "ref": "Psalm 119:105-112 (Nun)",
-          "note": "Thy word is a lamp unto my feet, and a light unto my path."
-        }
-      }
-    },
-    {
-      "day": 61,
-      "reflection_prompt": "What did God entrust to you that you spent on yourself?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "1 Timothy 6:6-19",
-          "virtue": "Manage Faithfully",
-          "note": "Godliness with contentment is great gain. Rich in good works."
-        },
-        "husbands_post": {
-          "ref": "1 Peter 3:7",
-          "virtue": "Protecting",
-          "note": "Husbands, dwell with them according to knowledge. Give honor to the weaker vessel."
-        },
-        "fathers_charge": {
-          "ref": "1 Thessalonians 5:14",
-          "virtue": "Leading",
-          "note": "Warn them that are unruly. Comfort the feebleminded. Support the weak. Be patient."
-        },
-        "citizens_stand": {
-          "ref": "Hebrews 13:1",
-          "virtue": "Loyal",
-          "ring": "your city",
-          "note": "Let brotherly love continue."
-        },
-        "evening_peace": {
-          "ref": "Psalm 99",
-          "note": "The LORD reigneth. Let the people tremble. Exalt ye the LORD our God."
-        }
-      }
-    },
-    {
-      "day": 62,
-      "reflection_prompt": "Does she feel covered today — not just paid for?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "2 Corinthians 13:5",
-          "virtue": "Account Accurately",
-          "note": "Examine yourselves whether you be in the faith. Prove your own selves."
-        },
-        "husbands_post": {
-          "ref": "1 Timothy 5:8",
-          "virtue": "Providing",
-          "note": "He that provideth not for his own house is worse than an infidel."
-        },
-        "fathers_charge": {
-          "ref": "Philippians 4:8",
-          "virtue": "Encouraging",
-          "note": "Whatsoever things are of good report — think on these things."
-        },
-        "citizens_stand": {
-          "ref": "Acts 4:32",
-          "virtue": "United",
-          "ring": "your state",
-          "note": "The multitude of them that believed were of one heart and of one soul."
-        },
-        "evening_peace": {
-          "ref": "Psalm 101",
-          "note": "Mercy and judgment will I sing. I will behave myself wisely in a perfect way."
-        }
-      }
-    },
-    {
-      "day": 63,
-      "reflection_prompt": "If your children imitated only what you did this week — would Christ be honored?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Romans 5:1-5",
-          "virtue": "Never Quit",
-          "note": "Tribulation works patience. Patience, experience. Experience, hope."
-        },
-        "husbands_post": {
-          "ref": "Philippians 2:3-11",
-          "virtue": "Yields",
-          "note": "In lowliness of mind let each esteem other better than themselves."
-        },
-        "fathers_charge": {
-          "ref": "Psalm 78:4",
-          "virtue": "Discipling",
-          "note": "We will not hide them from their children — showing to the generation to come."
-        },
-        "citizens_stand": {
-          "ref": "Acts 18:24-28",
-          "virtue": "Teaching",
-          "ring": "your nation",
-          "note": "Apollos, mighty in the Scriptures. Aquila and Priscilla expounded unto him the way of God more perfectly."
-        },
-        "evening_peace": {
-          "ref": "Psalm 104",
-          "note": "Bless the LORD, O my soul. O LORD my God, Thou art very great."
-        }
-      }
-    },
-    {
-      "day": 64,
-      "reflection_prompt": "Where did your city, state, or nation need a Christian presence today — and were you there?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Revelation 3:14-22",
-          "virtue": "Reject Passivity",
-          "note": "Neither hot nor cold. He spits the lukewarm out of His mouth."
-        },
-        "husbands_post": {
-          "ref": "Ephesians 4:25",
-          "virtue": "Honest",
-          "note": "Put away lying. Speak truth, each with his neighbor."
-        },
-        "fathers_charge": {
-          "ref": "Proverbs 28:20",
-          "virtue": "Faithful",
-          "note": "A faithful man shall abound with blessings."
-        },
-        "citizens_stand": {
-          "ref": "Philippians 2:14-16",
-          "virtue": "Engaged",
-          "ring": "your city",
-          "note": "Do all things without murmurings and disputings. Shine as lights in the world."
-        },
-        "evening_peace": {
-          "ref": "Psalm 119:113-120 (Samech)",
-          "note": "I hate vain thoughts. But Thy law do I love."
-        }
-      }
-    },
-    {
-      "day": 65,
-      "reflection_prompt": "What did you give your full presence to — and what did you only half-show up for?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "James 1:22-25",
-          "virtue": "Engage Intentionally",
-          "note": "Be doers of the word, and not hearers only — deceiving yourselves."
-        },
-        "husbands_post": {
-          "ref": "1 Peter 3:7",
-          "virtue": "Honors",
-          "note": "Dwell with her with understanding. Give honor — heir together of the grace of life."
-        },
-        "fathers_charge": {
-          "ref": "Proverbs 4:7",
-          "virtue": "Understanding",
-          "note": "Wisdom is the principal thing. With all thy getting, get understanding."
-        },
-        "citizens_stand": {
-          "ref": "Deuteronomy 8:1-18",
-          "virtue": "Remembering",
-          "ring": "your state",
-          "note": "Beware lest thou forget the LORD thy God. Thou shalt remember all the way."
-        },
-        "evening_peace": {
-          "ref": "Psalm 107",
-          "note": "O give thanks unto the LORD, for He is good. His mercy endureth for ever."
-        }
-      }
-    },
-    {
-      "day": 66,
-      "reflection_prompt": "Is your marriage running on your spiritual fumes or on Christ's fullness?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Galatians 6:4-5",
-          "virtue": "Accept Responsibility",
-          "note": "Let each man examine his own work. Each shall bear his own load."
-        },
-        "husbands_post": {
-          "ref": "Psalm 1:1-3",
-          "virtue": "Abiding",
-          "note": "Blessed is the man... his delight is in the law of the LORD."
-        },
-        "fathers_charge": {
-          "ref": "Ephesians 3:14-19",
-          "virtue": "Loving",
-          "note": "That ye may know the love of Christ, which passeth knowledge."
-        },
-        "citizens_stand": {
-          "ref": "Ephesians 6:10-18",
-          "virtue": "Equipped",
-          "ring": "your nation",
-          "note": "Put on the whole armor of God. Stand against the wiles of the devil."
-        },
-        "evening_peace": {
-          "ref": "Psalm 113",
-          "note": "Praise, O ye servants of the LORD. Praise the name of the LORD."
-        }
-      }
-    },
-    {
-      "day": 67,
-      "reflection_prompt": "When was the last time your children heard you laugh because they were near?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Philippians 1:27-30",
-          "virtue": "Lead Courageously",
-          "note": "Stand fast in one spirit, striving together for the faith."
-        },
-        "husbands_post": {
-          "ref": "Proverbs 5:15-19",
-          "virtue": "Adoring",
-          "note": "Drink waters out of thine own cistern. Rejoice with the wife of thy youth."
-        },
-        "fathers_charge": {
-          "ref": "Proverbs 15:13",
-          "virtue": "Fun",
-          "note": "A merry heart maketh a cheerful countenance."
-        },
-        "citizens_stand": {
-          "ref": "Mark 10:42-45",
-          "virtue": "Serving",
-          "ring": "your city",
-          "note": "The Son of man came not to be ministered unto, but to minister."
-        },
-        "evening_peace": {
-          "ref": "Psalm 117",
-          "note": "O praise the LORD, all ye nations. Praise Him, all ye people."
-        }
-      }
-    },
-    {
-      "day": 68,
-      "reflection_prompt": "Whose name did you carry to God today that does not yet know Him?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Luke 14:25-33",
-          "virtue": "Manage Faithfully",
-          "note": "Count the cost before you build. Sit down first and calculate."
-        },
-        "husbands_post": {
-          "ref": "Ephesians 5:25-27",
-          "virtue": "Protecting",
-          "note": "He gave Himself for her — to sanctify and cleanse her with the washing of water by the word."
-        },
-        "fathers_charge": {
-          "ref": "1 Thessalonians 2:11-12",
-          "virtue": "Intentional",
-          "note": "As a father deals with his own children — exhorting, comforting, charging."
-        },
-        "citizens_stand": {
-          "ref": "Matthew 28:18-20",
-          "virtue": "Outreaching",
-          "ring": "your state",
-          "note": "Go ye therefore, and teach all nations. Baptizing them, teaching them."
-        },
-        "evening_peace": {
-          "ref": "Psalm 119:121-128 (Ain)",
-          "note": "I have done judgment and justice. Leave me not to mine oppressors."
-        }
-      }
-    },
-    {
-      "day": 69,
-      "reflection_prompt": "If today were submitted as a report, what would you redact?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "1 Corinthians 11:27-31",
-          "virtue": "Account Accurately",
-          "note": "Let a man examine himself before he eats. If we judged ourselves, we would not be judged."
-        },
-        "husbands_post": {
-          "ref": "Proverbs 27:23-27",
-          "virtue": "Providing",
-          "note": "Be diligent to know the state of thy flocks. Riches are not forever."
-        },
-        "fathers_charge": {
-          "ref": "Proverbs 20:5",
-          "virtue": "Listening",
-          "note": "The heart of man is like deep water. A man of understanding draweth it out."
-        },
-        "citizens_stand": {
-          "ref": "Proverbs 17:17",
-          "virtue": "Loyal",
-          "ring": "your nation",
-          "note": "A friend loveth at all times. A brother is born for adversity."
-        },
-        "evening_peace": {
-          "ref": "Psalm 120",
-          "note": "In my distress I cried unto the LORD. He heard me."
-        }
-      }
-    },
-    {
-      "day": 70,
-      "reflection_prompt": "When she spoke, did you actually change — or did you do what you already planned?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "1 Corinthians 15:58",
-          "virtue": "Never Quit",
-          "note": "Be steadfast, unmovable. Your labor is not in vain in the Lord."
-        },
-        "husbands_post": {
-          "ref": "Ephesians 5:21",
-          "virtue": "Yields",
-          "note": "Submitting yourselves one to another in the fear of God."
-        },
-        "fathers_charge": {
-          "ref": "Proverbs 27:23",
-          "virtue": "Leading",
-          "note": "Be thou diligent to know the state of thy flocks. Look well to thy herds."
-        },
-        "citizens_stand": {
-          "ref": "Ephesians 4:1-6",
-          "virtue": "United",
-          "ring": "your city",
-          "note": "One body, one Spirit, one hope, one Lord, one faith, one baptism, one God and Father."
-        },
-        "evening_peace": {
-          "ref": "Psalm 121",
-          "note": "I will lift up mine eyes unto the hills. From whence cometh my help."
-        }
-      }
-    },
-    {
-      "day": 71,
-      "reflection_prompt": "Whose courage did you build up today, and whose did you tear down?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "2 Timothy 1:6-7",
-          "virtue": "Reject Passivity",
-          "note": "Fan into flame the gift of God. Not a spirit of fear, but of power."
-        },
-        "husbands_post": {
-          "ref": "1 John 1:5-10",
-          "virtue": "Honest",
-          "note": "If we walk in the light, the blood of Jesus cleanses us from all sin."
-        },
-        "fathers_charge": {
-          "ref": "Romans 14:19",
-          "virtue": "Encouraging",
-          "note": "Let us therefore follow after the things which make for peace, and edify one another."
-        },
-        "citizens_stand": {
-          "ref": "Matthew 28:18-20",
-          "virtue": "Teaching",
-          "ring": "your state",
-          "note": "Teaching them to observe all things whatsoever I have commanded you."
-        },
-        "evening_peace": {
-          "ref": "Psalm 122",
-          "note": "I was glad when they said unto me, Let us go into the house of the LORD."
-        }
-      }
-    },
-    {
-      "day": 72,
-      "reflection_prompt": "Where did your city, state, or nation need a Christian presence today — and were you there?",
       "readings": {
         "morning_wisdom": {
           "ref": "Romans 12:9-13",
@@ -2344,55 +1476,55 @@
           "note": "Her children rise and call her blessed. Her husband also — he praises her."
         },
         "fathers_charge": {
-          "ref": "1 Corinthians 11:1",
-          "virtue": "Discipling",
-          "note": "Be ye followers of me, even as I also am of Christ."
+          "ref": "1 Thessalonians 5:11",
+          "virtue": "Encouraging",
+          "note": "Comfort yourselves together, and edify one another."
         },
         "citizens_stand": {
-          "ref": "Jeremiah 29:7",
-          "virtue": "Engaged",
-          "ring": "your nation",
-          "note": "Seek the peace of the city whither I have caused you to be carried away. Pray unto the LORD for it."
+          "ref": "Colossians 4:2-6",
+          "virtue": "Outreaching",
+          "ring": "your state",
+          "note": "Walk in wisdom toward them that are without. Redeeming the time."
         },
         "evening_peace": {
-          "ref": "Psalm 119:129-136 (Pe)",
-          "note": "Thy testimonies are wonderful. Therefore doth my soul keep them."
+          "ref": "Psalm 92",
+          "note": "It is a good thing to give thanks unto the LORD. To shew forth Thy lovingkindness in the morning."
         }
       }
     },
     {
-      "day": 73,
+      "day": 45,
       "reflection_prompt": "Whose fault did you blame today that was actually yours?",
       "readings": {
         "morning_wisdom": {
-          "ref": "James 5:16",
+          "ref": "Psalm 119:41-48 (Vau)",
           "virtue": "Accept Responsibility",
-          "note": "Confess your faults to one another. The fervent prayer of a righteous man avails."
+          "note": "Let Thy mercies come unto me, O LORD. So shall I have wherewith to answer him that reproacheth me."
         },
         "husbands_post": {
-          "ref": "Colossians 3:1-4",
+          "ref": "1 John 2:6",
           "virtue": "Abiding",
-          "note": "Set your mind on things above. Your life is hid with Christ in God."
+          "note": "He who says he abides in Him ought himself to walk as He walked."
         },
         "fathers_charge": {
-          "ref": "Matthew 25:21",
-          "virtue": "Faithful",
-          "note": "Well done, good and faithful servant. You were faithful in a few things."
+          "ref": "3 John 4",
+          "virtue": "Discipling",
+          "note": "I have no greater joy than to hear that my children walk in truth."
         },
         "citizens_stand": {
-          "ref": "Joshua 4:1-7",
-          "virtue": "Remembering",
-          "ring": "your city",
-          "note": "Twelve stones from the Jordan. So your children may ask: What mean these stones?"
+          "ref": "Proverbs 17:17",
+          "virtue": "Loyal",
+          "ring": "your nation",
+          "note": "A friend loveth at all times. A brother is born for adversity."
         },
         "evening_peace": {
-          "ref": "Psalm 123",
-          "note": "Unto Thee lift I up mine eyes — O Thou that dwellest in the heavens."
+          "ref": "Psalm 95",
+          "note": "O come, let us worship and bow down. Let us kneel before the LORD our maker."
         }
       }
     },
     {
-      "day": 74,
+      "day": 46,
       "reflection_prompt": "When was the last time you looked at your wife the way you did when you were dating?",
       "readings": {
         "morning_wisdom": {
@@ -2406,92 +1538,92 @@
           "note": "Set me as a seal upon thine heart. Love is strong as death."
         },
         "fathers_charge": {
-          "ref": "Psalm 139:13-16",
-          "virtue": "Understanding",
-          "note": "Thou hast covered me in my mother's womb. Fearfully and wonderfully made."
+          "ref": "Joshua 24:14-15",
+          "virtue": "Faithful",
+          "note": "As for me and my house, we will serve the LORD."
         },
         "citizens_stand": {
-          "ref": "2 Timothy 3:16-17",
-          "virtue": "Equipped",
-          "ring": "your state",
-          "note": "All Scripture is profitable. That the man of God may be perfect, thoroughly furnished."
-        },
-        "evening_peace": {
-          "ref": "Psalm 124",
-          "note": "If it had not been the LORD who was on our side. Our help is in the name of the LORD."
-        }
-      }
-    },
-    {
-      "day": 75,
-      "reflection_prompt": "Did your children feel loved today, or just managed?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Hebrews 13:5",
-          "virtue": "Manage Faithfully",
-          "note": "Free from the love of money. Be content with what you have."
-        },
-        "husbands_post": {
-          "ref": "Nehemiah 4:14",
-          "virtue": "Protecting",
-          "note": "Fight for your brethren, your sons, your daughters, your wives, your houses."
-        },
-        "fathers_charge": {
-          "ref": "1 Corinthians 13:4-7",
-          "virtue": "Loving",
-          "note": "Love suffers long, is kind. Beareth all things, hopeth all things, endureth all things."
-        },
-        "citizens_stand": {
-          "ref": "Matthew 20:25-28",
-          "virtue": "Serving",
-          "ring": "your nation",
-          "note": "Whosoever will be great among you, let him be your minister."
-        },
-        "evening_peace": {
-          "ref": "Psalm 125",
-          "note": "They that trust in the LORD shall be as mount Zion, which cannot be removed."
-        }
-      }
-    },
-    {
-      "day": 76,
-      "reflection_prompt": "Whose name did you carry to God today that does not yet know Him?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Romans 12:3",
-          "virtue": "Account Accurately",
-          "note": "Think of yourself with sober judgment, according to the measure of faith."
-        },
-        "husbands_post": {
-          "ref": "2 Thessalonians 3:10-12",
-          "virtue": "Providing",
-          "note": "If any would not work, neither should he eat."
-        },
-        "fathers_charge": {
-          "ref": "Proverbs 17:22",
-          "virtue": "Fun",
-          "note": "A merry heart doeth good like a medicine. A broken spirit drieth the bones."
-        },
-        "citizens_stand": {
-          "ref": "Acts 1:8",
-          "virtue": "Outreaching",
+          "ref": "Philippians 2:1-2",
+          "virtue": "United",
           "ring": "your city",
-          "note": "Ye shall be witnesses unto Me — in Jerusalem, in all Judaea and Samaria, unto the uttermost part of the earth."
+          "note": "Be likeminded, having the same love, being of one accord, of one mind."
         },
         "evening_peace": {
-          "ref": "Psalm 119:137-144 (Tzaddi)",
-          "note": "Righteous art Thou, O LORD. Upright are Thy judgments."
+          "ref": "Psalm 96",
+          "note": "Sing unto the LORD a new song. Sing unto the LORD, all the earth."
         }
       }
     },
     {
-      "day": 77,
+      "day": 47,
+      "reflection_prompt": "What does each of your children need from you that no one else can give them?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Luke 16:10-13",
+          "virtue": "Manage Faithfully",
+          "note": "He who is faithful in least is faithful in much. You cannot serve two masters."
+        },
+        "husbands_post": {
+          "ref": "Psalm 91:1-4",
+          "virtue": "Protecting",
+          "note": "He shall cover thee with His feathers. His truth shall be thy shield."
+        },
+        "fathers_charge": {
+          "ref": "Proverbs 20:5",
+          "virtue": "Understanding",
+          "note": "Counsel in the heart of man is like deep water. A man of understanding draws it out."
+        },
+        "citizens_stand": {
+          "ref": "2 Timothy 2:2",
+          "virtue": "Teaching",
+          "ring": "your state",
+          "note": "The same commit thou to faithful men, who shall be able to teach others also."
+        },
+        "evening_peace": {
+          "ref": "Psalm 98",
+          "note": "Sing unto the LORD a new song. For He hath done marvellous things."
+        }
+      }
+    },
+    {
+      "day": 48,
+      "reflection_prompt": "Where did your city, state, or nation need a Christian presence today — and were you there?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Psalm 119:49-56 (Zain)",
+          "virtue": "Account Accurately",
+          "note": "Remember the word unto Thy servant — upon which Thou hast caused me to hope."
+        },
+        "husbands_post": {
+          "ref": "Proverbs 6:6-11",
+          "virtue": "Providing",
+          "note": "Go to the ant, thou sluggard. Consider her ways and be wise."
+        },
+        "fathers_charge": {
+          "ref": "Colossians 3:12-14",
+          "virtue": "Loving",
+          "note": "Above all these things put on charity, which is the bond of perfectness."
+        },
+        "citizens_stand": {
+          "ref": "Titus 3:1-2",
+          "virtue": "Engaged",
+          "ring": "your nation",
+          "note": "Put them in mind to be subject to principalities and powers. To be ready to every good work."
+        },
+        "evening_peace": {
+          "ref": "Psalm 99",
+          "note": "The LORD reigneth. Let the people tremble. Exalt ye the LORD our God."
+        }
+      }
+    },
+    {
+      "day": 49,
       "reflection_prompt": "What is God asking you to keep doing past the point you wanted to stop?",
       "readings": {
         "morning_wisdom": {
-          "ref": "Philippians 4:13",
+          "ref": "1 Corinthians 15:58",
           "virtue": "Never Quit",
-          "note": "I can do all things through Christ who strengthens me."
+          "note": "Be steadfast, unmovable. Your labor is not in vain in the Lord."
         },
         "husbands_post": {
           "ref": "1 Peter 5:5-6",
@@ -2499,9 +1631,133 @@
           "note": "Be clothed with humility. God resisteth the proud."
         },
         "fathers_charge": {
-          "ref": "Deuteronomy 6:6-9",
+          "ref": "Ecclesiastes 3:1-8",
+          "virtue": "Fun",
+          "note": "To every thing there is a season. A time to weep, a time to laugh."
+        },
+        "citizens_stand": {
+          "ref": "Psalm 78:5-7",
+          "virtue": "Remembering",
+          "ring": "your city",
+          "note": "He commanded our fathers to make them known to their children — that the generation to come might know."
+        },
+        "evening_peace": {
+          "ref": "Psalm 101",
+          "note": "Mercy and judgment will I sing. I will behave myself wisely in a perfect way."
+        }
+      }
+    },
+    {
+      "day": 50,
+      "reflection_prompt": "What did your wife need you to say today that you didn't say?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Ephesians 5:14-17",
+          "virtue": "Reject Passivity",
+          "note": "Awake, O sleeper. Walk circumspectly. The days are evil."
+        },
+        "husbands_post": {
+          "ref": "Proverbs 27:5-6",
+          "virtue": "Honest",
+          "note": "Open rebuke is better than secret love. Faithful are the wounds of a friend."
+        },
+        "fathers_charge": {
+          "ref": "Psalm 78:1-8",
           "virtue": "Intentional",
-          "note": "These words shall be in thine heart. Teach them diligently unto thy children."
+          "note": "We will not hide them from their children. The next generation might know."
+        },
+        "citizens_stand": {
+          "ref": "1 Peter 3:15",
+          "virtue": "Equipped",
+          "ring": "your state",
+          "note": "Be ready always to give an answer to every man — with meekness and fear."
+        },
+        "evening_peace": {
+          "ref": "Psalm 104",
+          "note": "Bless the LORD, O my soul. O LORD my God, Thou art very great."
+        }
+      }
+    },
+    {
+      "day": 51,
+      "reflection_prompt": "What did one of your children say today that you almost missed?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Psalm 119:57-64 (Cheth)",
+          "virtue": "Engage Intentionally",
+          "note": "Thou art my portion, O LORD. I have said that I would keep Thy words."
+        },
+        "husbands_post": {
+          "ref": "Song of Solomon 2:10-13",
+          "virtue": "Honors",
+          "note": "Rise up, my love, my fair one, and come away."
+        },
+        "fathers_charge": {
+          "ref": "Proverbs 18:2",
+          "virtue": "Listening",
+          "note": "A fool hath no delight in understanding — but in that his heart may discover itself."
+        },
+        "citizens_stand": {
+          "ref": "Philippians 2:3-8",
+          "virtue": "Serving",
+          "ring": "your nation",
+          "note": "Look not every man on his own things — but every man also on the things of others."
+        },
+        "evening_peace": {
+          "ref": "Psalm 107",
+          "note": "O give thanks unto the LORD, for He is good. His mercy endureth for ever."
+        }
+      }
+    },
+    {
+      "day": 52,
+      "reflection_prompt": "Whose name did you carry to God today that does not yet know Him?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Luke 15:11-32",
+          "virtue": "Accept Responsibility",
+          "note": "The prodigal came to himself. The first step home is owning it."
+        },
+        "husbands_post": {
+          "ref": "Psalm 1:1-3",
+          "virtue": "Abiding",
+          "note": "Blessed is the man... his delight is in the law of the LORD."
+        },
+        "fathers_charge": {
+          "ref": "Deuteronomy 6:4-9",
+          "virtue": "Leading",
+          "note": "Thou shalt love the LORD thy God with all thine heart. These words shall be in thine heart."
+        },
+        "citizens_stand": {
+          "ref": "James 5:19-20",
+          "virtue": "Outreaching",
+          "ring": "your city",
+          "note": "If any of you do err from the truth, and one convert him — he shall save a soul from death."
+        },
+        "evening_peace": {
+          "ref": "Psalm 113",
+          "note": "Praise, O ye servants of the LORD. Praise the name of the LORD."
+        }
+      }
+    },
+    {
+      "day": 53,
+      "reflection_prompt": "Where did you fear man more than God today?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Psalm 119:65-72 (Teth)",
+          "virtue": "Lead Courageously",
+          "note": "Thou hast dealt well with Thy servant. It is good for me that I have been afflicted."
+        },
+        "husbands_post": {
+          "ref": "Song of Solomon 7:10",
+          "virtue": "Adoring",
+          "note": "I am my beloved's, and his desire is toward me."
+        },
+        "fathers_charge": {
+          "ref": "Hebrews 10:24-25",
+          "virtue": "Encouraging",
+          "note": "Consider one another to provoke unto love and good works."
         },
         "citizens_stand": {
           "ref": "Proverbs 18:24",
@@ -2510,355 +1766,14 @@
           "note": "A man that hath friends must shew himself friendly. There is a friend that sticketh closer than a brother."
         },
         "evening_peace": {
-          "ref": "Psalm 126",
-          "note": "When the LORD turned again the captivity of Zion, we were like them that dream."
+          "ref": "Psalm 117",
+          "note": "O praise the LORD, all ye nations. Praise Him, all ye people."
         }
       }
     },
     {
-      "day": 78,
-      "reflection_prompt": "What did your wife need you to say today that you didn't say?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Philippians 3:12-14",
-          "virtue": "Reject Passivity",
-          "note": "Forgetting what lies behind. Press on toward the goal."
-        },
-        "husbands_post": {
-          "ref": "James 5:16",
-          "virtue": "Honest",
-          "note": "Confess your faults one to another. Pray for one another, that you may be healed."
-        },
-        "fathers_charge": {
-          "ref": "James 1:19",
-          "virtue": "Listening",
-          "note": "Swift to hear, slow to speak, slow to wrath."
-        },
-        "citizens_stand": {
-          "ref": "Psalm 133",
-          "virtue": "United",
-          "ring": "your nation",
-          "note": "Behold, how good and how pleasant it is for brethren to dwell together in unity."
-        },
-        "evening_peace": {
-          "ref": "Psalm 127",
-          "note": "Except the LORD build the house, they labor in vain that build it."
-        }
-      }
-    },
-    {
-      "day": 79,
-      "reflection_prompt": "Where are you leading your family — and do they know?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "1 Peter 1:13-16",
-          "virtue": "Engage Intentionally",
-          "note": "Gird up the loins of your mind. Be sober. Set your hope fully."
-        },
-        "husbands_post": {
-          "ref": "Colossians 3:19",
-          "virtue": "Honors",
-          "note": "Husbands, love your wives. Be not bitter against them."
-        },
-        "fathers_charge": {
-          "ref": "Ephesians 6:4",
-          "virtue": "Leading",
-          "note": "Bring them up in the nurture and admonition of the Lord."
-        },
-        "citizens_stand": {
-          "ref": "2 Timothy 2:2",
-          "virtue": "Teaching",
-          "ring": "your city",
-          "note": "The same commit thou to faithful men, who shall be able to teach others also."
-        },
-        "evening_peace": {
-          "ref": "Psalm 128",
-          "note": "Blessed is every one that feareth the LORD. That walketh in His ways."
-        }
-      }
-    },
-    {
-      "day": 80,
-      "reflection_prompt": "Where did your city, state, or nation need a Christian presence today — and were you there?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "1 John 1:5-10",
-          "virtue": "Accept Responsibility",
-          "note": "If we say we have no sin, we deceive ourselves. He is faithful to forgive."
-        },
-        "husbands_post": {
-          "ref": "Galatians 2:20",
-          "virtue": "Abiding",
-          "note": "I have been crucified with Christ. Yet I live; not I, but Christ in me."
-        },
-        "fathers_charge": {
-          "ref": "Hebrews 10:24-25",
-          "virtue": "Encouraging",
-          "note": "Consider one another to provoke unto love and good works."
-        },
-        "citizens_stand": {
-          "ref": "Romans 13:1-7",
-          "virtue": "Engaged",
-          "ring": "your state",
-          "note": "Let every soul be subject unto the higher powers. The powers that be are ordained of God."
-        },
-        "evening_peace": {
-          "ref": "Psalm 119:145-152 (Koph)",
-          "note": "I cried with my whole heart. Hear me, O LORD."
-        }
-      }
-    },
-    {
-      "day": 81,
-      "reflection_prompt": "Where did you fear man more than God today?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "2 Timothy 4:1-8",
-          "virtue": "Lead Courageously",
-          "note": "Preach the word. In season, out of season. I have fought the good fight."
-        },
-        "husbands_post": {
-          "ref": "Proverbs 18:22",
-          "virtue": "Adoring",
-          "note": "Whoso findeth a wife findeth a good thing — and obtaineth favour of the LORD."
-        },
-        "fathers_charge": {
-          "ref": "Deuteronomy 6:6-9",
-          "virtue": "Discipling",
-          "note": "Teach them diligently to thy children. Talk of them when thou sittest. When thou walkest."
-        },
-        "citizens_stand": {
-          "ref": "Ecclesiastes 12:1",
-          "virtue": "Remembering",
-          "ring": "your nation",
-          "note": "Remember now thy Creator in the days of thy youth."
-        },
-        "evening_peace": {
-          "ref": "Psalm 134",
-          "note": "Bless the LORD, all ye servants of the LORD."
-        }
-      }
-    },
-    {
-      "day": 82,
+      "day": 54,
       "reflection_prompt": "What is encroaching on her peace that you've been ignoring?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "1 Timothy 5:8",
-          "virtue": "Manage Faithfully",
-          "note": "He who provides not for his own has denied the faith."
-        },
-        "husbands_post": {
-          "ref": "Psalm 91:1-4",
-          "virtue": "Protecting",
-          "note": "He shall cover thee with His feathers. His truth shall be thy shield."
-        },
-        "fathers_charge": {
-          "ref": "1 Corinthians 4:2",
-          "virtue": "Faithful",
-          "note": "It is required in stewards that a man be found faithful."
-        },
-        "citizens_stand": {
-          "ref": "Psalm 144:1",
-          "virtue": "Equipped",
-          "ring": "your city",
-          "note": "Blessed be the LORD my strength, which teacheth my hands to war."
-        },
-        "evening_peace": {
-          "ref": "Psalm 139",
-          "note": "O LORD, Thou hast searched me, and known me."
-        }
-      }
-    },
-    {
-      "day": 83,
-      "reflection_prompt": "What does each of your children need from you that no one else can give them?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Galatians 6:1-3",
-          "virtue": "Account Accurately",
-          "note": "Restore in a spirit of meekness. Consider yourself, lest you also be tempted."
-        },
-        "husbands_post": {
-          "ref": "Proverbs 13:22",
-          "virtue": "Providing",
-          "note": "A good man leaveth an inheritance to his children's children."
-        },
-        "fathers_charge": {
-          "ref": "Ephesians 6:4",
-          "virtue": "Understanding",
-          "note": "Provoke not your children to wrath."
-        },
-        "citizens_stand": {
-          "ref": "Galatians 5:13",
-          "virtue": "Serving",
-          "ring": "your state",
-          "note": "By love serve one another."
-        },
-        "evening_peace": {
-          "ref": "Psalm 141",
-          "note": "Set a watch, O LORD, before my mouth. Keep the door of my lips."
-        }
-      }
-    },
-    {
-      "day": 84,
-      "reflection_prompt": "Whose name did you carry to God today that does not yet know Him?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Revelation 2:10",
-          "virtue": "Never Quit",
-          "note": "Be faithful unto death. I will give you the crown of life."
-        },
-        "husbands_post": {
-          "ref": "James 4:7-10",
-          "virtue": "Yields",
-          "note": "Submit yourselves therefore to God. Humble yourselves in the sight of the Lord."
-        },
-        "fathers_charge": {
-          "ref": "1 John 4:7-21",
-          "virtue": "Loving",
-          "note": "Beloved, let us love one another — for love is of God."
-        },
-        "citizens_stand": {
-          "ref": "2 Corinthians 5:18-21",
-          "virtue": "Outreaching",
-          "ring": "your nation",
-          "note": "He hath given to us the ministry of reconciliation. We are ambassadors for Christ."
-        },
-        "evening_peace": {
-          "ref": "Psalm 119:153-160 (Resh)",
-          "note": "Consider mine affliction, and deliver me. For I do not forget Thy law."
-        }
-      }
-    },
-    {
-      "day": 85,
-      "reflection_prompt": "Where did you wait today when God called you to move?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "1 Peter 4:1-2",
-          "virtue": "Reject Passivity",
-          "note": "Arm yourselves with the same mind. He who suffers in the flesh is done with sin."
-        },
-        "husbands_post": {
-          "ref": "Proverbs 27:5-6",
-          "virtue": "Honest",
-          "note": "Open rebuke is better than secret love. Faithful are the wounds of a friend."
-        },
-        "fathers_charge": {
-          "ref": "Ecclesiastes 3:1-8",
-          "virtue": "Fun",
-          "note": "To every thing there is a season. A time to weep, a time to laugh."
-        },
-        "citizens_stand": {
-          "ref": "Proverbs 27:10",
-          "virtue": "Loyal",
-          "ring": "your city",
-          "note": "Thine own friend, and thy father's friend, forsake not."
-        },
-        "evening_peace": {
-          "ref": "Psalm 142",
-          "note": "With my voice I cried unto the LORD. I poured out my complaint before Him."
-        }
-      }
-    },
-    {
-      "day": 86,
-      "reflection_prompt": "When she heard you talking about her — to anyone — was she honored?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Hebrews 10:24-25",
-          "virtue": "Engage Intentionally",
-          "note": "Stir up one another to love and good works. Do not forsake assembling."
-        },
-        "husbands_post": {
-          "ref": "Hebrews 13:4",
-          "virtue": "Honors",
-          "note": "Marriage is honorable in all. The bed undefiled."
-        },
-        "fathers_charge": {
-          "ref": "Ephesians 5:15-16",
-          "virtue": "Intentional",
-          "note": "See then that ye walk circumspectly. Redeeming the time, because the days are evil."
-        },
-        "citizens_stand": {
-          "ref": "1 Corinthians 1:10",
-          "virtue": "United",
-          "ring": "your state",
-          "note": "That there be no divisions among you. Perfectly joined together in the same mind."
-        },
-        "evening_peace": {
-          "ref": "Psalm 25",
-          "note": "Unto Thee, O LORD, do I lift up my soul. O my God, I trust in Thee."
-        }
-      }
-    },
-    {
-      "day": 87,
-      "reflection_prompt": "What did one of your children say today that you almost missed?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Luke 12:42-48",
-          "virtue": "Accept Responsibility",
-          "note": "Faithful steward. To whom much is given, much shall be required."
-        },
-        "husbands_post": {
-          "ref": "Philippians 4:8-9",
-          "virtue": "Abiding",
-          "note": "Whatsoever is true, noble, just, pure — think on these things."
-        },
-        "fathers_charge": {
-          "ref": "Proverbs 18:13",
-          "virtue": "Listening",
-          "note": "He that answereth a matter before he heareth it — it is folly and shame unto him."
-        },
-        "citizens_stand": {
-          "ref": "Ephesians 4:11-13",
-          "virtue": "Teaching",
-          "ring": "your nation",
-          "note": "Pastors and teachers — for the perfecting of the saints, for the work of the ministry."
-        },
-        "evening_peace": {
-          "ref": "Psalm 26",
-          "note": "Examine me, O LORD, and prove me. Try my reins and my heart."
-        }
-      }
-    },
-    {
-      "day": 88,
-      "reflection_prompt": "Where did your city, state, or nation need a Christian presence today — and were you there?",
-      "readings": {
-        "morning_wisdom": {
-          "ref": "Acts 4:13-31",
-          "virtue": "Lead Courageously",
-          "note": "They marveled at the boldness of unschooled men. They had been with Jesus."
-        },
-        "husbands_post": {
-          "ref": "Genesis 24:67",
-          "virtue": "Adoring",
-          "note": "Isaac brought her into Sarah's tent. He loved her, and was comforted."
-        },
-        "fathers_charge": {
-          "ref": "1 Timothy 3:4-5",
-          "virtue": "Leading",
-          "note": "One that ruleth well his own house, having his children in subjection."
-        },
-        "citizens_stand": {
-          "ref": "1 Peter 2:13-17",
-          "virtue": "Engaged",
-          "ring": "your city",
-          "note": "Submit yourselves to every ordinance of man for the Lord's sake."
-        },
-        "evening_peace": {
-          "ref": "Psalm 119:161-168 (Schin)",
-          "note": "Great peace have they which love Thy law. Nothing shall offend them."
-        }
-      }
-    },
-    {
-      "day": 89,
-      "reflection_prompt": "What did God entrust to you that you spent on yourself?",
       "readings": {
         "morning_wisdom": {
           "ref": "Luke 16:10-13",
@@ -2871,19 +1786,1104 @@
           "note": "Deliver those drawn unto death. He that pondereth the heart, considereth it."
         },
         "fathers_charge": {
-          "ref": "1 Thessalonians 5:11",
-          "virtue": "Encouraging",
-          "note": "Comfort yourselves together, and edify one another."
+          "ref": "Deuteronomy 6:6-9",
+          "virtue": "Discipling",
+          "note": "Teach them diligently to thy children. Talk of them when thou sittest. When thou walkest."
         },
         "citizens_stand": {
-          "ref": "Psalm 78:5-7",
+          "ref": "Colossians 3:12-15",
+          "virtue": "United",
+          "ring": "your nation",
+          "note": "Above all these things put on charity, which is the bond of perfectness."
+        },
+        "evening_peace": {
+          "ref": "Psalm 120",
+          "note": "In my distress I cried unto the LORD. He heard me."
+        }
+      }
+    },
+    {
+      "day": 55,
+      "reflection_prompt": "What did your children see you keep that no one would have known if you'd broken?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "1 Corinthians 11:27-31",
+          "virtue": "Account Accurately",
+          "note": "Let a man examine himself before he eats. If we judged ourselves, we would not be judged."
+        },
+        "husbands_post": {
+          "ref": "Proverbs 22:29",
+          "virtue": "Providing",
+          "note": "Seest thou a man diligent in his business? He shall stand before kings."
+        },
+        "fathers_charge": {
+          "ref": "Proverbs 28:20",
+          "virtue": "Faithful",
+          "note": "A faithful man shall abound with blessings."
+        },
+        "citizens_stand": {
+          "ref": "Titus 2:1-15",
+          "virtue": "Teaching",
+          "ring": "your city",
+          "note": "Speak thou the things which become sound doctrine. Aged men, aged women, young men."
+        },
+        "evening_peace": {
+          "ref": "Psalm 122",
+          "note": "I was glad when they said unto me, Let us go into the house of the LORD."
+        }
+      }
+    },
+    {
+      "day": 56,
+      "reflection_prompt": "Where did your city, state, or nation need a Christian presence today — and were you there?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Psalm 119:73-80 (Jod)",
+          "virtue": "Never Quit",
+          "note": "Thy hands have made me and fashioned me. Give me understanding, that I may learn."
+        },
+        "husbands_post": {
+          "ref": "Proverbs 19:11",
+          "virtue": "Yields",
+          "note": "The discretion of a man defers his anger. It is his glory to overlook a transgression."
+        },
+        "fathers_charge": {
+          "ref": "Proverbs 19:14",
+          "virtue": "Understanding",
+          "note": "Houses and riches are an inheritance from fathers — but a prudent wife from the LORD."
+        },
+        "citizens_stand": {
+          "ref": "1 Peter 2:13-17",
+          "virtue": "Engaged",
+          "ring": "your state",
+          "note": "Submit yourselves to every ordinance of man for the Lord's sake."
+        },
+        "evening_peace": {
+          "ref": "Psalm 123",
+          "note": "Unto Thee lift I up mine eyes — O Thou that dwellest in the heavens."
+        }
+      }
+    },
+    {
+      "day": 57,
+      "reflection_prompt": "Where did you wait today when God called you to move?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Philippians 3:12-14",
+          "virtue": "Reject Passivity",
+          "note": "Forgetting what lies behind. Press on toward the goal."
+        },
+        "husbands_post": {
+          "ref": "Matthew 5:37",
+          "virtue": "Honest",
+          "note": "Let your yes be yes, your no be no. More than this is from the evil one."
+        },
+        "fathers_charge": {
+          "ref": "1 John 4:7-21",
+          "virtue": "Loving",
+          "note": "Beloved, let us love one another — for love is of God."
+        },
+        "citizens_stand": {
+          "ref": "Ecclesiastes 12:1",
+          "virtue": "Remembering",
+          "ring": "your nation",
+          "note": "Remember now thy Creator in the days of thy youth."
+        },
+        "evening_peace": {
+          "ref": "Psalm 124",
+          "note": "If it had not been the LORD who was on our side. Our help is in the name of the LORD."
+        }
+      }
+    },
+    {
+      "day": 58,
+      "reflection_prompt": "When she heard you talking about her — to anyone — was she honored?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "1 Corinthians 9:24-27",
+          "virtue": "Engage Intentionally",
+          "note": "All run, but one receives the prize. So run that you may obtain."
+        },
+        "husbands_post": {
+          "ref": "1 Corinthians 11:7",
+          "virtue": "Honors",
+          "note": "The woman is the glory of the man."
+        },
+        "fathers_charge": {
+          "ref": "Ecclesiastes 9:7-10",
+          "virtue": "Fun",
+          "note": "Go thy way, eat thy bread with joy. Whatsoever thy hand findeth to do, do it with thy might."
+        },
+        "citizens_stand": {
+          "ref": "Psalm 144:1",
+          "virtue": "Equipped",
+          "ring": "your city",
+          "note": "Blessed be the LORD my strength, which teacheth my hands to war."
+        },
+        "evening_peace": {
+          "ref": "Psalm 125",
+          "note": "They that trust in the LORD shall be as mount Zion, which cannot be removed."
+        }
+      }
+    },
+    {
+      "day": 59,
+      "reflection_prompt": "Are you discipling your children — or just supervising them?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Psalm 119:81-88 (Caph)",
+          "virtue": "Accept Responsibility",
+          "note": "My soul fainteth for Thy salvation. I hope in Thy word."
+        },
+        "husbands_post": {
+          "ref": "John 15:1-11",
+          "virtue": "Abiding",
+          "note": "Abide in Me. The branch cannot bear fruit by itself."
+        },
+        "fathers_charge": {
+          "ref": "Proverbs 22:6",
+          "virtue": "Intentional",
+          "note": "Train up a child in the way he should go. When he is old, he will not depart from it."
+        },
+        "citizens_stand": {
+          "ref": "1 Peter 4:10",
+          "virtue": "Serving",
+          "ring": "your state",
+          "note": "As every man hath received the gift, even so minister the same one to another."
+        },
+        "evening_peace": {
+          "ref": "Psalm 126",
+          "note": "When the LORD turned again the captivity of Zion, we were like them that dream."
+        }
+      }
+    },
+    {
+      "day": 60,
+      "reflection_prompt": "Whose name did you carry to God today that does not yet know Him?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "1 Corinthians 16:13-14",
+          "virtue": "Lead Courageously",
+          "note": "Watch ye. Stand fast in the faith. Quit you like men. Be strong."
+        },
+        "husbands_post": {
+          "ref": "Ephesians 5:28-29",
+          "virtue": "Adoring",
+          "note": "He that loveth his wife loveth himself. No man ever yet hated his own flesh."
+        },
+        "fathers_charge": {
+          "ref": "Proverbs 20:5",
+          "virtue": "Listening",
+          "note": "The heart of man is like deep water. A man of understanding draweth it out."
+        },
+        "citizens_stand": {
+          "ref": "1 Peter 3:15",
+          "virtue": "Outreaching",
+          "ring": "your nation",
+          "note": "Be ready always to give an answer to every man — with meekness and fear."
+        },
+        "evening_peace": {
+          "ref": "Psalm 127",
+          "note": "Except the LORD build the house, they labor in vain that build it."
+        }
+      }
+    },
+    {
+      "day": 61,
+      "reflection_prompt": "What did God entrust to you that you spent on yourself?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Luke 14:25-33",
+          "virtue": "Manage Faithfully",
+          "note": "Count the cost before you build. Sit down first and calculate."
+        },
+        "husbands_post": {
+          "ref": "Ephesians 5:25-27",
+          "virtue": "Protecting",
+          "note": "He gave Himself for her — to sanctify and cleanse her with the washing of water by the word."
+        },
+        "fathers_charge": {
+          "ref": "Joshua 24:15",
+          "virtue": "Leading",
+          "note": "As for me and my house, we will serve the LORD."
+        },
+        "citizens_stand": {
+          "ref": "Proverbs 27:10",
+          "virtue": "Loyal",
+          "ring": "your city",
+          "note": "Thine own friend, and thy father's friend, forsake not."
+        },
+        "evening_peace": {
+          "ref": "Psalm 128",
+          "note": "Blessed is every one that feareth the LORD. That walketh in His ways."
+        }
+      }
+    },
+    {
+      "day": 62,
+      "reflection_prompt": "Does she feel covered today — not just paid for?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Psalm 119:89-96 (Lamed)",
+          "virtue": "Account Accurately",
+          "note": "For ever, O LORD, Thy word is settled in heaven."
+        },
+        "husbands_post": {
+          "ref": "Matthew 6:25-34",
+          "virtue": "Providing",
+          "note": "Seek first the kingdom of God — and all these things shall be added."
+        },
+        "fathers_charge": {
+          "ref": "Hebrews 3:13",
+          "virtue": "Encouraging",
+          "note": "Exhort one another daily, while it is called To day. Lest any be hardened."
+        },
+        "citizens_stand": {
+          "ref": "Psalm 133",
+          "virtue": "United",
+          "ring": "your state",
+          "note": "Behold, how good and how pleasant it is for brethren to dwell together in unity."
+        },
+        "evening_peace": {
+          "ref": "Psalm 134",
+          "note": "Bless the LORD, all ye servants of the LORD."
+        }
+      }
+    },
+    {
+      "day": 63,
+      "reflection_prompt": "If your children imitated only what you did this week — would Christ be honored?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Galatians 6:9",
+          "virtue": "Never Quit",
+          "note": "Be not weary in well-doing. In due season we shall reap, if we faint not."
+        },
+        "husbands_post": {
+          "ref": "Matthew 26:39",
+          "virtue": "Yields",
+          "note": "Not as I will, but as Thou wilt."
+        },
+        "fathers_charge": {
+          "ref": "Psalm 78:4",
+          "virtue": "Discipling",
+          "note": "We will not hide them from their children — showing to the generation to come."
+        },
+        "citizens_stand": {
+          "ref": "Deuteronomy 6:6-7",
+          "virtue": "Teaching",
+          "ring": "your nation",
+          "note": "Teach them diligently to thy children. Talk of them when thou sittest. When thou walkest."
+        },
+        "evening_peace": {
+          "ref": "Psalm 141",
+          "note": "Set a watch, O LORD, before my mouth. Keep the door of my lips."
+        }
+      }
+    },
+    {
+      "day": 64,
+      "reflection_prompt": "Where did your city, state, or nation need a Christian presence today — and were you there?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Psalm 119:97-104 (Mem)",
+          "virtue": "Reject Passivity",
+          "note": "O how I love Thy law! It is my meditation all the day."
+        },
+        "husbands_post": {
+          "ref": "Galatians 2:11-14",
+          "virtue": "Honest",
+          "note": "Paul withstood Peter to the face. He was to be blamed."
+        },
+        "fathers_charge": {
+          "ref": "Lamentations 3:22-23",
+          "virtue": "Faithful",
+          "note": "His mercies are new every morning. Great is Thy faithfulness."
+        },
+        "citizens_stand": {
+          "ref": "Jeremiah 29:7",
+          "virtue": "Engaged",
+          "ring": "your city",
+          "note": "Seek the peace of the city whither I have caused you to be carried away. Pray unto the LORD for it."
+        },
+        "evening_peace": {
+          "ref": "Psalm 142",
+          "note": "With my voice I cried unto the LORD. I poured out my complaint before Him."
+        }
+      }
+    },
+    {
+      "day": 65,
+      "reflection_prompt": "What did you give your full presence to — and what did you only half-show up for?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "1 Corinthians 9:24-27",
+          "virtue": "Engage Intentionally",
+          "note": "All run, but one receives the prize. So run that you may obtain."
+        },
+        "husbands_post": {
+          "ref": "Ephesians 5:25-33",
+          "virtue": "Honors",
+          "note": "Husbands, love your wives as Christ loved the church — and gave Himself for her."
+        },
+        "fathers_charge": {
+          "ref": "Proverbs 4:7",
+          "virtue": "Understanding",
+          "note": "Wisdom is the principal thing. With all thy getting, get understanding."
+        },
+        "citizens_stand": {
+          "ref": "1 Corinthians 11:23-26",
           "virtue": "Remembering",
           "ring": "your state",
-          "note": "He commanded our fathers to make them known to their children — that the generation to come might know."
+          "note": "This do in remembrance of Me. As often as ye eat this bread."
+        },
+        "evening_peace": {
+          "ref": "Psalm 25",
+          "note": "Unto Thee, O LORD, do I lift up my soul. O my God, I trust in Thee."
+        }
+      }
+    },
+    {
+      "day": 66,
+      "reflection_prompt": "Is your marriage running on your spiritual fumes or on Christ's fullness?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Romans 14:10-12",
+          "virtue": "Accept Responsibility",
+          "note": "Each of us shall give account of himself to God."
+        },
+        "husbands_post": {
+          "ref": "Romans 8:9-11",
+          "virtue": "Abiding",
+          "note": "If the Spirit of Him who raised Jesus dwells in you, He shall quicken you."
+        },
+        "fathers_charge": {
+          "ref": "1 John 3:16-18",
+          "virtue": "Loving",
+          "note": "Let us not love in word, but in deed and in truth."
+        },
+        "citizens_stand": {
+          "ref": "2 Corinthians 10:3-5",
+          "virtue": "Equipped",
+          "ring": "your nation",
+          "note": "The weapons of our warfare are not carnal — but mighty through God."
+        },
+        "evening_peace": {
+          "ref": "Psalm 26",
+          "note": "Examine me, O LORD, and prove me. Try my reins and my heart."
+        }
+      }
+    },
+    {
+      "day": 67,
+      "reflection_prompt": "When was the last time your children heard you laugh because they were near?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Psalm 119:105-112 (Nun)",
+          "virtue": "Lead Courageously",
+          "note": "Thy word is a lamp unto my feet, and a light unto my path."
+        },
+        "husbands_post": {
+          "ref": "Genesis 24:67",
+          "virtue": "Adoring",
+          "note": "Isaac brought her into Sarah's tent. He loved her, and was comforted."
+        },
+        "fathers_charge": {
+          "ref": "Zephaniah 3:17",
+          "virtue": "Fun",
+          "note": "He will rejoice over thee with joy. He will joy over thee with singing."
+        },
+        "citizens_stand": {
+          "ref": "Matthew 20:25-28",
+          "virtue": "Serving",
+          "ring": "your city",
+          "note": "Whosoever will be great among you, let him be your minister."
         },
         "evening_peace": {
           "ref": "Psalm 41",
           "note": "Blessed is he that considereth the poor. The LORD will deliver him in time of trouble."
+        }
+      }
+    },
+    {
+      "day": 68,
+      "reflection_prompt": "Whose name did you carry to God today that does not yet know Him?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "1 Corinthians 4:1-2",
+          "virtue": "Manage Faithfully",
+          "note": "Stewards of the mysteries of God. Required of stewards: be found faithful."
+        },
+        "husbands_post": {
+          "ref": "Ephesians 6:10-18",
+          "virtue": "Protecting",
+          "note": "Put on the whole armor of God. Withstand in the evil day, and having done all, stand."
+        },
+        "fathers_charge": {
+          "ref": "Proverbs 4:1-9",
+          "virtue": "Intentional",
+          "note": "Hear, ye children, the instruction of a father. Get wisdom; get understanding."
+        },
+        "citizens_stand": {
+          "ref": "Matthew 28:18-20",
+          "virtue": "Outreaching",
+          "ring": "your state",
+          "note": "Go ye therefore, and teach all nations. Baptizing them, teaching them."
+        },
+        "evening_peace": {
+          "ref": "Psalm 11",
+          "note": "In the LORD put I my trust. The LORD trieth the righteous."
+        }
+      }
+    },
+    {
+      "day": 69,
+      "reflection_prompt": "If today were submitted as a report, what would you redact?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "2 Corinthians 13:5",
+          "virtue": "Account Accurately",
+          "note": "Examine yourselves whether you be in the faith. Prove your own selves."
+        },
+        "husbands_post": {
+          "ref": "2 Thessalonians 3:10-12",
+          "virtue": "Providing",
+          "note": "If any would not work, neither should he eat."
+        },
+        "fathers_charge": {
+          "ref": "Ecclesiastes 5:1",
+          "virtue": "Listening",
+          "note": "Keep thy foot when thou goest to the house of God. Be more ready to hear."
+        },
+        "citizens_stand": {
+          "ref": "John 15:13",
+          "virtue": "Loyal",
+          "ring": "your nation",
+          "note": "Greater love hath no man than this — that a man lay down his life for his friends."
+        },
+        "evening_peace": {
+          "ref": "Psalm 15",
+          "note": "Who shall abide in Thy tabernacle? He that walketh uprightly, and worketh righteousness."
+        }
+      }
+    },
+    {
+      "day": 70,
+      "reflection_prompt": "When she spoke, did you actually change — or did you do what you already planned?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Psalm 119:113-120 (Samech)",
+          "virtue": "Never Quit",
+          "note": "I hate vain thoughts. But Thy law do I love."
+        },
+        "husbands_post": {
+          "ref": "Romans 12:18",
+          "virtue": "Yields",
+          "note": "If it be possible, as much as lieth in you, live peaceably with all men."
+        },
+        "fathers_charge": {
+          "ref": "Proverbs 27:23",
+          "virtue": "Leading",
+          "note": "Be thou diligent to know the state of thy flocks. Look well to thy herds."
+        },
+        "citizens_stand": {
+          "ref": "John 17:20-23",
+          "virtue": "United",
+          "ring": "your city",
+          "note": "That they all may be one. As Thou, Father, art in Me, and I in Thee."
+        },
+        "evening_peace": {
+          "ref": "Psalm 22",
+          "note": "My God, my God, why hast Thou forsaken me? — yet I will declare Thy name unto my brethren."
+        }
+      }
+    },
+    {
+      "day": 71,
+      "reflection_prompt": "Whose courage did you build up today, and whose did you tear down?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "2 Timothy 1:6-7",
+          "virtue": "Reject Passivity",
+          "note": "Fan into flame the gift of God. Not a spirit of fear, but of power."
+        },
+        "husbands_post": {
+          "ref": "Ephesians 4:25",
+          "virtue": "Honest",
+          "note": "Put away lying. Speak truth, each with his neighbor."
+        },
+        "fathers_charge": {
+          "ref": "Proverbs 12:25",
+          "virtue": "Encouraging",
+          "note": "Heaviness in the heart maketh it stoop. A good word maketh it glad."
+        },
+        "citizens_stand": {
+          "ref": "Matthew 28:18-20",
+          "virtue": "Teaching",
+          "ring": "your state",
+          "note": "Teaching them to observe all things whatsoever I have commanded you."
+        },
+        "evening_peace": {
+          "ref": "Psalm 24",
+          "note": "The earth is the LORD's, and the fulness thereof. Who shall ascend into the hill of the LORD?"
+        }
+      }
+    },
+    {
+      "day": 72,
+      "reflection_prompt": "Where did your city, state, or nation need a Christian presence today — and were you there?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Psalm 119:121-128 (Ain)",
+          "virtue": "Engage Intentionally",
+          "note": "I have done judgment and justice. Leave me not to mine oppressors."
+        },
+        "husbands_post": {
+          "ref": "Colossians 3:19",
+          "virtue": "Honors",
+          "note": "Husbands, love your wives. Be not bitter against them."
+        },
+        "fathers_charge": {
+          "ref": "Proverbs 22:6",
+          "virtue": "Discipling",
+          "note": "Train up a child in the way he should go. When he is old, he will not depart from it."
+        },
+        "citizens_stand": {
+          "ref": "Matthew 5:13-16",
+          "virtue": "Engaged",
+          "ring": "your nation",
+          "note": "Ye are the light of the world. A city that is set on an hill cannot be hid."
+        },
+        "evening_peace": {
+          "ref": "Psalm 29",
+          "note": "Give unto the LORD glory and strength. The voice of the LORD is upon the waters."
+        }
+      }
+    },
+    {
+      "day": 73,
+      "reflection_prompt": "Whose fault did you blame today that was actually yours?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Romans 14:10-12",
+          "virtue": "Accept Responsibility",
+          "note": "Each of us shall give account of himself to God."
+        },
+        "husbands_post": {
+          "ref": "Galatians 2:20",
+          "virtue": "Abiding",
+          "note": "I have been crucified with Christ. Yet I live; not I, but Christ in me."
+        },
+        "fathers_charge": {
+          "ref": "Matthew 25:21",
+          "virtue": "Faithful",
+          "note": "Well done, good and faithful servant. You were faithful in a few things."
+        },
+        "citizens_stand": {
+          "ref": "Hebrews 13:7",
+          "virtue": "Remembering",
+          "ring": "your city",
+          "note": "Remember them which have the rule over you. Whose faith follow."
+        },
+        "evening_peace": {
+          "ref": "Psalm 36",
+          "note": "Thy mercy, O LORD, is in the heavens. With Thee is the fountain of life."
+        }
+      }
+    },
+    {
+      "day": 74,
+      "reflection_prompt": "When was the last time you looked at your wife the way you did when you were dating?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Ephesians 6:10-13",
+          "virtue": "Lead Courageously",
+          "note": "Be strong in the Lord. Put on the whole armor. Stand."
+        },
+        "husbands_post": {
+          "ref": "Proverbs 5:15-19",
+          "virtue": "Adoring",
+          "note": "Drink waters out of thine own cistern. Rejoice with the wife of thy youth."
+        },
+        "fathers_charge": {
+          "ref": "Matthew 18:1-6",
+          "virtue": "Understanding",
+          "note": "Except ye be converted and become as little children, ye shall not enter the kingdom."
+        },
+        "citizens_stand": {
+          "ref": "Ephesians 6:10-18",
+          "virtue": "Equipped",
+          "ring": "your state",
+          "note": "Put on the whole armor of God. Stand against the wiles of the devil."
+        },
+        "evening_peace": {
+          "ref": "Psalm 47",
+          "note": "O clap your hands, all ye people. God is gone up with a shout."
+        }
+      }
+    },
+    {
+      "day": 75,
+      "reflection_prompt": "Did your children feel loved today, or just managed?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Psalm 119:129-136 (Pe)",
+          "virtue": "Manage Faithfully",
+          "note": "Thy testimonies are wonderful. Therefore doth my soul keep them."
+        },
+        "husbands_post": {
+          "ref": "1 Peter 3:7",
+          "virtue": "Protecting",
+          "note": "Husbands, dwell with them according to knowledge. Give honor to the weaker vessel."
+        },
+        "fathers_charge": {
+          "ref": "John 13:34-35",
+          "virtue": "Loving",
+          "note": "A new commandment I give unto you, that ye love one another."
+        },
+        "citizens_stand": {
+          "ref": "Mark 10:42-45",
+          "virtue": "Serving",
+          "ring": "your nation",
+          "note": "The Son of man came not to be ministered unto, but to minister."
+        },
+        "evening_peace": {
+          "ref": "Psalm 48",
+          "note": "Great is the LORD, and greatly to be praised in the city of our God."
+        }
+      }
+    },
+    {
+      "day": 76,
+      "reflection_prompt": "Whose name did you carry to God today that does not yet know Him?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "2 Corinthians 13:5",
+          "virtue": "Account Accurately",
+          "note": "Examine yourselves whether you be in the faith. Prove your own selves."
+        },
+        "husbands_post": {
+          "ref": "1 Timothy 5:8",
+          "virtue": "Providing",
+          "note": "He that provideth not for his own house is worse than an infidel."
+        },
+        "fathers_charge": {
+          "ref": "Luke 15:22-24",
+          "virtue": "Fun",
+          "note": "Bring forth the best robe and put it on him. Let us eat and be merry."
+        },
+        "citizens_stand": {
+          "ref": "Matthew 5:13-16",
+          "virtue": "Outreaching",
+          "ring": "your city",
+          "note": "Ye are the salt of the earth. Ye are the light of the world."
+        },
+        "evening_peace": {
+          "ref": "Psalm 49",
+          "note": "Wherefore should I fear in the days of evil? They that trust in their wealth..."
+        }
+      }
+    },
+    {
+      "day": 77,
+      "reflection_prompt": "What is God asking you to keep doing past the point you wanted to stop?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "2 Timothy 4:7",
+          "virtue": "Never Quit",
+          "note": "I have fought the good fight. I have finished my course. I have kept the faith."
+        },
+        "husbands_post": {
+          "ref": "Ephesians 5:21",
+          "virtue": "Yields",
+          "note": "Submitting yourselves one to another in the fear of God."
+        },
+        "fathers_charge": {
+          "ref": "Ephesians 5:15-16",
+          "virtue": "Intentional",
+          "note": "See then that ye walk circumspectly. Redeeming the time, because the days are evil."
+        },
+        "citizens_stand": {
+          "ref": "2 Timothy 4:9-11",
+          "virtue": "Loyal",
+          "ring": "your state",
+          "note": "Demas hath forsaken me. Only Luke is with me."
+        },
+        "evening_peace": {
+          "ref": "Psalm 66",
+          "note": "Make a joyful noise unto God, all ye lands. Sing forth the honour of His name."
+        }
+      }
+    },
+    {
+      "day": 78,
+      "reflection_prompt": "What did your wife need you to say today that you didn't say?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Psalm 119:137-144 (Tzaddi)",
+          "virtue": "Reject Passivity",
+          "note": "Righteous art Thou, O LORD. Upright are Thy judgments."
+        },
+        "husbands_post": {
+          "ref": "Hebrews 4:12-13",
+          "virtue": "Honest",
+          "note": "The Word lays bare. All things are naked before His eyes."
+        },
+        "fathers_charge": {
+          "ref": "Matthew 18:15-17",
+          "virtue": "Listening",
+          "note": "If thy brother shall trespass against thee, go and tell him his fault — between thee and him alone."
+        },
+        "citizens_stand": {
+          "ref": "Acts 4:32",
+          "virtue": "United",
+          "ring": "your nation",
+          "note": "The multitude of them that believed were of one heart and of one soul."
+        },
+        "evening_peace": {
+          "ref": "Psalm 68",
+          "note": "Let God arise. Let His enemies be scattered. As wax melteth before the fire."
+        }
+      }
+    },
+    {
+      "day": 79,
+      "reflection_prompt": "Where are you leading your family — and do they know?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Colossians 4:5-6",
+          "virtue": "Engage Intentionally",
+          "note": "Walk in wisdom toward outsiders. Speech with grace, seasoned with salt."
+        },
+        "husbands_post": {
+          "ref": "Hebrews 13:4",
+          "virtue": "Honors",
+          "note": "Marriage is honorable in all. The bed undefiled."
+        },
+        "fathers_charge": {
+          "ref": "Ephesians 6:4",
+          "virtue": "Leading",
+          "note": "Bring them up in the nurture and admonition of the Lord."
+        },
+        "citizens_stand": {
+          "ref": "Acts 18:24-28",
+          "virtue": "Teaching",
+          "ring": "your city",
+          "note": "Apollos, mighty in the Scriptures. Aquila and Priscilla expounded unto him the way of God more perfectly."
+        },
+        "evening_peace": {
+          "ref": "Psalm 72",
+          "note": "He shall come down like rain upon the mown grass. His enemies shall lick the dust."
+        }
+      }
+    },
+    {
+      "day": 80,
+      "reflection_prompt": "Where did your city, state, or nation need a Christian presence today — and were you there?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Psalm 119:145-152 (Koph)",
+          "virtue": "Accept Responsibility",
+          "note": "I cried with my whole heart. Hear me, O LORD."
+        },
+        "husbands_post": {
+          "ref": "Ephesians 3:14-21",
+          "virtue": "Abiding",
+          "note": "Rooted and grounded in love. Filled with all the fullness of God."
+        },
+        "fathers_charge": {
+          "ref": "Romans 14:19",
+          "virtue": "Encouraging",
+          "note": "Let us therefore follow after the things which make for peace, and edify one another."
+        },
+        "citizens_stand": {
+          "ref": "Romans 13:1-7",
+          "virtue": "Engaged",
+          "ring": "your state",
+          "note": "Let every soul be subject unto the higher powers. The powers that be are ordained of God."
+        },
+        "evening_peace": {
+          "ref": "Psalm 78",
+          "note": "Give ear, O my people, to my law. I will utter dark sayings of old."
+        }
+      }
+    },
+    {
+      "day": 81,
+      "reflection_prompt": "Where did you fear man more than God today?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Philippians 1:27-30",
+          "virtue": "Lead Courageously",
+          "note": "Stand fast in one spirit, striving together for the faith."
+        },
+        "husbands_post": {
+          "ref": "Proverbs 18:22",
+          "virtue": "Adoring",
+          "note": "Whoso findeth a wife findeth a good thing — and obtaineth favour of the LORD."
+        },
+        "fathers_charge": {
+          "ref": "Matthew 28:18-20",
+          "virtue": "Discipling",
+          "note": "Go ye therefore, and teach all nations — teaching them to observe all things."
+        },
+        "citizens_stand": {
+          "ref": "2 Peter 1:12-15",
+          "virtue": "Remembering",
+          "ring": "your nation",
+          "note": "I will not be negligent to put you always in remembrance — though ye know and be established."
+        },
+        "evening_peace": {
+          "ref": "Psalm 89",
+          "note": "I will sing of the mercies of the LORD for ever. With my mouth will I make known Thy faithfulness."
+        }
+      }
+    },
+    {
+      "day": 82,
+      "reflection_prompt": "What is encroaching on her peace that you've been ignoring?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "1 Timothy 6:6-19",
+          "virtue": "Manage Faithfully",
+          "note": "Godliness with contentment is great gain. Rich in good works."
+        },
+        "husbands_post": {
+          "ref": "Genesis 2:15",
+          "virtue": "Protecting",
+          "note": "The LORD put him into the garden to dress it and to keep it."
+        },
+        "fathers_charge": {
+          "ref": "1 Corinthians 4:2",
+          "virtue": "Faithful",
+          "note": "It is required in stewards that a man be found faithful."
+        },
+        "citizens_stand": {
+          "ref": "Ephesians 4:11-16",
+          "virtue": "Equipped",
+          "ring": "your city",
+          "note": "Apostles, prophets, evangelists, pastors, teachers — for the perfecting of the saints."
+        },
+        "evening_peace": {
+          "ref": "Psalm 105",
+          "note": "O give thanks unto the LORD; call upon His name. Make known His deeds among the people."
+        }
+      }
+    },
+    {
+      "day": 83,
+      "reflection_prompt": "What does each of your children need from you that no one else can give them?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Psalm 119:153-160 (Resh)",
+          "virtue": "Account Accurately",
+          "note": "Consider mine affliction, and deliver me. For I do not forget Thy law."
+        },
+        "husbands_post": {
+          "ref": "Genesis 30:30",
+          "virtue": "Providing",
+          "note": "When shall I provide for mine own house also?"
+        },
+        "fathers_charge": {
+          "ref": "Luke 2:51-52",
+          "virtue": "Understanding",
+          "note": "Jesus increased in wisdom and stature, and in favor with God and man."
+        },
+        "citizens_stand": {
+          "ref": "John 13:1-17",
+          "virtue": "Serving",
+          "ring": "your state",
+          "note": "Jesus girded Himself with a towel, and began to wash the disciples' feet."
+        },
+        "evening_peace": {
+          "ref": "Psalm 106",
+          "note": "Praise ye the LORD. Who can utter the mighty acts of the LORD?"
+        }
+      }
+    },
+    {
+      "day": 84,
+      "reflection_prompt": "Whose name did you carry to God today that does not yet know Him?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "2 Timothy 4:7",
+          "virtue": "Never Quit",
+          "note": "I have fought the good fight. I have finished my course. I have kept the faith."
+        },
+        "husbands_post": {
+          "ref": "Philippians 2:3-11",
+          "virtue": "Yields",
+          "note": "In lowliness of mind let each esteem other better than themselves."
+        },
+        "fathers_charge": {
+          "ref": "Romans 12:9-10",
+          "virtue": "Loving",
+          "note": "Let love be without dissimulation. Be kindly affectioned with brotherly love."
+        },
+        "citizens_stand": {
+          "ref": "Acts 1:8",
+          "virtue": "Outreaching",
+          "ring": "your nation",
+          "note": "Ye shall be witnesses unto Me — in Jerusalem, in all Judaea and Samaria, unto the uttermost part of the earth."
+        },
+        "evening_peace": {
+          "ref": "Psalm 111",
+          "note": "Praise ye the LORD. I will praise the LORD with my whole heart."
+        }
+      }
+    },
+    {
+      "day": 85,
+      "reflection_prompt": "Where did you wait today when God called you to move?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Hebrews 6:11-12",
+          "virtue": "Reject Passivity",
+          "note": "Not sluggish. Imitators of those who through faith inherit the promises."
+        },
+        "husbands_post": {
+          "ref": "James 5:16",
+          "virtue": "Honest",
+          "note": "Confess your faults one to another. Pray for one another, that you may be healed."
+        },
+        "fathers_charge": {
+          "ref": "Nehemiah 8:10",
+          "virtue": "Fun",
+          "note": "The joy of the LORD is your strength."
+        },
+        "citizens_stand": {
+          "ref": "Hebrews 13:1",
+          "virtue": "Loyal",
+          "ring": "your city",
+          "note": "Let brotherly love continue."
+        },
+        "evening_peace": {
+          "ref": "Psalm 112",
+          "note": "Blessed is the man that feareth the LORD. He shall not be afraid of evil tidings."
+        }
+      }
+    },
+    {
+      "day": 86,
+      "reflection_prompt": "When she heard you talking about her — to anyone — was she honored?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Psalm 119:161-168 (Schin)",
+          "virtue": "Engage Intentionally",
+          "note": "Great peace have they which love Thy law. Nothing shall offend them."
+        },
+        "husbands_post": {
+          "ref": "1 Peter 3:7",
+          "virtue": "Honors",
+          "note": "Dwell with her with understanding. Give honor — heir together of the grace of life."
+        },
+        "fathers_charge": {
+          "ref": "1 Thessalonians 2:11-12",
+          "virtue": "Intentional",
+          "note": "As a father deals with his own children — exhorting, comforting, charging."
+        },
+        "citizens_stand": {
+          "ref": "Romans 15:5-7",
+          "virtue": "United",
+          "ring": "your state",
+          "note": "Be likeminded one toward another, according to Christ Jesus."
+        },
+        "evening_peace": {
+          "ref": "Psalm 115",
+          "note": "Not unto us, O LORD, not unto us, but unto Thy name give glory."
+        }
+      }
+    },
+    {
+      "day": 87,
+      "reflection_prompt": "What did one of your children say today that you almost missed?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "2 Corinthians 5:9-11",
+          "virtue": "Accept Responsibility",
+          "note": "The judgment seat of Christ. The fear of the Lord persuades men."
+        },
+        "husbands_post": {
+          "ref": "Philippians 4:8-9",
+          "virtue": "Abiding",
+          "note": "Whatsoever is true, noble, just, pure — think on these things."
+        },
+        "fathers_charge": {
+          "ref": "Hebrews 5:11-14",
+          "virtue": "Listening",
+          "note": "Strong meat belongs to them of full age. By use, senses are exercised to discern."
+        },
+        "citizens_stand": {
+          "ref": "Ephesians 4:11-13",
+          "virtue": "Teaching",
+          "ring": "your nation",
+          "note": "Pastors and teachers — for the perfecting of the saints, for the work of the ministry."
+        },
+        "evening_peace": {
+          "ref": "Psalm 133",
+          "note": "Behold, how good and how pleasant it is for brethren to dwell together in unity."
+        }
+      }
+    },
+    {
+      "day": 88,
+      "reflection_prompt": "Where did your city, state, or nation need a Christian presence today — and were you there?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "Psalm 119:169-176 (Tau)",
+          "virtue": "Lead Courageously",
+          "note": "Let my cry come near before Thee, O LORD. Give me understanding according to Thy word."
+        },
+        "husbands_post": {
+          "ref": "Ecclesiastes 9:9",
+          "virtue": "Adoring",
+          "note": "Live joyfully with the wife whom thou lovest, all the days of thy life."
+        },
+        "fathers_charge": {
+          "ref": "1 Thessalonians 5:14",
+          "virtue": "Leading",
+          "note": "Warn them that are unruly. Comfort the feebleminded. Support the weak. Be patient."
+        },
+        "citizens_stand": {
+          "ref": "1 Corinthians 16:13-14",
+          "virtue": "Engaged",
+          "ring": "your city",
+          "note": "Watch ye, stand fast in the faith, quit you like men, be strong."
+        },
+        "evening_peace": {
+          "ref": "Psalm 136",
+          "note": "O give thanks unto the LORD; for He is good. For His mercy endureth for ever."
+        }
+      }
+    },
+    {
+      "day": 89,
+      "reflection_prompt": "What did God entrust to you that you spent on yourself?",
+      "readings": {
+        "morning_wisdom": {
+          "ref": "1 Timothy 5:8",
+          "virtue": "Manage Faithfully",
+          "note": "He who provides not for his own has denied the faith."
+        },
+        "husbands_post": {
+          "ref": "1 Samuel 30:18-19",
+          "virtue": "Protecting",
+          "note": "David recovered all. Nothing lacking — small or great, sons or daughters."
+        },
+        "fathers_charge": {
+          "ref": "Ephesians 4:29",
+          "virtue": "Encouraging",
+          "note": "Let no corrupt communication proceed out of your mouth — but that which is good to edify."
+        },
+        "citizens_stand": {
+          "ref": "Deuteronomy 8:1-18",
+          "virtue": "Remembering",
+          "ring": "your state",
+          "note": "Beware lest thou forget the LORD thy God. Thou shalt remember all the way."
+        },
+        "evening_peace": {
+          "ref": "Psalm 144",
+          "note": "Blessed be the LORD my strength, which teacheth my hands to war."
         }
       }
     },
@@ -2897,24 +2897,24 @@
           "note": "Submit to those who watch for your souls — they shall give account."
         },
         "husbands_post": {
-          "ref": "Genesis 30:30",
+          "ref": "Proverbs 27:23-27",
           "virtue": "Providing",
-          "note": "When shall I provide for mine own house also?"
+          "note": "Be diligent to know the state of thy flocks. Riches are not forever."
         },
         "fathers_charge": {
-          "ref": "Matthew 28:18-20",
+          "ref": "1 Corinthians 11:1",
           "virtue": "Discipling",
-          "note": "Go ye therefore, and teach all nations — teaching them to observe all things."
+          "note": "Be ye followers of me, even as I also am of Christ."
         },
         "citizens_stand": {
-          "ref": "Hebrews 4:12",
+          "ref": "1 Timothy 6:11-12",
           "virtue": "Equipped",
           "ring": "your nation",
-          "note": "The Word of God is quick, and powerful, and sharper than any two-edged sword."
+          "note": "Flee these things. Fight the good fight of faith. Lay hold on eternal life."
         },
         "evening_peace": {
-          "ref": "Psalm 4",
-          "note": "I will both lay me down in peace, and sleep. Thou alone makest me dwell in safety."
+          "ref": "Psalm 149",
+          "note": "Sing unto the LORD a new song. His praise in the congregation of saints."
         }
       }
     }

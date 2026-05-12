@@ -1,7 +1,7 @@
 // Operation Watchman — Service Worker
 // Provides offline support via cache-first strategy
 
-const CACHE_NAME = 'watchman-v3';
+const CACHE_NAME = 'watchman-v4';
 const PRECACHE_URLS = [
   '/',
   '/index.html',
