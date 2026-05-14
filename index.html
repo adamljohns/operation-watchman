@@ -332,14 +332,15 @@
       cursor: pointer;
     }
 
-    /* JOURNAL BUTTON (lives below day banner) */
+    /* JOURNAL + PLANS BUTTON BAR (lives below day banner) */
     .journal-bar {
       display: flex;
       justify-content: center;
+      gap: 10px;
       padding: 10px 16px 4px;
       background: var(--bg);
     }
-    .journal-btn {
+    .journal-btn, .plans-btn {
       background: none;
       border: 1px solid var(--gold-dark);
       color: var(--gold);
@@ -352,10 +353,72 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    .journal-btn:hover, .journal-btn:active {
+    .journal-btn:hover, .journal-btn:active,
+    .plans-btn:hover,   .plans-btn:active {
       background: rgba(212, 175, 55, 0.1);
       border-color: var(--gold);
     }
+
+    /* PLAN CARDS inside the settings modal */
+    .plan-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .plan-card.active {
+      border-color: var(--gold);
+      background: rgba(212, 175, 55, 0.04);
+    }
+    .plan-card .plan-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+    }
+    .plan-card .plan-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .plan-card .plan-summary {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.5;
+      margin-top: 4px;
+    }
+    .plan-card .plan-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .plan-card .plan-actions {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+    }
+    .plan-card .plan-current {
+      font-size: 0.72rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-family: 'Playfair Display', serif;
+    }
+    .plan-card .btn-activate {
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+    }
+    .plan-card .btn-activate:hover { background: var(--gold-light); }
 
     /* JOURNAL MODAL */
     .modal-overlay {
@@ -535,6 +598,9 @@
   <button class="journal-btn" id="journalBtn" type="button">
     ✎ Journal
   </button>
+  <button class="plans-btn" id="plansBtn" type="button">
+    ⚒ Plans
+  </button>
 </div>
 
 <div class="streak-bar">
@@ -673,6 +739,22 @@
 
 <div id="toast"></div>
 
+<!-- PLAN SWITCHER MODAL -->
+<div class="modal-overlay" id="plansModal" role="dialog" aria-modal="true" aria-labelledby="plansHeading">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">
+        <div class="modal-day" id="plansHeading">Formation Plans</div>
+        <div class="modal-date" id="plansActiveLabel">—</div>
+      </div>
+      <button class="modal-close" id="plansClose" type="button" aria-label="Close plans">✕</button>
+    </div>
+    <div class="modal-body" id="plansBody">
+      <!-- plan cards rendered by renderPlansModal() -->
+    </div>
+  </div>
+</div>
+
 <!-- JOURNAL MODAL -->
 <div class="modal-overlay" id="journalModal" role="dialog" aria-modal="true" aria-labelledby="modalDay">
   <div class="modal">
@@ -708,19 +790,67 @@
   // ─────────────────────────────────────
   // CONSTANTS
   // ─────────────────────────────────────
-  const START_DATE_KEY  = 'ow_start_date';
-  const DAILY_KEY       = 'ow_daily_';       // + YYYY-MM-DD
-  const STREAK_KEY      = 'ow_streak';
-  const LAST_CHECK_KEY  = 'ow_last_checked';
+  // Storage keys are plan-namespaced as of v0.4 Pass B. Each plan keeps an
+  // independent start date, daily checks, journal, and last-checked toast
+  // dedupe under "ow_plan_{planId}_*". The active plan id lives in a single
+  // global key. Legacy unprefixed keys from v0.1-v0.3 are migrated on first
+  // load (see migrateLegacyData) and left in place for rollback safety.
   const REGISTRY_URL    = 'content/plans/index.json';
-  const JOURNAL_KEY     = 'ow_journal_';     // + YYYY-MM-DD
   const DEFAULT_PLAN_ID = 'watchman-90';
+  const ACTIVE_PLAN_KEY = 'ow_active_plan';
+  const MIGRATION_FLAG  = 'ow_migrated_v04';
 
   let registry = null;      // loaded from REGISTRY_URL; null falls back to DEFAULT_PLAN_ID
   let plan = null;          // active plan content; null means "use theme fallbacks"
   let activePlanId = DEFAULT_PLAN_ID;
   let modalDateStr = null;  // YYYY-MM-DD currently displayed in journal modal
   let saveTimer = null;     // debounce handle for journal autosave
+
+  // Storage key helpers — all per-active-plan
+  function planPrefix()       { return 'ow_plan_' + activePlanId + '_'; }
+  function keyStartDate()     { return planPrefix() + 'start_date'; }
+  function keyDaily(dateStr)  { return planPrefix() + 'daily_' + dateStr; }
+  function keyJournal(dateStr){ return planPrefix() + 'journal_' + dateStr; }
+  function keyLastCheck()     { return planPrefix() + 'last_checked'; }
+  function journalPrefix()    { return planPrefix() + 'journal_'; }
+
+  // One-time migration of v0.1-v0.3 unprefixed keys into the watchman-90
+  // namespace. Leaves the originals in place so a rollback to an older build
+  // would still find the user's data.
+  function migrateLegacyData() {
+    if (localStorage.getItem(MIGRATION_FLAG)) return;
+    const planId = DEFAULT_PLAN_ID;
+    const prefix = 'ow_plan_' + planId + '_';
+
+    // Collect first; modifying localStorage mid-iteration shifts indices.
+    const toCopy = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (!k || k.startsWith('ow_plan_')) continue;
+      if (k.startsWith('ow_daily_')) {
+        toCopy.push([prefix + 'daily_' + k.slice('ow_daily_'.length), localStorage.getItem(k)]);
+      } else if (k.startsWith('ow_journal_')) {
+        toCopy.push([prefix + 'journal_' + k.slice('ow_journal_'.length), localStorage.getItem(k)]);
+      }
+    }
+    for (const [newKey, value] of toCopy) {
+      if (localStorage.getItem(newKey) == null) localStorage.setItem(newKey, value);
+    }
+
+    const start = localStorage.getItem('ow_start_date');
+    if (start && localStorage.getItem(prefix + 'start_date') == null) {
+      localStorage.setItem(prefix + 'start_date', start);
+    }
+    const lastCheck = localStorage.getItem('ow_last_checked');
+    if (lastCheck && localStorage.getItem(prefix + 'last_checked') == null) {
+      localStorage.setItem(prefix + 'last_checked', lastCheck);
+    }
+
+    if (localStorage.getItem(ACTIVE_PLAN_KEY) == null) {
+      localStorage.setItem(ACTIVE_PLAN_KEY, planId);
+    }
+    localStorage.setItem(MIGRATION_FLAG, '1');
+  }
 
   // ─────────────────────────────────────
   // DATE HELPERS
@@ -731,10 +861,10 @@
   }
 
   function getStartDate() {
-    let sd = localStorage.getItem(START_DATE_KEY);
+    let sd = localStorage.getItem(keyStartDate());
     if (!sd) {
       sd = todayStr();
-      localStorage.setItem(START_DATE_KEY, sd);
+      localStorage.setItem(keyStartDate(), sd);
     }
     return sd;
   }
@@ -768,19 +898,19 @@
   // DATA LOAD / SAVE
   // ─────────────────────────────────────
   function getTodayData() {
-    const raw = localStorage.getItem(DAILY_KEY + todayStr());
+    const raw = localStorage.getItem(keyDaily(todayStr()));
     return raw ? JSON.parse(raw) : {};
   }
 
   function saveTodayData(data) {
-    localStorage.setItem(DAILY_KEY + todayStr(), JSON.stringify(data));
+    localStorage.setItem(keyDaily(todayStr()), JSON.stringify(data));
   }
 
   // ─────────────────────────────────────
   // STREAK CALCULATION
   // ─────────────────────────────────────
   function isDayComplete(dateStr) {
-    const raw = localStorage.getItem(DAILY_KEY + dateStr);
+    const raw = localStorage.getItem(keyDaily(dateStr));
     if (!raw) return false;
     const data = JSON.parse(raw);
     const keys = planKeys();
@@ -861,9 +991,9 @@
     // All done today toast check — only when the plan actually has items to check
     const totalItems = readingKeys.length + discKeys.length;
     if (totalItems > 0 && (readingsDone + discDone) === totalItems) {
-      const lastCheck = localStorage.getItem(LAST_CHECK_KEY);
+      const lastCheck = localStorage.getItem(keyLastCheck());
       if (lastCheck !== today) {
-        localStorage.setItem(LAST_CHECK_KEY, today);
+        localStorage.setItem(keyLastCheck(), today);
         const msg = (plan && plan.completion_message) || 'Watchman stands.';
         setTimeout(() => showToast('🔥 Day ' + dayNum + ' Complete! ' + msg), 400);
       }
@@ -886,8 +1016,8 @@
   // ─────────────────────────────────────
   function resetDay() {
     if (!confirm('Reset all checks for today?')) return;
-    localStorage.removeItem(DAILY_KEY + todayStr());
-    localStorage.removeItem(LAST_CHECK_KEY);
+    localStorage.removeItem(keyDaily(todayStr()));
+    localStorage.removeItem(keyLastCheck());
     render();
     showToast('Today reset.');
   }
@@ -938,11 +1068,30 @@
       const res = await fetch(REGISTRY_URL, { cache: 'default' });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       registry = await res.json();
-      if (registry.default_plan) activePlanId = registry.default_plan;
     } catch (e) {
       console.warn('Registry load failed; falling back to single plan:', e);
       registry = null;
     }
+
+    // Resolve active plan id: user choice > registry default > hardcoded default.
+    const stored = localStorage.getItem(ACTIVE_PLAN_KEY);
+    if (stored) {
+      activePlanId = stored;
+    } else if (registry && registry.default_plan) {
+      activePlanId = registry.default_plan;
+    } else {
+      activePlanId = DEFAULT_PLAN_ID;
+    }
+  }
+
+  // Switch the active plan, persist the choice, and reload the page so all
+  // state (start date, checks, journal, streak) re-reads from the new plan's
+  // storage namespace cleanly.
+  function switchPlan(planId) {
+    if (planId === activePlanId) return;
+    flushSave();  // save any pending journal text in the current plan first
+    localStorage.setItem(ACTIVE_PLAN_KEY, planId);
+    location.reload();
   }
 
   async function loadPlan() {
@@ -1088,14 +1237,14 @@
   // JOURNAL
   // ─────────────────────────────────────
   function getJournal(dateStr) {
-    return localStorage.getItem(JOURNAL_KEY + dateStr) || '';
+    return localStorage.getItem(keyJournal(dateStr)) || '';
   }
 
   function saveJournal(dateStr, text) {
     if (text && text.length > 0) {
-      localStorage.setItem(JOURNAL_KEY + dateStr, text);
+      localStorage.setItem(keyJournal(dateStr), text);
     } else {
-      localStorage.removeItem(JOURNAL_KEY + dateStr);
+      localStorage.removeItem(keyJournal(dateStr));
     }
   }
 
@@ -1185,13 +1334,16 @@
     document.getElementById('modalSaved').textContent = text ? 'Saved' : '';
   }
 
-  // Collect all journal entries and trigger a markdown file download
+  // Collect all journal entries for the active plan and trigger a markdown
+  // file download. Other plans' journals are not included; export only the
+  // plan you're currently in.
   function exportJournal() {
     const entries = [];
+    const prefix  = journalPrefix();
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      if (key && key.startsWith(JOURNAL_KEY)) {
-        const dateStr = key.slice(JOURNAL_KEY.length);
+      if (key && key.startsWith(prefix)) {
+        const dateStr = key.slice(prefix.length);
         const text    = localStorage.getItem(key);
         if (text && text.trim()) {
           entries.push({ dateStr, text });
@@ -1205,8 +1357,9 @@
       return;
     }
 
+    const planName = (plan && plan.name) || 'Operation Watchman';
     const lines = [
-      '# Operation Watchman — Journal',
+      `# ${planName} — Journal`,
       '',
       `_Exported ${formatDateDisplay(todayStr())}_`,
       `_Start date: ${formatDateDisplay(getStartDate())}_`,
@@ -1243,6 +1396,94 @@
   }
 
   // ─────────────────────────────────────
+  // PLAN SWITCHER MODAL
+  // ─────────────────────────────────────
+  function openPlansModal() {
+    renderPlansModal();
+    document.getElementById('plansModal').classList.add('visible');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePlansModal() {
+    document.getElementById('plansModal').classList.remove('visible');
+    if (!document.getElementById('journalModal').classList.contains('visible')) {
+      document.body.style.overflow = '';
+    }
+  }
+
+  function renderPlansModal() {
+    const activeLabel = document.getElementById('plansActiveLabel');
+    const body        = document.getElementById('plansBody');
+    body.innerHTML    = '';
+
+    const plans = (registry && Array.isArray(registry.plans)) ? registry.plans : [];
+    if (plans.length === 0) {
+      activeLabel.textContent = 'No registry loaded';
+      const empty = document.createElement('div');
+      empty.className   = 'plan-card';
+      empty.textContent = 'Plan registry unavailable. Check your connection and reload.';
+      body.appendChild(empty);
+      return;
+    }
+
+    const active = plans.find(p => p.id === activePlanId);
+    activeLabel.textContent = active
+      ? 'Currently active: ' + active.name
+      : 'Currently active: ' + activePlanId;
+
+    for (const p of plans) {
+      const card = document.createElement('div');
+      card.className = 'plan-card' + (p.id === activePlanId ? ' active' : '');
+
+      const name = document.createElement('div');
+      name.className   = 'plan-name';
+      name.textContent = p.name || p.id;
+      card.appendChild(name);
+
+      if (p.subtitle) {
+        const sub = document.createElement('div');
+        sub.className   = 'plan-subtitle';
+        sub.textContent = p.subtitle;
+        card.appendChild(sub);
+      }
+      if (p.summary) {
+        const sum = document.createElement('div');
+        sum.className   = 'plan-summary';
+        sum.textContent = p.summary;
+        card.appendChild(sum);
+      }
+      if (p.duration_days) {
+        const meta = document.createElement('div');
+        meta.className   = 'plan-meta';
+        meta.textContent = p.duration_days + ' days';
+        card.appendChild(meta);
+      }
+
+      const actions = document.createElement('div');
+      actions.className = 'plan-actions';
+      if (p.id === activePlanId) {
+        const cur = document.createElement('span');
+        cur.className   = 'plan-current';
+        cur.textContent = 'Currently active';
+        actions.appendChild(cur);
+      } else {
+        const btn = document.createElement('button');
+        btn.className   = 'btn-activate';
+        btn.type        = 'button';
+        btn.textContent = 'Start this plan';
+        btn.addEventListener('click', () => {
+          if (confirm(`Switch to "${p.name || p.id}"?\n\nYour current plan's data stays saved. Switching reloads the app.`)) {
+            switchPlan(p.id);
+          }
+        });
+        actions.appendChild(btn);
+      }
+      card.appendChild(actions);
+      body.appendChild(card);
+    }
+  }
+
+  // ─────────────────────────────────────
   // SERVICE WORKER REGISTRATION
   // ─────────────────────────────────────
   if ('serviceWorker' in navigator) {
@@ -1256,11 +1497,16 @@
   // ─────────────────────────────────────
   // INIT
   // ─────────────────────────────────────
-  getStartDate();       // ensure start date is set
+  migrateLegacyData();  // copy v0.1-v0.3 keys into the watchman-90 namespace
   cacheThemeLabels();   // preserve fallback text in case the plan never loads
-  render();             // first paint with hardcoded HTML + empty state
+  // First paint can't read user data yet — activePlanId resolves after the
+  // registry loads. So we delay the initial render until the chain completes.
   loadRegistry()
-    .then(loadPlan)
+    .then(() => {
+      getStartDate();      // lazily initialize start date in the active namespace
+      render();            // first paint with hardcoded HTML + empty state
+      return loadPlan();
+    })
     .then(() => {
       renderChecklist();   // rebuild readings + disciplines from plan
       render();            // recompute badges, streak, banner with real counts
@@ -1275,9 +1521,16 @@
   document.getElementById('modalText').addEventListener('input', scheduleSave);
   document.getElementById('btnExport').addEventListener('click', exportJournal);
 
-  // Close modal with Escape
+  // Plans modal wiring
+  document.getElementById('plansBtn').addEventListener('click', openPlansModal);
+  document.getElementById('plansClose').addEventListener('click', closePlansModal);
+
+  // Close whichever modal is open with Escape
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && document.getElementById('journalModal').classList.contains('visible')) {
+    if (e.key !== 'Escape') return;
+    if (document.getElementById('plansModal').classList.contains('visible')) {
+      closePlansModal();
+    } else if (document.getElementById('journalModal').classList.contains('visible')) {
       closeJournal();
     }
   });
