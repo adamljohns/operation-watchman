@@ -560,7 +560,7 @@
   </div>
 
   <!-- READINGS -->
-  <div class="card">
+  <div class="card" id="readingsCard">
     <div class="card-header">
       <span class="icon">📖</span>
       <h3>Today's Readings</h3>
@@ -606,7 +606,7 @@
   </div>
 
   <!-- DISCIPLINES -->
-  <div class="card">
+  <div class="card" id="discCard">
     <div class="card-header">
       <span class="icon">🛡️</span>
       <h3>Daily Disciplines</h3>
@@ -712,13 +712,13 @@
   const DAILY_KEY       = 'ow_daily_';       // + YYYY-MM-DD
   const STREAK_KEY      = 'ow_streak';
   const LAST_CHECK_KEY  = 'ow_last_checked';
-  const TOTAL_ITEMS     = 11; // 5 readings + 6 disciplines
-  const READINGS_COUNT  = 5;
-  const DISC_COUNT      = 6;
-  const PLAN_URL        = 'content/plans/watchman-90.json';
+  const REGISTRY_URL    = 'content/plans/index.json';
   const JOURNAL_KEY     = 'ow_journal_';     // + YYYY-MM-DD
+  const DEFAULT_PLAN_ID = 'watchman-90';
 
-  let plan = null;          // loaded from PLAN_URL; null means "use theme fallbacks"
+  let registry = null;      // loaded from REGISTRY_URL; null falls back to DEFAULT_PLAN_ID
+  let plan = null;          // active plan content; null means "use theme fallbacks"
+  let activePlanId = DEFAULT_PLAN_ID;
   let modalDateStr = null;  // YYYY-MM-DD currently displayed in journal modal
   let saveTimer = null;     // debounce handle for journal autosave
 
@@ -749,7 +749,7 @@
     const start = new Date(getStartDate() + 'T00:00:00');
     const d     = new Date(dateStr + 'T00:00:00');
     const diff  = Math.floor((d - start) / 86400000) + 1;
-    return Math.min(diff, 90);
+    return Math.min(diff, planDuration());
   }
 
   // Shift a YYYY-MM-DD by N days (positive or negative). Returns YYYY-MM-DD.
@@ -783,19 +783,17 @@
     const raw = localStorage.getItem(DAILY_KEY + dateStr);
     if (!raw) return false;
     const data = JSON.parse(raw);
-    // All 11 items must be checked
-    const keys = [
-      'morning_wisdom','husbands_post','fathers_charge','citizens_stand','evening_peace',
-      'cold_shower','fasting','no_alcohol','no_screens','prayer_morning','prayer_evening'
-    ];
+    const keys = planKeys();
+    if (keys.length === 0) return false;
     return keys.every(k => data[k] === true);
   }
 
   function calculateStreak() {
     let streak = 0;
     const today = new Date(todayStr() + 'T00:00:00');
+    const horizon = planDuration();
     // Walk backwards from yesterday (today might still be in progress)
-    for (let i = 1; i <= 90; i++) {
+    for (let i = 1; i <= horizon; i++) {
       const d = new Date(today);
       d.setDate(d.getDate() - i);
       const ds = d.toISOString().split('T')[0];
@@ -814,12 +812,13 @@
   // RENDER
   // ─────────────────────────────────────
   function render() {
-    const today = todayStr();
-    const data  = getTodayData();
-    const dayNum = getDayNumber();
+    const today    = todayStr();
+    const data     = getTodayData();
+    const dayNum   = getDayNumber();
+    const duration = planDuration();
 
     // Day banner
-    document.getElementById('dayBanner').childNodes[0].textContent = `Day ${dayNum} of 90`;
+    document.getElementById('dayBanner').childNodes[0].textContent = `Day ${dayNum} of ${duration}`;
     document.getElementById('dayDate').textContent = formatDateDisplay(today);
     document.getElementById('dateDisplay').textContent = `Tracking: ${formatDateDisplay(today)}`;
 
@@ -833,35 +832,40 @@
       }
     });
 
-    // Update badges
-    const readingsDone = ['morning_wisdom','husbands_post','fathers_charge','citizens_stand','evening_peace']
-      .filter(k => data[k]).length;
-    const discDone = ['cold_shower','fasting','no_alcohol','no_screens','prayer_morning','prayer_evening']
-      .filter(k => data[k]).length;
+    // Update badges — counts are keyed to the active plan's items
+    const readingKeys = (plan && plan.readings)    ? plan.readings.map(r => r.key)    : [];
+    const discKeys    = (plan && plan.disciplines) ? plan.disciplines.map(d => d.key) : [];
+    const readingsDone = readingKeys.filter(k => data[k]).length;
+    const discDone     = discKeys.filter(k => data[k]).length;
 
     const rBadge = document.getElementById('readingsBadge');
-    rBadge.textContent = `${readingsDone} / 5`;
-    rBadge.className = 'badge' + (readingsDone === 5 ? ' done' : '');
-
+    if (readingKeys.length > 0) {
+      rBadge.textContent = `${readingsDone} / ${readingKeys.length}`;
+      rBadge.className = 'badge' + (readingsDone === readingKeys.length ? ' done' : '');
+    }
     const dBadge = document.getElementById('discBadge');
-    dBadge.textContent = `${discDone} / 6`;
-    dBadge.className = 'badge' + (discDone === 6 ? ' done' : '');
+    if (discKeys.length > 0) {
+      dBadge.textContent = `${discDone} / ${discKeys.length}`;
+      dBadge.className = 'badge' + (discDone === discKeys.length ? ' done' : '');
+    }
 
     // Streak
     const streak = calculateStreak();
     document.getElementById('streakNum').textContent = streak;
 
-    // Progress bar (days completed out of 90)
-    const pct = Math.round((dayNum / 90) * 100);
+    // Progress bar (days completed out of plan duration)
+    const pct = Math.round((dayNum / duration) * 100);
     document.getElementById('progressFill').style.width = pct + '%';
-    document.getElementById('progressPct').textContent = `Day ${dayNum} of 90`;
+    document.getElementById('progressPct').textContent = `Day ${dayNum} of ${duration}`;
 
-    // All done today toast check
-    if (readingsDone === 5 && discDone === 6) {
+    // All done today toast check — only when the plan actually has items to check
+    const totalItems = readingKeys.length + discKeys.length;
+    if (totalItems > 0 && (readingsDone + discDone) === totalItems) {
       const lastCheck = localStorage.getItem(LAST_CHECK_KEY);
       if (lastCheck !== today) {
         localStorage.setItem(LAST_CHECK_KEY, today);
-        setTimeout(() => showToast('🔥 Day ' + dayNum + ' Complete! Watchman stands.'), 400);
+        const msg = (plan && plan.completion_message) || 'Watchman stands.';
+        setTimeout(() => showToast('🔥 Day ' + dayNum + ' Complete! ' + msg), 400);
       }
     }
   }
@@ -918,32 +922,122 @@
   });
 
   // ─────────────────────────────────────
-  // PLAN LOADER
+  // PLAN LOADER & DYNAMIC RENDERING
   // ─────────────────────────────────────
-  // Cache original .check-sub text so we can fall back cleanly
-  // if the plan fails to load or doesn't cover today.
+  // Cache the original hardcoded .check-sub text so we can fall back cleanly
+  // when no plan loads at all. Once a plan is loaded, the checklist DOM is
+  // rebuilt from plan.readings / plan.disciplines, replacing this fallback.
   function cacheThemeLabels() {
     document.querySelectorAll('.check-item .check-sub').forEach(el => {
       if (!el.dataset.fallback) el.dataset.fallback = el.textContent;
     });
   }
 
-  async function loadPlan() {
+  async function loadRegistry() {
     try {
-      const res = await fetch(PLAN_URL, { cache: 'default' });
+      const res = await fetch(REGISTRY_URL, { cache: 'default' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      registry = await res.json();
+      if (registry.default_plan) activePlanId = registry.default_plan;
+    } catch (e) {
+      console.warn('Registry load failed; falling back to single plan:', e);
+      registry = null;
+    }
+  }
+
+  async function loadPlan() {
+    // Resolve plan file from registry if present; otherwise use the legacy path.
+    let planUrl = 'content/plans/' + activePlanId + '.json';
+    if (registry && Array.isArray(registry.plans)) {
+      const entry = registry.plans.find(p => p.id === activePlanId);
+      if (entry && entry.file) planUrl = entry.file;
+    }
+    try {
+      const res = await fetch(planUrl, { cache: 'default' });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       plan = await res.json();
     } catch (e) {
-      console.warn('Plan load failed; using theme fallbacks:', e);
+      console.warn('Plan load failed (' + planUrl + '); using theme fallbacks:', e);
       plan = null;
     }
   }
 
+  // Build a .check-item element matching the hardcoded HTML shape so all the
+  // existing CSS continues to apply unchanged.
+  function buildCheckItem(group, key, title, theme) {
+    const item = document.createElement('div');
+    item.className   = 'check-item';
+    item.dataset.group = group;
+    item.dataset.key   = key;
+
+    const box = document.createElement('div');
+    box.className = 'check-box';
+
+    const label = document.createElement('div');
+    label.className = 'check-label';
+    label.textContent = title;
+
+    if (theme) {
+      const sub = document.createElement('span');
+      sub.className   = 'check-sub';
+      sub.textContent = theme;
+      sub.dataset.fallback = theme;
+      label.appendChild(sub);
+    }
+
+    item.appendChild(box);
+    item.appendChild(label);
+    item.addEventListener('click', () => toggle(item));
+    return item;
+  }
+
+  // Render the readings and disciplines cards from plan data. Hides a card
+  // entirely when the plan has zero items of that kind (e.g. Proverbs-31 has
+  // no disciplines). Called once after the plan loads.
+  function renderChecklist() {
+    if (!plan) return;
+    const readingsCard = document.getElementById('readingsCard');
+    const discCard     = document.getElementById('discCard');
+    const readingsList = document.getElementById('readingsList');
+    const discList     = document.getElementById('discList');
+    const readingsBadge = document.getElementById('readingsBadge');
+    const discBadge    = document.getElementById('discBadge');
+
+    const readings    = Array.isArray(plan.readings)    ? plan.readings    : [];
+    const disciplines = Array.isArray(plan.disciplines) ? plan.disciplines : [];
+
+    // READINGS
+    if (readings.length > 0) {
+      readingsList.replaceChildren(...readings.map(r =>
+        buildCheckItem('readings', r.key, r.title, r.theme || '')
+      ));
+      readingsBadge.textContent = `0 / ${readings.length}`;
+      readingsCard.style.display = '';
+    } else {
+      readingsCard.style.display = 'none';
+    }
+
+    // DISCIPLINES
+    if (disciplines.length > 0) {
+      discList.replaceChildren(...disciplines.map(d =>
+        buildCheckItem('disc', d.key, d.title, d.theme || '')
+      ));
+      discBadge.textContent = `0 / ${disciplines.length}`;
+      discCard.style.display = '';
+    } else {
+      discCard.style.display = 'none';
+    }
+
+    // Header / banner / progress reflect the loaded plan
+    if (plan.name)     document.querySelector('header h1').textContent = plan.name;
+    if (plan.subtitle) document.querySelector('header h2').textContent = plan.subtitle;
+  }
+
   function applyPlan() {
-    const dayNum = getDayNumber();
+    const dayNum   = getDayNumber();
     const dayEntry = plan && plan.days && plan.days.find(d => d.day === dayNum);
 
-    // Update reading labels
+    // Update reading labels (refs from plan, or fall back to theme)
     document.querySelectorAll('.check-item[data-group="readings"]').forEach(item => {
       const key    = item.dataset.key;
       const subEl  = item.querySelector('.check-sub');
@@ -954,7 +1048,6 @@
           ? `${reading.ref} — ${reading.note}`
           : reading.ref;
       } else {
-        // Fall back to original theme text
         subEl.textContent = subEl.dataset.fallback || subEl.textContent;
       }
     });
@@ -969,6 +1062,26 @@
     } else {
       refWrap.classList.remove('visible');
     }
+  }
+
+  // Return every check-item key the active plan demands for daily completion.
+  // Falls back to the legacy watchman-90 key list when no plan is loaded so
+  // streak calculations still work on first run with an empty cache.
+  function planKeys() {
+    if (plan && Array.isArray(plan.readings) && Array.isArray(plan.disciplines)) {
+      return [
+        ...plan.readings.map(r => r.key),
+        ...plan.disciplines.map(d => d.key)
+      ];
+    }
+    return [
+      'morning_wisdom','husbands_post','fathers_charge','citizens_stand','evening_peace',
+      'cold_shower','fasting','no_alcohol','no_screens','prayer_morning','prayer_evening'
+    ];
+  }
+
+  function planDuration() {
+    return (plan && plan.duration_days) || 90;
   }
 
   // ─────────────────────────────────────
@@ -1144,9 +1257,15 @@
   // INIT
   // ─────────────────────────────────────
   getStartDate();       // ensure start date is set
-  cacheThemeLabels();   // preserve fallback text before any overwrites
-  render();
-  loadPlan().then(applyPlan);
+  cacheThemeLabels();   // preserve fallback text in case the plan never loads
+  render();             // first paint with hardcoded HTML + empty state
+  loadRegistry()
+    .then(loadPlan)
+    .then(() => {
+      renderChecklist();   // rebuild readings + disciplines from plan
+      render();            // recompute badges, streak, banner with real counts
+      applyPlan();         // overlay scripture refs and reflection prompt
+    });
 
   // Journal wiring
   document.getElementById('journalBtn').addEventListener('click', () => openJournal(todayStr()));

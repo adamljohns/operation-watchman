@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "default_plan": "watchman-90",
+  "plans": [
+    {
+      "id": "watchman-90",
+      "file": "content/plans/watchman-90.json",
+      "name": "Operation Watchman",
+      "subtitle": "90-Day Men's Formation",
+      "duration_days": 90,
+      "summary": "Five daily readings, six disciplines, ninety days. Husband, father, citizen, watchman."
+    },
+    {
+      "id": "proverbs-31",
+      "file": "content/plans/proverbs-31.json",
+      "name": "Proverbs in 31",
+      "subtitle": "A chapter a day",
+      "duration_days": 31,
+      "summary": "One chapter of Proverbs each day for a month. Billy Graham's rhythm."
+    }
+  ]
+}
