@@ -1,0 +1,14 @@
+{
+  "name": "operation-watchman",
+  "version": "0.4.0",
+  "private": true,
+  "description": "90-Day Men's Formation PWA",
+  "scripts": {
+    "serve": "python3 -m http.server 8080 --bind 127.0.0.1",
+    "test": "playwright test",
+    "test:headed": "playwright test --headed"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
+  }
+}
