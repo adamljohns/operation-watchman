@@ -260,9 +260,16 @@ test.describe('Operation Watchman — v0.5 features', () => {
 
 test.describe('Operation Watchman — onboarding', () => {
   // These tests need a virgin localStorage; override the global beforeEach
-  // by clearing the flag it set.
+  // by clearing the flag it set. addInitScript runs on EVERY navigation
+  // (including page.reload()), so use a one-shot sentinel — otherwise the
+  // reload step would wipe a flag the test just verified was set.
   test.beforeEach(async ({ page }) => {
-    await page.addInitScript(() => localStorage.removeItem('ow_onboarded_v05'));
+    await page.addInitScript(() => {
+      if (localStorage.getItem('__test_cleared_onboard') !== '1') {
+        localStorage.removeItem('ow_onboarded_v05');
+        localStorage.setItem('__test_cleared_onboard', '1');
+      }
+    });
   });
 
   test('onboarding overlay shows on first load', async ({ page }) => {

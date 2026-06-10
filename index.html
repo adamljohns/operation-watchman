@@ -1261,12 +1261,13 @@
   }
 
   // Day number (1-based) for an arbitrary YYYY-MM-DD relative to start_date.
-  // Returns 0 or negative for dates before start; clamps high end to 90.
+  // Returns 0 or negative for dates before start. Returns >duration_days
+  // past the end of the plan — graduation logic depends on that overshoot,
+  // so display sites clamp at render time instead.
   function getDayNumberFor(dateStr) {
     const start = new Date(getStartDate() + 'T00:00:00');
     const d     = new Date(dateStr + 'T00:00:00');
-    const diff  = Math.floor((d - start) / 86400000) + 1;
-    return Math.min(diff, planDuration());
+    return Math.floor((d - start) / 86400000) + 1;
   }
 
   // Shift a YYYY-MM-DD by N days (positive or negative). Returns YYYY-MM-DD.
@@ -1334,8 +1335,10 @@
     const dayNum   = getDayNumber();
     const duration = planDuration();
 
-    // Day banner
-    document.getElementById('dayBanner').childNodes[0].textContent = `Day ${dayNum} of ${duration}`;
+    // Day banner — clamp the displayed day so it never shows "Day 95 of 90".
+    // The unclamped dayNum is still used below for graduation detection.
+    const displayDay = Math.max(1, Math.min(dayNum, duration));
+    document.getElementById('dayBanner').childNodes[0].textContent = `Day ${displayDay} of ${duration}`;
     document.getElementById('dayDate').textContent = formatDateDisplay(today);
     document.getElementById('dateDisplay').textContent = `Tracking: ${formatDateDisplay(today)}`;
 
@@ -1384,10 +1387,10 @@
     // Graduation card (Day > duration) takes over the main flow
     renderGraduation(dayNum, streak);
 
-    // Progress bar (days completed out of plan duration)
-    const pct = Math.round((dayNum / duration) * 100);
+    // Progress bar (days completed out of plan duration) — clamped 0-100.
+    const pct = Math.max(0, Math.min(100, Math.round((dayNum / duration) * 100)));
     document.getElementById('progressFill').style.width = pct + '%';
-    document.getElementById('progressPct').textContent = `Day ${dayNum} of ${duration}`;
+    document.getElementById('progressPct').textContent = `Day ${displayDay} of ${duration}`;
 
     // All done today toast check — only when the plan actually has items to check
     const totalItems = readingKeys.length + discKeys.length;
