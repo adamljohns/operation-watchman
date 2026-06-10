@@ -583,6 +583,290 @@
       color: var(--gold);
     }
     .modal-footer .footer-spacer { flex: 1; }
+
+    /* LORD'S DAY BANNER (Sunday only) */
+    .lords-day {
+      display: none;
+      background: linear-gradient(90deg, rgba(212,175,55,0.18), rgba(212,175,55,0.05));
+      border-bottom: 1px solid var(--gold-dark);
+      padding: 8px 16px;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+    }
+    .lords-day.visible { display: block; }
+    .lords-day .lords-day-sub {
+      display: block;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 2px;
+    }
+
+    /* WEEKLY CONFESSION ANCHOR CARD */
+    .confession-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: 8px;
+      padding: 14px 16px;
+      display: none;
+    }
+    .confession-card.visible { display: block; }
+    .confession-card .conf-label {
+      display: block;
+      font-size: 0.66rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 4px;
+      font-family: 'Playfair Display', serif;
+    }
+    .confession-card .conf-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+    .confession-card .conf-chapter {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-family: 'Open Sans', sans-serif;
+    }
+    .confession-card .conf-summary {
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: var(--text);
+    }
+
+    /* ANCHOR PRAYER (top of journal modal) */
+    .anchor-display {
+      background: rgba(212,175,55,0.05);
+      border: 1px solid var(--gold-dark);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--text);
+      position: relative;
+    }
+    .anchor-display .anchor-label {
+      display: block;
+      font-size: 0.66rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 4px;
+      font-family: 'Playfair Display', serif;
+    }
+    .anchor-display.empty .anchor-text { color: var(--text-muted); font-style: italic; }
+    .anchor-display .anchor-edit-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+    }
+    .anchor-display .anchor-edit-btn:hover { color: var(--gold); }
+
+    /* ONBOARDING (Day 0) — full-screen takeover */
+    .onboard-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      display: none;
+      flex-direction: column;
+      z-index: 2000;
+      overflow-y: auto;
+    }
+    .onboard-overlay.visible { display: flex; }
+    .onboard-inner {
+      max-width: 560px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 20px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .onboard-inner h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 1.5rem;
+      letter-spacing: 0.04em;
+      text-align: center;
+    }
+    .onboard-inner h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 1.05rem;
+      margin-top: 4px;
+    }
+    .onboard-inner p {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .onboard-inner .verse {
+      border-left: 3px solid var(--gold);
+      padding: 6px 12px;
+      color: var(--text);
+      font-style: italic;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .onboard-inner .anchor-prompt {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .onboard-inner .anchor-prompt label {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 0.95rem;
+    }
+    .onboard-inner textarea {
+      width: 100%;
+      min-height: 110px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 12px;
+      color: var(--text);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      resize: vertical;
+    }
+    .onboard-inner textarea:focus {
+      outline: none;
+      border-color: var(--gold-dark);
+    }
+    .onboard-inner .btn-begin {
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 14px 18px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: 'Open Sans', sans-serif;
+      margin-top: 6px;
+    }
+    .onboard-inner .btn-begin:hover { background: var(--gold-light); }
+
+    /* GRADUATION (Day 91+) */
+    .graduation {
+      display: none;
+      background: var(--bg2);
+      border: 1px solid var(--gold-dark);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+    }
+    .graduation.visible { display: block; }
+    .graduation .grad-title {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 1.3rem;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+    .graduation .grad-body {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+    .graduation .grad-verse {
+      border-left: 3px solid var(--gold);
+      padding: 8px 12px;
+      text-align: left;
+      color: var(--text);
+      font-style: italic;
+      font-size: 0.88rem;
+      margin-bottom: 16px;
+    }
+    .graduation .grad-stats {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .graduation .grad-stat {
+      text-align: center;
+    }
+    .graduation .grad-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .graduation .grad-stat-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 4px;
+    }
+    .graduation .grad-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .graduation .grad-actions button {
+      background: none;
+      border: 1px solid var(--gold-dark);
+      color: var(--gold);
+      padding: 9px 16px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: 'Open Sans', sans-serif;
+    }
+    .graduation .grad-actions button:hover {
+      background: rgba(212,175,55,0.1);
+      border-color: var(--gold);
+    }
+    .graduation .grad-actions .btn-primary {
+      background: var(--gold);
+      color: #000;
+      border-color: var(--gold);
+    }
+
+    /* FOOTER */
+    .app-footer {
+      text-align: center;
+      padding: 24px 16px 12px;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+    .app-footer a {
+      color: var(--gold-dark);
+      text-decoration: none;
+    }
+    .app-footer a:hover { color: var(--gold); }
   </style>
 </head>
 <body>
@@ -592,6 +876,11 @@
   <h1>Operation Watchman</h1>
   <h2>90-Day Men's Formation</h2>
 </header>
+
+<div class="lords-day" id="lordsDay">
+  ✟ The Lord's Day
+  <span class="lords-day-sub">Corporate worship · Family worship · Holy rest</span>
+</div>
 
 <div class="day-banner" id="dayBanner">
   Day — of 90
@@ -728,9 +1017,36 @@
     </div>
   </div>
 
+  <!-- WEEKLY CONFESSION ANCHOR -->
+  <div class="confession-card" id="confessionCard">
+    <span class="conf-label">This Week's Anchor — LBCF 1689</span>
+    <div class="conf-title">
+      <span id="confTitle">—</span>
+      <span class="conf-chapter" id="confChapter"></span>
+    </div>
+    <div class="conf-summary" id="confSummary"></div>
+  </div>
+
   <div class="reflection" id="reflection">
     <span class="reflection-label">Evening Examination</span>
     <span id="reflectionText"></span>
+  </div>
+
+  <!-- GRADUATION (Day 91+) -->
+  <div class="graduation" id="graduation">
+    <div class="grad-title" id="gradTitle">—</div>
+    <div class="grad-body" id="gradBody">—</div>
+    <div class="grad-verse" id="gradVerse">—</div>
+    <div class="grad-stats">
+      <div class="grad-stat"><div class="grad-stat-num" id="gradStatDays">0</div><div class="grad-stat-label">Days Complete</div></div>
+      <div class="grad-stat"><div class="grad-stat-num" id="gradStatStreak">0</div><div class="grad-stat-label">Best Streak</div></div>
+      <div class="grad-stat"><div class="grad-stat-num" id="gradStatEntries">0</div><div class="grad-stat-label">Journal Entries</div></div>
+    </div>
+    <div class="grad-actions">
+      <button type="button" class="btn-primary" id="gradAgainBtn">Begin Again (90 More)</button>
+      <button type="button" id="gradPlansBtn">Other Plans</button>
+      <button type="button" id="gradExportBtn">Export Journal</button>
+    </div>
   </div>
 
   <div class="date-display" id="dateDisplay">—</div>
@@ -741,7 +1057,56 @@
 
 </main>
 
+<footer class="app-footer">
+  An initiative of
+  <a href="https://usmcmin.org" target="_blank" rel="noopener">USMC Ministries</a>
+  · <a href="#" id="footerOnboard">About / Re-read intro</a>
+</footer>
+
 <div id="toast"></div>
+
+<!-- ONBOARDING OVERLAY (Day 0) -->
+<div class="onboard-overlay" id="onboardOverlay" role="dialog" aria-modal="true" aria-labelledby="onboardHeading">
+  <div class="onboard-inner">
+    <h2 id="onboardHeading">⚔ Operation Watchman</h2>
+    <p style="text-align:center; color:var(--text-muted); font-size:0.82rem; letter-spacing:0.1em; text-transform:uppercase; margin-top:-8px;">
+      90 Days · Five Readings · Six Disciplines
+    </p>
+
+    <div class="verse">
+      "I have stationed you as a watchman for the house of Israel. When you hear a word from My mouth, give them warning from Me." — Ezekiel 3:17
+    </div>
+
+    <h3>What this is</h3>
+    <p>
+      Ninety days of focused formation for the Christian man — husband, father, citizen, watchman. Five daily readings draw you through Wisdom literature, the Husband's epistles, the Father's charge, the Citizen's stand, and the Evening Peace. Six disciplines tax the body and protect the mind. A weekly anchor in the <strong>1689 Baptist Confession of Faith</strong> roots the soul in doctrine, not in sentiment.
+    </p>
+
+    <h3>Means of grace, not means of merit</h3>
+    <p>
+      These disciplines do not earn you anything from God. Christ has already earned every blessing you will ever receive, and faith receives it as a gift (LBCF 11). The cold shower, the fast, the silenced phone — these are means of grace, ordinary channels through which the Spirit conforms you to Christ (LBCF 13). You will fall. You will fail. You will pick up tomorrow and stand the post again. The streak is not your standing.
+    </p>
+
+    <h3>Your anchor prayer</h3>
+    <p>
+      Name the one thing you are bringing before God across these 90 days. The promotion. The wandering son. The marriage that has gone cold. The besetting sin. Write it now. You will see it daily. You will pray it until it is answered or until you have the peace that passes understanding about its delay.
+    </p>
+
+    <div class="anchor-prompt">
+      <label for="onboardAnchor">Anchor Prayer</label>
+      <textarea
+        id="onboardAnchor"
+        placeholder="Lord, over these 90 days I am bringing before You..."
+        maxlength="500"
+      ></textarea>
+      <div style="font-size:0.74rem; color:var(--text-muted); text-align:right;">
+        You can edit this anytime from the Journal screen.
+      </div>
+    </div>
+
+    <button type="button" class="btn-begin" id="onboardBegin">Begin Day 1 — Stand the Post</button>
+  </div>
+</div>
 
 <!-- PLAN SWITCHER MODAL -->
 <div class="modal-overlay" id="plansModal" role="dialog" aria-modal="true" aria-labelledby="plansHeading">
@@ -772,6 +1137,11 @@
       <button class="modal-close" id="modalClose" type="button" aria-label="Close journal">✕</button>
     </div>
     <div class="modal-body">
+      <div class="anchor-display empty" id="anchorDisplay">
+        <button type="button" class="anchor-edit-btn" id="anchorEditBtn">edit</button>
+        <span class="anchor-label">Anchor Prayer</span>
+        <span class="anchor-text" id="anchorText">No anchor yet — tap edit to name one.</span>
+      </div>
       <div class="modal-prompt empty" id="modalPrompt">
         <span class="modal-prompt-label">Evening Examination</span>
         <span id="modalPromptText"></span>
@@ -803,6 +1173,8 @@
   const DEFAULT_PLAN_ID = 'watchman-90';
   const ACTIVE_PLAN_KEY = 'ow_active_plan';
   const MIGRATION_FLAG  = 'ow_migrated_v04';
+  const ONBOARD_FLAG    = 'ow_onboarded_v05';
+  const ANCHOR_MAX      = 500;
 
   let registry = null;      // loaded from REGISTRY_URL; null falls back to DEFAULT_PLAN_ID
   let plan = null;          // active plan content; null means "use theme fallbacks"
@@ -816,6 +1188,8 @@
   function keyDaily(dateStr)  { return planPrefix() + 'daily_' + dateStr; }
   function keyJournal(dateStr){ return planPrefix() + 'journal_' + dateStr; }
   function keyLastCheck()     { return planPrefix() + 'last_checked'; }
+  function keyAnchor()        { return planPrefix() + 'anchor'; }
+  function keyBestStreak()    { return planPrefix() + 'best_streak'; }
   function journalPrefix()    { return planPrefix() + 'journal_'; }
 
   // One-time migration of v0.1-v0.3 unprefixed keys into the watchman-90
@@ -993,6 +1367,22 @@
     // Streak
     const streak = calculateStreak();
     document.getElementById('streakNum').textContent = streak;
+
+    // Track best streak (used by the graduation screen)
+    const prevBest = parseInt(localStorage.getItem(keyBestStreak()) || '0', 10);
+    if (streak > prevBest) localStorage.setItem(keyBestStreak(), String(streak));
+
+    // Lord's Day banner — Sunday only
+    document.getElementById('lordsDay').classList.toggle(
+      'visible',
+      new Date().getDay() === 0
+    );
+
+    // Weekly confession anchor
+    renderConfessionAnchor(dayNum);
+
+    // Graduation card (Day > duration) takes over the main flow
+    renderGraduation(dayNum, streak);
 
     // Progress bar (days completed out of plan duration)
     const pct = Math.round((dayNum / duration) * 100);
@@ -1248,6 +1638,176 @@
   }
 
   // ─────────────────────────────────────
+  // WEEKLY CONFESSION ANCHOR (LBCF 1689)
+  // ─────────────────────────────────────
+  // The plan defines an array of week-spanning anchors. Look up the one
+  // whose [day_start, day_end] contains today's plan day. Hidden cleanly
+  // when no anchors are defined or we're outside the plan window.
+  function renderConfessionAnchor(dayNum) {
+    const card = document.getElementById('confessionCard');
+    const anchors = plan && Array.isArray(plan.confession_anchors) ? plan.confession_anchors : [];
+    if (anchors.length === 0 || dayNum < 1 || dayNum > planDuration()) {
+      card.classList.remove('visible');
+      return;
+    }
+    const anchor = anchors.find(a => dayNum >= a.day_start && dayNum <= a.day_end);
+    if (!anchor) {
+      card.classList.remove('visible');
+      return;
+    }
+    document.getElementById('confTitle').textContent = anchor.title;
+    document.getElementById('confChapter').textContent =
+      ' · Chapter ' + anchor.chapter + ' · Week ' + anchor.week;
+    document.getElementById('confSummary').textContent = anchor.summary;
+    card.classList.add('visible');
+  }
+
+  // ─────────────────────────────────────
+  // GRADUATION (Day 91+)
+  // ─────────────────────────────────────
+  // When the user finishes the plan, swap the checklist for a debrief.
+  // Stats sourced from per-plan storage so each plan graduates independently.
+  function renderGraduation(dayNum, currentStreak) {
+    const card = document.getElementById('graduation');
+    const past = dayNum > planDuration();
+
+    // Hide / show the daily cards and reflection wholesale.
+    const readingsCard = document.getElementById('readingsCard');
+    const discCard    = document.getElementById('discCard');
+    const reflection  = document.getElementById('reflection');
+    const resetWrap   = document.querySelector('.reset-wrap');
+    const confession  = document.getElementById('confessionCard');
+
+    if (!past) {
+      card.classList.remove('visible');
+      return;
+    }
+
+    // Stats: completed days = days marked complete; best streak = persisted;
+    // entries = count of journal keys with content under this plan.
+    let completedDays = 0;
+    let entryCount    = 0;
+    const dailyPrefix   = planPrefix() + 'daily_';
+    const journalPref   = journalPrefix();
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (!k) continue;
+      if (k.startsWith(dailyPrefix)) {
+        const dateStr = k.slice(dailyPrefix.length);
+        if (isDayComplete(dateStr)) completedDays++;
+      } else if (k.startsWith(journalPref)) {
+        const v = localStorage.getItem(k);
+        if (v && v.trim()) entryCount++;
+      }
+    }
+    const bestStreak = Math.max(
+      parseInt(localStorage.getItem(keyBestStreak()) || '0', 10),
+      currentStreak
+    );
+
+    const grad = (plan && plan.graduation) || {};
+    document.getElementById('gradTitle').textContent =
+      grad.title || 'Watchman, you have stood your post.';
+    document.getElementById('gradBody').textContent =
+      grad.body  || 'The plan is complete. The post remains.';
+    document.getElementById('gradVerse').textContent =
+      grad.verse || '';
+
+    document.getElementById('gradStatDays').textContent    = completedDays;
+    document.getElementById('gradStatStreak').textContent  = bestStreak;
+    document.getElementById('gradStatEntries').textContent = entryCount;
+
+    if (readingsCard) readingsCard.style.display = 'none';
+    if (discCard)     discCard.style.display     = 'none';
+    if (reflection)   reflection.classList.remove('visible');
+    if (resetWrap)    resetWrap.style.display    = 'none';
+    if (confession)   confession.classList.remove('visible');
+
+    card.classList.add('visible');
+  }
+
+  // Reset the plan to start over from today. Confirmed via prompt. Clears
+  // start_date and last_checked but preserves journal entries and the
+  // anchor prayer — those are the user's history, not the plan's state.
+  function beginAgain() {
+    if (!confirm('Begin another 90 days from today?\n\nYour journal entries and anchor stay; check marks and start date reset.')) return;
+    localStorage.setItem(keyStartDate(), todayStr());
+    localStorage.removeItem(keyLastCheck());
+    // Wipe daily check records so the new round starts clean.
+    const toDelete = [];
+    const prefix = planPrefix() + 'daily_';
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith(prefix)) toDelete.push(k);
+    }
+    toDelete.forEach(k => localStorage.removeItem(k));
+    location.reload();
+  }
+
+  // ─────────────────────────────────────
+  // ANCHOR PRAYER
+  // ─────────────────────────────────────
+  function getAnchor()         { return localStorage.getItem(keyAnchor()) || ''; }
+  function setAnchor(text) {
+    const trimmed = (text || '').trim().slice(0, ANCHOR_MAX);
+    if (trimmed) localStorage.setItem(keyAnchor(), trimmed);
+    else         localStorage.removeItem(keyAnchor());
+  }
+
+  function renderAnchorDisplay() {
+    const wrap = document.getElementById('anchorDisplay');
+    const text = getAnchor();
+    const textEl = document.getElementById('anchorText');
+    if (text) {
+      textEl.textContent = text;
+      wrap.classList.remove('empty');
+    } else {
+      textEl.textContent = 'No anchor yet — tap edit to name one.';
+      wrap.classList.add('empty');
+    }
+  }
+
+  function editAnchor() {
+    const current = getAnchor();
+    const next = prompt(
+      'Your anchor prayer (what you are bringing before God across these 90 days):',
+      current
+    );
+    if (next === null) return;  // cancelled
+    setAnchor(next);
+    renderAnchorDisplay();
+    showToast(next.trim() ? 'Anchor saved.' : 'Anchor cleared.');
+  }
+
+  // ─────────────────────────────────────
+  // ONBOARDING (Day 0)
+  // ─────────────────────────────────────
+  function shouldShowOnboarding() {
+    return localStorage.getItem(ONBOARD_FLAG) !== '1';
+  }
+
+  function showOnboarding() {
+    document.getElementById('onboardAnchor').value = getAnchor();
+    document.getElementById('onboardOverlay').classList.add('visible');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('onboardAnchor').focus(), 100);
+  }
+
+  function finishOnboarding() {
+    const anchorText = document.getElementById('onboardAnchor').value;
+    setAnchor(anchorText);
+    localStorage.setItem(ONBOARD_FLAG, '1');
+    // Stamp the start date NOW so Day 1 is today, not whenever they first
+    // opened the app and bounced.
+    localStorage.setItem(keyStartDate(), todayStr());
+    document.getElementById('onboardOverlay').classList.remove('visible');
+    document.body.style.overflow = '';
+    render();
+    renderAnchorDisplay();
+    showToast('The post is yours. Stand watch.');
+  }
+
+  // ─────────────────────────────────────
   // JOURNAL
   // ─────────────────────────────────────
   function getJournal(dateStr) {
@@ -1265,6 +1825,7 @@
   function openJournal(dateStr) {
     modalDateStr = dateStr || todayStr();
     renderModal();
+    renderAnchorDisplay();  // anchor sits above the prompt
     document.getElementById('journalModal').classList.add('visible');
     document.body.style.overflow = 'hidden';
     // Focus the textarea after the modal is visible
@@ -1533,7 +2094,9 @@
   // registry loads. So we delay the initial render until the chain completes.
   loadRegistry()
     .then(() => {
-      getStartDate();      // lazily initialize start date in the active namespace
+      // Defer start_date stamping until the user finishes onboarding so
+      // Day 1 = the day they actually commit, not the day they peeked.
+      if (!shouldShowOnboarding()) getStartDate();
       render();            // first paint with hardcoded HTML + empty state
       return loadPlan();
     })
@@ -1541,6 +2104,7 @@
       renderChecklist();   // rebuild readings + disciplines from plan
       render();            // recompute badges, streak, banner with real counts
       applyPlan();         // overlay scripture refs and reflection prompt
+      if (shouldShowOnboarding()) showOnboarding();
     });
 
   // Journal wiring
@@ -1554,6 +2118,21 @@
   // Plans modal wiring
   document.getElementById('plansBtn').addEventListener('click', openPlansModal);
   document.getElementById('plansClose').addEventListener('click', closePlansModal);
+
+  // Anchor prayer (inside the journal modal)
+  document.getElementById('anchorEditBtn').addEventListener('click', editAnchor);
+
+  // Onboarding
+  document.getElementById('onboardBegin').addEventListener('click', finishOnboarding);
+  document.getElementById('footerOnboard').addEventListener('click', (e) => {
+    e.preventDefault();
+    showOnboarding();
+  });
+
+  // Graduation actions
+  document.getElementById('gradAgainBtn').addEventListener('click', beginAgain);
+  document.getElementById('gradPlansBtn').addEventListener('click', openPlansModal);
+  document.getElementById('gradExportBtn').addEventListener('click', exportJournal);
 
   // Close whichever modal is open with Escape
   document.addEventListener('keydown', (e) => {

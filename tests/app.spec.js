@@ -3,6 +3,16 @@ const { test, expect } = require('@playwright/test');
 
 // All tests run in fresh contexts (no shared localStorage), so each one
 // starts on Day 1 of whatever plan it loads.
+//
+// v0.5 added an onboarding overlay that intercepts first load. Tests that
+// don't specifically exercise onboarding pre-stamp the flag so the app
+// boots straight into the daily view. The onboarding-specific tests skip
+// this beforeEach by living in their own describe block.
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem('ow_onboarded_v05', '1');
+  });
+});
 
 test.describe('Operation Watchman — smoke', () => {
   test('loads the watchman-90 plan and renders Day 1', async ({ page }) => {
@@ -185,5 +195,100 @@ test.describe('Operation Watchman — migration', () => {
     expect(Object.keys(ls).some(k => k.startsWith('ow_plan_watchman-90_journal_'))).toBe(true);
     expect(Object.keys(ls).some(k => k.startsWith('ow_plan_watchman-90_daily_'))).toBe(true);
     expect(ls).toHaveProperty('ow_start_date'); // original preserved
+  });
+});
+
+test.describe('Operation Watchman — v0.5 features', () => {
+  test('weekly confession anchor is visible on Day 1', async ({ page }) => {
+    await page.goto('/index.html');
+    const card = page.locator('#confessionCard');
+    await expect(card).toBeVisible();
+    await expect(page.locator('#confTitle')).toHaveText('Of the Holy Scriptures');
+    await expect(page.locator('#confChapter')).toContainText('Chapter 1');
+    await expect(page.locator('#confChapter')).toContainText('Week 1');
+  });
+
+  test('USMC Ministries footer link is present', async ({ page }) => {
+    await page.goto('/index.html');
+    const link = page.locator('.app-footer a').first();
+    await expect(link).toHaveText('USMC Ministries');
+    await expect(link).toHaveAttribute('href', 'https://usmcmin.org');
+  });
+
+  test('Lord\'s Day banner toggles by weekday', async ({ page }) => {
+    await page.goto('/index.html');
+    const isSunday = await page.evaluate(() => new Date().getDay() === 0);
+    const banner = page.locator('#lordsDay');
+    if (isSunday) {
+      await expect(banner).toBeVisible();
+    } else {
+      await expect(banner).toBeHidden();
+    }
+  });
+
+  test('anchor prayer persists and shows in journal', async ({ page }) => {
+    // Pre-seed the anchor so we don't have to drive the prompt() dialog.
+    await page.addInitScript(() => {
+      localStorage.setItem('ow_plan_watchman-90_anchor', 'For my marriage and my sons.');
+    });
+    await page.goto('/index.html');
+    await page.locator('#journalBtn').click();
+    const anchorBox = page.locator('#anchorDisplay');
+    await expect(anchorBox).toBeVisible();
+    await expect(anchorBox).not.toHaveClass(/empty/);
+    await expect(page.locator('#anchorText')).toHaveText('For my marriage and my sons.');
+  });
+
+  test('graduation screen renders past Day 90', async ({ page }) => {
+    // Backdate start so today is Day 95.
+    await page.addInitScript(() => {
+      const d = new Date();
+      d.setDate(d.getDate() - 94);
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      localStorage.setItem('ow_plan_watchman-90_start_date', `${y}-${m}-${day}`);
+    });
+    await page.goto('/index.html');
+    await expect(page.locator('#graduation')).toBeVisible();
+    await expect(page.locator('#gradTitle')).toContainText('stood your post');
+    // Daily cards step aside for the debrief.
+    await expect(page.locator('#readingsCard')).toBeHidden();
+    await expect(page.locator('#discCard')).toBeHidden();
+  });
+});
+
+test.describe('Operation Watchman — onboarding', () => {
+  // These tests need a virgin localStorage; override the global beforeEach
+  // by clearing the flag it set.
+  test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() => localStorage.removeItem('ow_onboarded_v05'));
+  });
+
+  test('onboarding overlay shows on first load', async ({ page }) => {
+    await page.goto('/index.html');
+    await expect(page.locator('#onboardOverlay')).toBeVisible();
+    await expect(page.locator('#onboardHeading')).toContainText('Operation Watchman');
+  });
+
+  test('begin button saves anchor, stamps start date, and dismisses', async ({ page }) => {
+    await page.goto('/index.html');
+    await page.locator('#onboardAnchor').fill('For my son to know the Lord.');
+    await page.locator('#onboardBegin').click();
+    await expect(page.locator('#onboardOverlay')).toBeHidden();
+
+    // Anchor persisted under the active plan
+    const anchor = await page.evaluate(() =>
+      localStorage.getItem('ow_plan_watchman-90_anchor')
+    );
+    expect(anchor).toBe('For my son to know the Lord.');
+
+    // Flag set; next reload skips onboarding
+    const flag = await page.evaluate(() => localStorage.getItem('ow_onboarded_v05'));
+    expect(flag).toBe('1');
+
+    await page.reload();
+    await expect(page.locator('#onboardOverlay')).toBeHidden();
+    await expect(page.locator('#dayBanner')).toContainText('Day 1 of 90');
   });
 });
