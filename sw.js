@@ -1,7 +1,7 @@
 // Operation Watchman — Service Worker
 // Provides offline support via cache-first strategy
 
-const CACHE_NAME = 'watchman-v3';
+const CACHE_NAME = 'watchman-v4';
 const PRECACHE_URLS = [
   '/',
   '/index.html',
@@ -33,12 +33,36 @@ self.addEventListener('activate', event => {
   );
 });
 
-// ── Fetch: cache-first for local, network-first for external ──
+// ── Fetch: network-first for HTML & plan content, cache-first for the rest ──
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
   // Skip non-GET requests
   if (event.request.method !== 'GET') return;
+
+  // Network-first for navigations and plan JSON so deployed updates reach
+  // users on next load. Cache-first here would pin the old index.html
+  // forever unless CACHE_NAME were manually bumped with every deploy.
+  const isNavigation = event.request.mode === 'navigate';
+  const isContent    = url.origin === self.location.origin && url.pathname.startsWith('/content/');
+  if (isNavigation || isContent) {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          if (response && response.status === 200) {
+            const cloned = response.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(event.request, cloned));
+          }
+          return response;
+        })
+        .catch(() =>
+          caches.match(event.request).then(cached =>
+            cached || (isNavigation ? caches.match('/index.html') : Response.error())
+          )
+        )
+    );
+    return;
+  }
 
   // Cache-first for same-origin
   if (url.origin === self.location.origin) {

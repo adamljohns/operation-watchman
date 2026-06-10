@@ -35,6 +35,22 @@ test.describe('Operation Watchman — smoke', () => {
     await expect(page.locator('#readingsBadge')).toHaveText('1 / 5');
   });
 
+  test('check items are keyboard-accessible checkboxes', async ({ page }) => {
+    await page.goto('/index.html');
+    const item = page.locator('.check-item[data-key="morning_wisdom"]');
+    await expect(item).toHaveAttribute('role', 'checkbox');
+    await expect(item).toHaveAttribute('aria-checked', 'false');
+
+    await item.focus();
+    await page.keyboard.press(' ');
+    await expect(item).toHaveClass(/checked/);
+    await expect(item).toHaveAttribute('aria-checked', 'true');
+
+    await page.keyboard.press('Enter');
+    await expect(item).not.toHaveClass(/checked/);
+    await expect(item).toHaveAttribute('aria-checked', 'false');
+  });
+
   test('streak increments after a fully complete day', async ({ page }) => {
     await page.goto('/index.html');
     // Tick every reading + discipline for today.
@@ -73,7 +89,7 @@ test.describe('Operation Watchman — journal', () => {
     const downloadPromise = page.waitForEvent('download');
     await page.locator('#btnExport').click();
     const download = await downloadPromise;
-    expect(download.suggestedFilename()).toMatch(/^watchman-journal-\d{4}-\d{2}-\d{2}\.md$/);
+    expect(download.suggestedFilename()).toMatch(/^watchman-90-journal-\d{4}-\d{2}-\d{2}\.md$/);
   });
 
   test('Escape closes the modal', async ({ page }) => {
@@ -136,7 +152,9 @@ test.describe('Operation Watchman — migration', () => {
   test('legacy v0.3 keys are copied into the watchman-90 namespace', async ({ page }) => {
     // Seed unprefixed keys BEFORE the app boots.
     await page.addInitScript(() => {
-      const today = new Date().toISOString().split('T')[0];
+      // Local date, matching the app's toLocalISO (not UTC toISOString).
+      const d = new Date();
+      const today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
       localStorage.setItem('ow_start_date', today);
       localStorage.setItem('ow_daily_' + today, JSON.stringify({ morning_wisdom: true }));
       localStorage.setItem('ow_journal_' + today, 'Legacy reflection text.');

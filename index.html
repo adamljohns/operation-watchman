@@ -187,6 +187,10 @@
     }
     .check-item:last-child { border-bottom: none; }
     .check-item:active { background: rgba(212, 175, 55, 0.05); }
+    .check-item:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: -2px;
+    }
 
     .check-box {
       width: 22px;
@@ -855,9 +859,18 @@
   // ─────────────────────────────────────
   // DATE HELPERS
   // ─────────────────────────────────────
+  // Local-time YYYY-MM-DD. toISOString() is UTC and would roll the day over
+  // at 4-8pm for users in the Americas, splitting checks/journal across the
+  // wrong dates and breaking streaks.
+  function toLocalISO(d) {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
+  }
+
   function todayStr() {
-    const d = new Date();
-    return d.toISOString().split('T')[0];
+    return toLocalISO(new Date());
   }
 
   function getStartDate() {
@@ -886,7 +899,7 @@
   function shiftDate(dateStr, deltaDays) {
     const d = new Date(dateStr + 'T00:00:00');
     d.setDate(d.getDate() + deltaDays);
-    return d.toISOString().split('T')[0];
+    return toLocalISO(d);
   }
 
   function formatDateDisplay(dateStr) {
@@ -926,7 +939,7 @@
     for (let i = 1; i <= horizon; i++) {
       const d = new Date(today);
       d.setDate(d.getDate() - i);
-      const ds = d.toISOString().split('T')[0];
+      const ds = toLocalISO(d);
       if (isDayComplete(ds)) {
         streak++;
       } else {
@@ -955,11 +968,9 @@
     // Restore checkboxes
     document.querySelectorAll('.check-item').forEach(item => {
       const key = item.dataset.key;
-      if (data[key]) {
-        item.classList.add('checked');
-      } else {
-        item.classList.remove('checked');
-      }
+      const checked = !!data[key];
+      item.classList.toggle('checked', checked);
+      item.setAttribute('aria-checked', checked ? 'true' : 'false');
     });
 
     // Update badges — counts are keyed to the active plan's items
@@ -1118,6 +1129,9 @@
     item.className   = 'check-item';
     item.dataset.group = group;
     item.dataset.key   = key;
+    item.setAttribute('role', 'checkbox');
+    item.setAttribute('aria-checked', 'false');
+    item.tabIndex = 0;
 
     const box = document.createElement('div');
     box.className = 'check-box';
@@ -1271,12 +1285,13 @@
     // Header day/date
     const dayEl  = document.getElementById('modalDay');
     const dateEl = document.getElementById('modalDate');
-    if (dayNum >= 1 && dayNum <= 90) {
-      dayEl.textContent = `Day ${dayNum} of 90`;
+    const duration = planDuration();
+    if (dayNum >= 1 && dayNum <= duration) {
+      dayEl.textContent = `Day ${dayNum} of ${duration}`;
     } else if (dayNum < 1) {
       dayEl.textContent = 'Before Start';
     } else {
-      dayEl.textContent = 'Beyond Day 90';
+      dayEl.textContent = `Beyond Day ${duration}`;
     }
     dateEl.textContent = formatDateDisplay(dateStr);
 
@@ -1369,7 +1384,7 @@
     ];
     for (const { dateStr, text } of entries) {
       const dayNum = getDayNumberFor(dateStr);
-      const dayLabel = (dayNum >= 1 && dayNum <= 90) ? `Day ${dayNum}` : dateStr;
+      const dayLabel = (dayNum >= 1 && dayNum <= planDuration()) ? `Day ${dayNum}` : dateStr;
       lines.push(`## ${dayLabel} — ${formatDateDisplay(dateStr)}`);
       const dayEntry = plan && plan.days && plan.days.find(d => d.day === dayNum);
       if (dayEntry && dayEntry.reflection_prompt) {
@@ -1387,7 +1402,7 @@
     const url  = URL.createObjectURL(blob);
     const a    = document.createElement('a');
     a.href     = url;
-    a.download = `watchman-journal-${todayStr()}.md`;
+    a.download = `${activePlanId}-journal-${todayStr()}.md`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -1499,6 +1514,21 @@
   // ─────────────────────────────────────
   migrateLegacyData();  // copy v0.1-v0.3 keys into the watchman-90 namespace
   cacheThemeLabels();   // preserve fallback text in case the plan never loads
+
+  // Make the hardcoded fallback check-items keyboard- and screen-reader-
+  // accessible (plan-rendered items get this in buildCheckItem).
+  document.querySelectorAll('.check-item').forEach(item => {
+    item.setAttribute('role', 'checkbox');
+    item.setAttribute('aria-checked', 'false');
+    item.tabIndex = 0;
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== ' ' && e.key !== 'Enter') return;
+    const item = e.target.closest && e.target.closest('.check-item');
+    if (!item) return;
+    e.preventDefault();  // stop Space from scrolling the page
+    toggle(item);
+  });
   // First paint can't read user data yet — activePlanId resolves after the
   // registry loads. So we delay the initial render until the chain completes.
   loadRegistry()
