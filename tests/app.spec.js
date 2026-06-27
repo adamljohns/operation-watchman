@@ -299,3 +299,87 @@ test.describe('Operation Watchman — onboarding', () => {
     await expect(page.locator('#dayBanner')).toContainText('Day 1 of 90');
   });
 });
+
+// Local-date string for N days before today, matching the app's toLocalISO.
+function isoDaysAgo(n) {
+  const d = new Date();
+  d.setDate(d.getDate() - n);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+const ALL_CHECKS = {
+  morning_wisdom: true, husbands_post: true, fathers_charge: true,
+  citizens_stand: true, evening_peace: true,
+  cold_shower: true, fasting: true, no_alcohol: true,
+  no_screens: true, prayer_morning: true, prayer_evening: true,
+};
+
+test.describe('Operation Watchman — v0.6 content + grace', () => {
+  test('back-half days have real readings and prompts (no fallback)', async ({ page }) => {
+    // Backdate the start so today is Day 45 — squarely in what used to be the
+    // placeholder zone.
+    await page.addInitScript((startStr) => {
+      localStorage.setItem('ow_plan_watchman-90_start_date', startStr);
+    }, isoDaysAgo(44));
+    await page.goto('/index.html');
+
+    await expect(page.locator('#dayBanner')).toContainText('Day 45 of 90');
+
+    // Husband's Post must show a real reference, not the category fallback.
+    const husb = page.locator('.check-item[data-key="husbands_post"] .check-sub');
+    await expect(husb).not.toHaveText('Ephesians · Marriage & love passages');
+    await expect(husb).toContainText(':'); // a real verse ref like "Revelation 19:6-9"
+
+    // Father's Charge and Citizen's Stand likewise populated.
+    await expect(page.locator('.check-item[data-key="fathers_charge"] .check-sub'))
+      .not.toHaveText('Deuteronomy · Legacy & instruction');
+    await expect(page.locator('.check-item[data-key="citizens_stand"] .check-sub'))
+      .not.toHaveText('Romans · Civic duty & righteousness');
+
+    // The nightly reflection prompt is present (was blank for 83 days pre-v0.6).
+    await expect(page.locator('#reflection')).toHaveClass(/visible/);
+    await expect(page.locator('#reflectionText')).not.toHaveText('');
+  });
+
+  test('a weekly grace day keeps the streak alive through one miss', async ({ page }) => {
+    // Seed the last five days complete EXCEPT three-days-ago, which is the
+    // single miss grace should cover. Today left in-progress.
+    await page.addInitScript((checks) => {
+      localStorage.setItem('ow_plan_watchman-90_start_date', (() => {
+        const d = new Date(); d.setDate(d.getDate() - 30);
+        return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      })());
+      const iso = (n) => {
+        const d = new Date(); d.setDate(d.getDate() - n);
+        return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      };
+      // Complete: 1,2,4,5 days ago. Miss: 3 days ago (not written).
+      for (const n of [1, 2, 4, 5]) {
+        localStorage.setItem('ow_plan_watchman-90_daily_' + iso(n), JSON.stringify(checks));
+      }
+    }, ALL_CHECKS);
+    await page.goto('/index.html');
+
+    // Grace bridges the single gap: run of 5 (days 1,2,[grace 3],4,5).
+    await expect(page.locator('#streakNum')).toHaveText('5');
+    // The grace indicator reports the week's allowance was spent.
+    await expect(page.locator('#graceInfo')).toContainText('grace');
+  });
+
+  test('a second miss in the same week breaks the streak', async ({ page }) => {
+    await page.addInitScript((checks) => {
+      const iso = (n) => {
+        const d = new Date(); d.setDate(d.getDate() - n);
+        return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      };
+      localStorage.setItem('ow_plan_watchman-90_start_date', iso(30));
+      // Complete 1,2 days ago; miss 3 AND 4 days ago (two misses, one window).
+      for (const n of [1, 2]) {
+        localStorage.setItem('ow_plan_watchman-90_daily_' + iso(n), JSON.stringify(checks));
+      }
+    }, ALL_CHECKS);
+    await page.goto('/index.html');
+
+    // Walk back: day1 ✓, day2 ✓, day3 miss (grace), day4 miss (grace spent) → break.
+    await expect(page.locator('#streakNum')).toHaveText('3');
+  });
+});

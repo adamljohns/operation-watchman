@@ -105,6 +105,12 @@
       text-transform: uppercase;
       letter-spacing: 0.1em;
     }
+    .streak-bar .grace-info {
+      font-size: 0.64rem;
+      color: var(--gold-dark);
+      letter-spacing: 0.04em;
+      margin-top: 3px;
+    }
     .streak-bar .progress-wrap {
       flex: 1;
       max-width: 200px;
@@ -901,6 +907,7 @@
   <div class="streak-info">
     <div class="streak-num" id="streakNum">0</div>
     <div class="streak-label">Day Streak</div>
+    <div class="grace-info" id="graceInfo" style="display:none"></div>
   </div>
   <div class="progress-wrap">
     <div class="progress-track">
@@ -1306,24 +1313,64 @@
     return keys.every(k => data[k] === true);
   }
 
+  function gracePerWeek() {
+    return (plan && plan.streak_grace_per_week) || 0;
+  }
+
+  // Streak with a weekly grace allowance. Walking back from yesterday, an
+  // incomplete day no longer breaks the run outright — it "spends" grace, so
+  // long as no more than gracePerWeek() misses fall within any trailing
+  // 7-day window. This keeps one missed cold shower on a travel day from
+  // zeroing a 40-day run, while still ending the streak when a man truly
+  // stops showing up (a second miss inside the same week breaks it). On-brand
+  // theologically: liberty, not license (LBCF 21).
   function calculateStreak() {
     let streak = 0;
+    const allowance = gracePerWeek();
+    const graceSpentAt = [];   // days-ago indices where grace covered a miss
     const today = new Date(todayStr() + 'T00:00:00');
+    const start = getStartDate();
     const horizon = planDuration();
-    // Walk backwards from yesterday (today might still be in progress)
     for (let i = 1; i <= horizon; i++) {
       const d = new Date(today);
       d.setDate(d.getDate() - i);
       const ds = toLocalISO(d);
+      // Don't walk (or spend grace) before the campaign began.
+      if (ds < start) break;
       if (isDayComplete(ds)) {
         streak++;
-      } else {
-        break;
+        continue;
       }
+      // Incomplete: cover it with grace if we have any left in this window.
+      const spentInWindow = graceSpentAt.filter(g => i - g < 7).length;
+      if (spentInWindow < allowance) {
+        graceSpentAt.push(i);
+        streak++;
+        continue;
+      }
+      break;
     }
     // If today is already complete, add 1
     if (isDayComplete(todayStr())) streak++;
     return streak;
+  }
+
+  // How much grace remains in the current trailing week, for the UI.
+  // null when the plan grants none.
+  function graceInfo() {
+    const allowance = gracePerWeek();
+    if (allowance <= 0) return null;
+    const base = new Date(todayStr() + 'T00:00:00');
+    const start = getStartDate();
+    let misses = 0;
+    for (let i = 1; i <= 7; i++) {
+      const d = new Date(base);
+      d.setDate(d.getDate() - i);
+      const ds = toLocalISO(d);
+      if (ds < start) break;            // before the campaign began
+      if (!isDayComplete(ds)) misses++;
+    }
+    return { allowance, left: Math.max(0, allowance - misses) };
   }
 
   // ─────────────────────────────────────
@@ -1375,10 +1422,24 @@
     const prevBest = parseInt(localStorage.getItem(keyBestStreak()) || '0', 10);
     if (streak > prevBest) localStorage.setItem(keyBestStreak(), String(streak));
 
-    // Lord's Day banner — Sunday only
+    // Grace indicator
+    const gi = graceInfo();
+    const giEl = document.getElementById('graceInfo');
+    if (gi) {
+      giEl.textContent = gi.left > 0
+        ? `🛡 ${gi.left} grace ${gi.left === 1 ? 'day' : 'days'} left`
+        : '🛡 grace spent this week';
+      giEl.style.display = '';
+    } else {
+      giEl.style.display = 'none';
+    }
+
+    // Lord's Day banner — Sunday only, and not once the plan is finished
+    // (Day 91+ the graduation screen owns the top of the page).
+    const past = dayNum > duration;
     document.getElementById('lordsDay').classList.toggle(
       'visible',
-      new Date().getDay() === 0
+      new Date().getDay() === 0 && !past
     );
 
     // Weekly confession anchor
