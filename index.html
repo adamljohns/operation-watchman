@@ -860,6 +860,132 @@
       border-color: var(--gold);
     }
 
+    /* READING ACTION BUTTONS (TTS + Feedback) */
+    .reading-actions {
+      display: flex;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+    .read-btn, .flag-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 8px;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: color 0.15s, background 0.15s;
+      line-height: 1;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .read-btn:hover, .flag-btn:hover {
+      color: var(--gold);
+      background: rgba(212,175,55,0.08);
+    }
+    .read-btn.active {
+      color: var(--gold);
+      animation: pulse-gold 1.5s ease-in-out infinite;
+    }
+    .flag-btn.has-feedback { color: var(--gold-dark); }
+    @keyframes pulse-gold {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.45; }
+    }
+
+    /* FEEDBACK SLIDE-UP MODAL */
+    .feedback-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.82);
+      z-index: 300;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .feedback-overlay.visible { display: flex; }
+    .feedback-modal {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--gold-dark);
+      border-radius: 14px 14px 0 0;
+      width: 100%;
+      max-width: 540px;
+      padding: 20px 20px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .feedback-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .feedback-header-text { flex: 1; }
+    .feedback-track {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--gold);
+    }
+    .feedback-ref {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+    .feedback-label {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+    .feedback-textarea {
+      width: 100%;
+      min-height: 90px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.88rem;
+      padding: 10px 12px;
+      resize: vertical;
+    }
+    .feedback-textarea:focus {
+      outline: none;
+      border-color: var(--gold-dark);
+    }
+    .feedback-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .feedback-clear {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      font-family: 'Open Sans', sans-serif;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .feedback-clear:hover { border-color: var(--gold-dark); color: var(--text); }
+    .feedback-save {
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Open Sans', sans-serif;
+    }
+    .feedback-save:hover { background: var(--gold-light); }
+
     /* FOOTER */
     .app-footer {
       text-align: center;
@@ -1167,6 +1293,27 @@
   </div>
 </div>
 
+<!-- FEEDBACK SLIDE-UP MODAL -->
+<div class="feedback-overlay" id="feedbackOverlay" role="dialog" aria-modal="true" aria-labelledby="feedbackTrack">
+  <div class="feedback-modal">
+    <div class="feedback-header">
+      <div class="feedback-header-text">
+        <div class="feedback-track" id="feedbackTrack">Reading</div>
+        <div class="feedback-ref" id="feedbackRef"></div>
+      </div>
+      <button class="modal-close" id="feedbackClose" type="button" aria-label="Close">✕</button>
+    </div>
+    <div>
+      <label class="feedback-label" for="feedbackText">Your note or suggested edit</label>
+      <textarea class="feedback-textarea" id="feedbackText" placeholder="Flag an error, suggest a better passage, or add context for your review…"></textarea>
+    </div>
+    <div class="feedback-footer">
+      <button class="feedback-clear" id="feedbackClear" type="button">Clear</button>
+      <button class="feedback-save" id="feedbackSave" type="button">Save Note</button>
+    </div>
+  </div>
+</div>
+
 <script>
   // ─────────────────────────────────────
   // CONSTANTS
@@ -1198,6 +1345,135 @@
   function keyAnchor()        { return planPrefix() + 'anchor'; }
   function keyBestStreak()    { return planPrefix() + 'best_streak'; }
   function journalPrefix()    { return planPrefix() + 'journal_'; }
+  function feedbackPrefix()   { return planPrefix() + 'feedback_'; }
+  function keyFeedback(dayNum, readingKey) {
+    return feedbackPrefix() + 'day' + dayNum + '_' + readingKey;
+  }
+
+  // TTS state
+  let ttsActiveKey = null;
+  let ttsActiveBtn = null;
+
+  // Feedback modal state
+  let feedbackCurrentKey    = null;
+  let feedbackCurrentDayNum = null;
+
+  // ─────────────────────────────────────
+  // TEXT-TO-SPEECH (Web Speech API)
+  // ─────────────────────────────────────
+  function speakReading(key, btn) {
+    if (!('speechSynthesis' in window)) {
+      showToast('TTS not supported in this browser.');
+      return;
+    }
+    // Toggle off if already speaking this reading
+    if (ttsActiveKey === key) {
+      stopTTS();
+      return;
+    }
+    stopTTS();
+
+    const item   = document.querySelector(`.check-item[data-group="readings"][data-key="${key}"]`);
+    if (!item) return;
+    const label  = item.querySelector('.check-label');
+    const sub    = item.querySelector('.check-sub');
+    const title  = label ? label.childNodes[0].textContent.trim() : key;
+    const refNote = sub  ? sub.textContent.trim() : '';
+    const text   = refNote ? `${title}. ${refNote}.` : `${title}.`;
+
+    const utt = new SpeechSynthesisUtterance(text);
+    utt.rate  = 0.9;
+    utt.onend = utt.onerror = () => {
+      ttsActiveKey = null;
+      ttsActiveBtn = null;
+      btn.classList.remove('active');
+      btn.setAttribute('aria-label', 'Listen to reading');
+      btn.textContent = '▶';
+    };
+
+    ttsActiveKey = key;
+    ttsActiveBtn = btn;
+    btn.classList.add('active');
+    btn.setAttribute('aria-label', 'Stop');
+    btn.textContent = '■';
+    window.speechSynthesis.speak(utt);
+  }
+
+  function stopTTS() {
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    if (ttsActiveBtn) {
+      ttsActiveBtn.classList.remove('active');
+      ttsActiveBtn.setAttribute('aria-label', 'Listen to reading');
+      ttsActiveBtn.textContent = '▶';
+    }
+    ttsActiveKey = null;
+    ttsActiveBtn = null;
+  }
+
+  // ─────────────────────────────────────
+  // READING FEEDBACK
+  // ─────────────────────────────────────
+  function getFeedback(dayNum, key) {
+    return localStorage.getItem(keyFeedback(dayNum, key)) || '';
+  }
+
+  function persistFeedback(dayNum, key, text) {
+    const sk = keyFeedback(dayNum, key);
+    if (text && text.trim()) {
+      localStorage.setItem(sk, text.trim());
+    } else {
+      localStorage.removeItem(sk);
+    }
+    // Sync visual indicator on the flag button
+    const item = document.querySelector(`.check-item[data-group="readings"][data-key="${key}"]`);
+    if (item) {
+      const flagBtn = item.querySelector('.flag-btn');
+      if (flagBtn) {
+        const has = !!text.trim();
+        flagBtn.classList.toggle('has-feedback', has);
+        flagBtn.title = has ? 'Edit your note' : 'Flag this reading';
+      }
+    }
+  }
+
+  function openFeedback(key) {
+    stopTTS();
+    const dayNum = getDayNumber();
+    feedbackCurrentKey    = key;
+    feedbackCurrentDayNum = dayNum;
+
+    const item   = document.querySelector(`.check-item[data-group="readings"][data-key="${key}"]`);
+    const label  = item && item.querySelector('.check-label');
+    const sub    = item && item.querySelector('.check-sub');
+    const title  = label ? label.childNodes[0].textContent.trim() : key;
+    const refNote = sub  ? sub.textContent.trim() : '';
+
+    document.getElementById('feedbackTrack').textContent = title;
+    document.getElementById('feedbackRef').textContent   = refNote || `Day ${dayNum}`;
+    document.getElementById('feedbackText').value        = getFeedback(dayNum, key);
+
+    document.getElementById('feedbackOverlay').classList.add('visible');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('feedbackText').focus(), 60);
+  }
+
+  function closeFeedback() {
+    document.getElementById('feedbackOverlay').classList.remove('visible');
+    if (!document.getElementById('journalModal').classList.contains('visible') &&
+        !document.getElementById('plansModal').classList.contains('visible')) {
+      document.body.style.overflow = '';
+    }
+    feedbackCurrentKey    = null;
+    feedbackCurrentDayNum = null;
+  }
+
+  function saveFeedbackAndClose() {
+    if (feedbackCurrentKey === null) return;
+    const text = document.getElementById('feedbackText').value;
+    persistFeedback(feedbackCurrentDayNum, feedbackCurrentKey, text);
+    closeFeedback();
+    showToast(text.trim() ? 'Note saved.' : 'Note cleared.');
+  }
 
   // One-time migration of v0.1-v0.3 unprefixed keys into the watchman-90
   // namespace. Leaves the originals in place so a rollback to an older build
@@ -1605,6 +1881,35 @@
     item.appendChild(box);
     item.appendChild(label);
     item.addEventListener('click', () => toggle(item));
+
+    if (group === 'readings') {
+      const actions = document.createElement('div');
+      actions.className = 'reading-actions';
+
+      const ttsBtn = document.createElement('button');
+      ttsBtn.type = 'button';
+      ttsBtn.className = 'read-btn';
+      ttsBtn.title = 'Listen';
+      ttsBtn.setAttribute('aria-label', 'Listen to reading');
+      ttsBtn.textContent = '▶';
+      ttsBtn.addEventListener('click', e => { e.stopPropagation(); speakReading(key, ttsBtn); });
+
+      const flagBtn = document.createElement('button');
+      flagBtn.type = 'button';
+      flagBtn.className = 'flag-btn';
+      flagBtn.setAttribute('aria-label', 'Flag this reading');
+      const dayNum = getDayNumber();
+      const hasFb  = !!localStorage.getItem(keyFeedback(dayNum, key));
+      flagBtn.title = hasFb ? 'Edit your note' : 'Flag this reading';
+      flagBtn.textContent = '✏';
+      if (hasFb) flagBtn.classList.add('has-feedback');
+      flagBtn.addEventListener('click', e => { e.stopPropagation(); openFeedback(key); });
+
+      actions.appendChild(ttsBtn);
+      actions.appendChild(flagBtn);
+      item.appendChild(actions);
+    }
+
     return item;
   }
 
@@ -2023,6 +2328,34 @@
       lines.push('');
     }
 
+    // Append any reading feedback notes
+    const fbPrefix = feedbackPrefix();
+    const feedbackEntries = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith(fbPrefix)) {
+        const text = localStorage.getItem(k);
+        if (text && text.trim()) {
+          feedbackEntries.push({ label: k.slice(fbPrefix.length), text });
+        }
+      }
+    }
+    if (feedbackEntries.length > 0) {
+      feedbackEntries.sort((a, b) => a.label.localeCompare(b.label));
+      lines.push('## Reading Feedback Notes');
+      lines.push('');
+      lines.push('_Use these to refine the curriculum._');
+      lines.push('');
+      for (const { label, text } of feedbackEntries) {
+        lines.push(`### ${label}`);
+        lines.push('');
+        lines.push(text.trim());
+        lines.push('');
+      }
+      lines.push('---');
+      lines.push('');
+    }
+
     const blob = new Blob([lines.join('\n')], { type: 'text/markdown' });
     const url  = URL.createObjectURL(blob);
     const a    = document.createElement('a');
@@ -2032,7 +2365,9 @@
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    showToast(`Exported ${entries.length} entr${entries.length === 1 ? 'y' : 'ies'}.`);
+    const fbCount = feedbackEntries.length;
+    const note    = fbCount > 0 ? ` + ${fbCount} feedback note${fbCount > 1 ? 's' : ''}` : '';
+    showToast(`Exported ${entries.length} entr${entries.length === 1 ? 'y' : 'ies'}${note}.`);
   }
 
   // ─────────────────────────────────────
@@ -2171,17 +2506,24 @@
       if (shouldShowOnboarding()) showOnboarding();
     });
 
-  // Journal wiring
-  document.getElementById('journalBtn').addEventListener('click', () => openJournal(todayStr()));
+  // Journal wiring (stop TTS when opening)
+  document.getElementById('journalBtn').addEventListener('click', () => { stopTTS(); openJournal(todayStr()); });
   document.getElementById('modalClose').addEventListener('click', closeJournal);
   document.getElementById('modalPrev').addEventListener('click', () => navigateJournal(-1));
   document.getElementById('modalNext').addEventListener('click', () => navigateJournal(1));
   document.getElementById('modalText').addEventListener('input', scheduleSave);
   document.getElementById('btnExport').addEventListener('click', exportJournal);
 
-  // Plans modal wiring
-  document.getElementById('plansBtn').addEventListener('click', openPlansModal);
+  // Plans modal wiring (stop TTS when opening)
+  document.getElementById('plansBtn').addEventListener('click', () => { stopTTS(); openPlansModal(); });
   document.getElementById('plansClose').addEventListener('click', closePlansModal);
+
+  // Feedback modal wiring
+  document.getElementById('feedbackClose').addEventListener('click', closeFeedback);
+  document.getElementById('feedbackSave').addEventListener('click', saveFeedbackAndClose);
+  document.getElementById('feedbackClear').addEventListener('click', () => {
+    document.getElementById('feedbackText').value = '';
+  });
 
   // Anchor prayer (inside the journal modal)
   document.getElementById('anchorEditBtn').addEventListener('click', editAnchor);
@@ -2198,10 +2540,13 @@
   document.getElementById('gradPlansBtn').addEventListener('click', openPlansModal);
   document.getElementById('gradExportBtn').addEventListener('click', exportJournal);
 
-  // Close whichever modal is open with Escape
+  // Close whichever modal is open with Escape; always stop TTS
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
-    if (document.getElementById('plansModal').classList.contains('visible')) {
+    stopTTS();
+    if (document.getElementById('feedbackOverlay').classList.contains('visible')) {
+      closeFeedback();
+    } else if (document.getElementById('plansModal').classList.contains('visible')) {
       closePlansModal();
     } else if (document.getElementById('journalModal').classList.contains('visible')) {
       closeJournal();
