@@ -105,6 +105,12 @@
       text-transform: uppercase;
       letter-spacing: 0.1em;
     }
+    .streak-bar .grace-info {
+      font-size: 0.64rem;
+      color: var(--gold-dark);
+      letter-spacing: 0.04em;
+      margin-top: 3px;
+    }
     .streak-bar .progress-wrap {
       flex: 1;
       max-width: 200px;
@@ -187,6 +193,10 @@
     }
     .check-item:last-child { border-bottom: none; }
     .check-item:active { background: rgba(212, 175, 55, 0.05); }
+    .check-item:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: -2px;
+    }
 
     .check-box {
       width: 22px;
@@ -292,12 +302,34 @@
       border: 1px solid var(--gold-dark);
       border-radius: 8px;
       padding: 12px 16px;
-      display: none;
       align-items: center;
       gap: 12px;
       font-size: 0.82rem;
     }
     #install-banner.visible { display: flex; }
+
+    /* REFLECTION PROMPT */
+    .reflection {
+      display: none;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--text);
+    }
+    .reflection.visible { display: block; }
+    .reflection .reflection-label {
+      display: block;
+      font-size: 0.68rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 6px;
+      font-family: 'Playfair Display', serif;
+    }
     #install-banner button {
       margin-left: auto;
       background: var(--gold);
@@ -309,6 +341,664 @@
       font-weight: 600;
       cursor: pointer;
     }
+
+    /* JOURNAL + PLANS BUTTON BAR (lives below day banner) */
+    .journal-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px 16px 4px;
+      background: var(--bg);
+    }
+    .journal-btn, .plans-btn {
+      background: none;
+      border: 1px solid var(--gold-dark);
+      color: var(--gold);
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-family: 'Open Sans', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .journal-btn:hover, .journal-btn:active,
+    .plans-btn:hover,   .plans-btn:active {
+      background: rgba(212, 175, 55, 0.1);
+      border-color: var(--gold);
+    }
+
+    /* PLAN CARDS inside the settings modal */
+    .plan-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .plan-card.active {
+      border-color: var(--gold);
+      background: rgba(212, 175, 55, 0.04);
+    }
+    .plan-card .plan-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+    }
+    .plan-card .plan-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .plan-card .plan-summary {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.5;
+      margin-top: 4px;
+    }
+    .plan-card .plan-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .plan-card .plan-actions {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+    }
+    .plan-card .plan-current {
+      font-size: 0.72rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-family: 'Playfair Display', serif;
+    }
+    .plan-card .btn-activate {
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+    }
+    .plan-card .btn-activate:hover { background: var(--gold-light); }
+
+    /* JOURNAL MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      z-index: 1000;
+      padding: 0;
+      overflow-y: auto;
+    }
+    .modal-overlay.visible { display: flex; }
+    .modal {
+      background: var(--bg2);
+      width: 100%;
+      max-width: 640px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      background: var(--bg3);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    .modal-nav {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.15s;
+    }
+    .modal-nav:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .modal-nav:not(:disabled):hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .modal-title {
+      flex: 1;
+      text-align: center;
+    }
+    .modal-day {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--gold);
+      line-height: 1.2;
+    }
+    .modal-date {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .modal-close {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .modal-close:hover {
+      color: var(--gold);
+      border-color: var(--gold-dark);
+    }
+    .modal-body {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .modal-prompt {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--text);
+    }
+    .modal-prompt .modal-prompt-label {
+      display: block;
+      font-size: 0.66rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 6px;
+      font-family: 'Playfair Display', serif;
+    }
+    .modal-prompt.empty { display: none; }
+    .modal-textarea {
+      width: 100%;
+      min-height: 280px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+      color: var(--text);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      resize: vertical;
+    }
+    .modal-textarea:focus {
+      outline: none;
+      border-color: var(--gold-dark);
+    }
+    .modal-saved {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-align: right;
+      min-height: 1em;
+      transition: opacity 0.3s;
+    }
+    .modal-footer {
+      padding: 12px 16px 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .modal-footer .btn-export {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      font-family: 'Open Sans', sans-serif;
+      transition: all 0.2s;
+    }
+    .modal-footer .btn-export:hover {
+      border-color: var(--gold-dark);
+      color: var(--gold);
+    }
+    .modal-footer .footer-spacer { flex: 1; }
+
+    /* LORD'S DAY BANNER (Sunday only) */
+    .lords-day {
+      display: none;
+      background: linear-gradient(90deg, rgba(212,175,55,0.18), rgba(212,175,55,0.05));
+      border-bottom: 1px solid var(--gold-dark);
+      padding: 8px 16px;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+    }
+    .lords-day.visible { display: block; }
+    .lords-day .lords-day-sub {
+      display: block;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 2px;
+    }
+
+    /* WEEKLY CONFESSION ANCHOR CARD */
+    .confession-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: 8px;
+      padding: 14px 16px;
+      display: none;
+    }
+    .confession-card.visible { display: block; }
+    .confession-card .conf-label {
+      display: block;
+      font-size: 0.66rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 4px;
+      font-family: 'Playfair Display', serif;
+    }
+    .confession-card .conf-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+    .confession-card .conf-chapter {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-family: 'Open Sans', sans-serif;
+    }
+    .confession-card .conf-summary {
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: var(--text);
+    }
+
+    /* ANCHOR PRAYER (top of journal modal) */
+    .anchor-display {
+      background: rgba(212,175,55,0.05);
+      border: 1px solid var(--gold-dark);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--text);
+      position: relative;
+    }
+    .anchor-display .anchor-label {
+      display: block;
+      font-size: 0.66rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 4px;
+      font-family: 'Playfair Display', serif;
+    }
+    .anchor-display.empty .anchor-text { color: var(--text-muted); font-style: italic; }
+    .anchor-display .anchor-edit-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+    }
+    .anchor-display .anchor-edit-btn:hover { color: var(--gold); }
+
+    /* ONBOARDING (Day 0) — full-screen takeover */
+    .onboard-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      display: none;
+      flex-direction: column;
+      z-index: 2000;
+      overflow-y: auto;
+    }
+    .onboard-overlay.visible { display: flex; }
+    .onboard-inner {
+      max-width: 560px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 20px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .onboard-inner h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 1.5rem;
+      letter-spacing: 0.04em;
+      text-align: center;
+    }
+    .onboard-inner h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 1.05rem;
+      margin-top: 4px;
+    }
+    .onboard-inner p {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .onboard-inner .verse {
+      border-left: 3px solid var(--gold);
+      padding: 6px 12px;
+      color: var(--text);
+      font-style: italic;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .onboard-inner .anchor-prompt {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .onboard-inner .anchor-prompt label {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 0.95rem;
+    }
+    .onboard-inner textarea {
+      width: 100%;
+      min-height: 110px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 12px;
+      color: var(--text);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      resize: vertical;
+    }
+    .onboard-inner textarea:focus {
+      outline: none;
+      border-color: var(--gold-dark);
+    }
+    .onboard-inner .btn-begin {
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 14px 18px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: 'Open Sans', sans-serif;
+      margin-top: 6px;
+    }
+    .onboard-inner .btn-begin:hover { background: var(--gold-light); }
+
+    /* GRADUATION (Day 91+) */
+    .graduation {
+      display: none;
+      background: var(--bg2);
+      border: 1px solid var(--gold-dark);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+    }
+    .graduation.visible { display: block; }
+    .graduation .grad-title {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 1.3rem;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+    .graduation .grad-body {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+    .graduation .grad-verse {
+      border-left: 3px solid var(--gold);
+      padding: 8px 12px;
+      text-align: left;
+      color: var(--text);
+      font-style: italic;
+      font-size: 0.88rem;
+      margin-bottom: 16px;
+    }
+    .graduation .grad-stats {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .graduation .grad-stat {
+      text-align: center;
+    }
+    .graduation .grad-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .graduation .grad-stat-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 4px;
+    }
+    .graduation .grad-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .graduation .grad-actions button {
+      background: none;
+      border: 1px solid var(--gold-dark);
+      color: var(--gold);
+      padding: 9px 16px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: 'Open Sans', sans-serif;
+    }
+    .graduation .grad-actions button:hover {
+      background: rgba(212,175,55,0.1);
+      border-color: var(--gold);
+    }
+    .graduation .grad-actions .btn-primary {
+      background: var(--gold);
+      color: #000;
+      border-color: var(--gold);
+    }
+
+    /* READING ACTION BUTTONS (TTS + Feedback) */
+    .reading-actions {
+      display: flex;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+    .read-btn, .flag-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 8px;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: color 0.15s, background 0.15s;
+      line-height: 1;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .read-btn:hover, .flag-btn:hover {
+      color: var(--gold);
+      background: rgba(212,175,55,0.08);
+    }
+    .read-btn.active {
+      color: var(--gold);
+      animation: pulse-gold 1.5s ease-in-out infinite;
+    }
+    .flag-btn.has-feedback { color: var(--gold-dark); }
+    @keyframes pulse-gold {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.45; }
+    }
+
+    /* FEEDBACK SLIDE-UP MODAL */
+    .feedback-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.82);
+      z-index: 300;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .feedback-overlay.visible { display: flex; }
+    .feedback-modal {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--gold-dark);
+      border-radius: 14px 14px 0 0;
+      width: 100%;
+      max-width: 540px;
+      padding: 20px 20px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .feedback-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .feedback-header-text { flex: 1; }
+    .feedback-track {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--gold);
+    }
+    .feedback-ref {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+    .feedback-label {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+    .feedback-textarea {
+      width: 100%;
+      min-height: 90px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.88rem;
+      padding: 10px 12px;
+      resize: vertical;
+    }
+    .feedback-textarea:focus {
+      outline: none;
+      border-color: var(--gold-dark);
+    }
+    .feedback-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .feedback-clear {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      font-family: 'Open Sans', sans-serif;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .feedback-clear:hover { border-color: var(--gold-dark); color: var(--text); }
+    .feedback-save {
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Open Sans', sans-serif;
+    }
+    .feedback-save:hover { background: var(--gold-light); }
+
+    /* FOOTER */
+    .app-footer {
+      text-align: center;
+      padding: 24px 16px 12px;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+    .app-footer a {
+      color: var(--gold-dark);
+      text-decoration: none;
+    }
+    .app-footer a:hover { color: var(--gold); }
   </style>
 </head>
 <body>
@@ -319,9 +1009,23 @@
   <h2>90-Day Men's Formation</h2>
 </header>
 
+<div class="lords-day" id="lordsDay">
+  ✟ The Lord's Day
+  <span class="lords-day-sub">Corporate worship · Family worship · Holy rest</span>
+</div>
+
 <div class="day-banner" id="dayBanner">
   Day — of 90
   <span id="dayDate">—</span>
+</div>
+
+<div class="journal-bar">
+  <button class="journal-btn" id="journalBtn" type="button">
+    ✎ Journal
+  </button>
+  <button class="plans-btn" id="plansBtn" type="button">
+    ⚒ Plans
+  </button>
 </div>
 
 <div class="streak-bar">
@@ -329,6 +1033,7 @@
   <div class="streak-info">
     <div class="streak-num" id="streakNum">0</div>
     <div class="streak-label">Day Streak</div>
+    <div class="grace-info" id="graceInfo" style="display:none"></div>
   </div>
   <div class="progress-wrap">
     <div class="progress-track">
@@ -347,7 +1052,7 @@
   </div>
 
   <!-- READINGS -->
-  <div class="card">
+  <div class="card" id="readingsCard">
     <div class="card-header">
       <span class="icon">📖</span>
       <h3>Today's Readings</h3>
@@ -393,7 +1098,7 @@
   </div>
 
   <!-- DISCIPLINES -->
-  <div class="card">
+  <div class="card" id="discCard">
     <div class="card-header">
       <span class="icon">🛡️</span>
       <h3>Daily Disciplines</h3>
@@ -445,6 +1150,38 @@
     </div>
   </div>
 
+  <!-- WEEKLY CONFESSION ANCHOR -->
+  <div class="confession-card" id="confessionCard">
+    <span class="conf-label">This Week's Anchor — LBCF 1689</span>
+    <div class="conf-title">
+      <span id="confTitle">—</span>
+      <span class="conf-chapter" id="confChapter"></span>
+    </div>
+    <div class="conf-summary" id="confSummary"></div>
+  </div>
+
+  <div class="reflection" id="reflection">
+    <span class="reflection-label">Evening Examination</span>
+    <span id="reflectionText"></span>
+  </div>
+
+  <!-- GRADUATION (Day 91+) -->
+  <div class="graduation" id="graduation">
+    <div class="grad-title" id="gradTitle">—</div>
+    <div class="grad-body" id="gradBody">—</div>
+    <div class="grad-verse" id="gradVerse">—</div>
+    <div class="grad-stats">
+      <div class="grad-stat"><div class="grad-stat-num" id="gradStatDays">0</div><div class="grad-stat-label">Days Complete</div></div>
+      <div class="grad-stat"><div class="grad-stat-num" id="gradStatStreak">0</div><div class="grad-stat-label">Best Streak</div></div>
+      <div class="grad-stat"><div class="grad-stat-num" id="gradStatEntries">0</div><div class="grad-stat-label">Journal Entries</div></div>
+    </div>
+    <div class="grad-actions">
+      <button type="button" class="btn-primary" id="gradAgainBtn">Begin Again (90 More)</button>
+      <button type="button" id="gradPlansBtn">Other Plans</button>
+      <button type="button" id="gradExportBtn">Export Journal</button>
+    </div>
+  </div>
+
   <div class="date-display" id="dateDisplay">—</div>
 
   <div class="reset-wrap">
@@ -453,42 +1190,374 @@
 
 </main>
 
+<footer class="app-footer">
+  An initiative of
+  <a href="https://usmcmin.org" target="_blank" rel="noopener">USMC Ministries</a>
+  · <a href="#" id="footerOnboard">About / Re-read intro</a>
+</footer>
+
 <div id="toast"></div>
+
+<!-- ONBOARDING OVERLAY (Day 0) -->
+<div class="onboard-overlay" id="onboardOverlay" role="dialog" aria-modal="true" aria-labelledby="onboardHeading">
+  <div class="onboard-inner">
+    <h2 id="onboardHeading">⚔ Operation Watchman</h2>
+    <p style="text-align:center; color:var(--text-muted); font-size:0.82rem; letter-spacing:0.1em; text-transform:uppercase; margin-top:-8px;">
+      90 Days · Five Readings · Six Disciplines
+    </p>
+
+    <div class="verse">
+      "I have stationed you as a watchman for the house of Israel. When you hear a word from My mouth, give them warning from Me." — Ezekiel 3:17
+    </div>
+
+    <h3>What this is</h3>
+    <p>
+      Ninety days of focused formation for the Christian man — husband, father, citizen, watchman. Five daily readings draw you through Wisdom literature, the Husband's epistles, the Father's charge, the Citizen's stand, and the Evening Peace. Six disciplines tax the body and protect the mind. A weekly anchor in the <strong>1689 Baptist Confession of Faith</strong> roots the soul in doctrine, not in sentiment.
+    </p>
+
+    <h3>Means of grace, not means of merit</h3>
+    <p>
+      These disciplines do not earn you anything from God. Christ has already earned every blessing you will ever receive, and faith receives it as a gift (LBCF 11). The cold shower, the fast, the silenced phone — these are means of grace, ordinary channels through which the Spirit conforms you to Christ (LBCF 13). You will fall. You will fail. You will pick up tomorrow and stand the post again. The streak is not your standing.
+    </p>
+
+    <h3>Your anchor prayer</h3>
+    <p>
+      Name the one thing you are bringing before God across these 90 days. The promotion. The wandering son. The marriage that has gone cold. The besetting sin. Write it now. You will see it daily. You will pray it until it is answered or until you have the peace that passes understanding about its delay.
+    </p>
+
+    <div class="anchor-prompt">
+      <label for="onboardAnchor">Anchor Prayer</label>
+      <textarea
+        id="onboardAnchor"
+        placeholder="Lord, over these 90 days I am bringing before You..."
+        maxlength="500"
+      ></textarea>
+      <div style="font-size:0.74rem; color:var(--text-muted); text-align:right;">
+        You can edit this anytime from the Journal screen.
+      </div>
+    </div>
+
+    <button type="button" class="btn-begin" id="onboardBegin">Begin Day 1 — Stand the Post</button>
+  </div>
+</div>
+
+<!-- PLAN SWITCHER MODAL -->
+<div class="modal-overlay" id="plansModal" role="dialog" aria-modal="true" aria-labelledby="plansHeading">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">
+        <div class="modal-day" id="plansHeading">Formation Plans</div>
+        <div class="modal-date" id="plansActiveLabel">—</div>
+      </div>
+      <button class="modal-close" id="plansClose" type="button" aria-label="Close plans">✕</button>
+    </div>
+    <div class="modal-body" id="plansBody">
+      <!-- plan cards rendered by renderPlansModal() -->
+    </div>
+  </div>
+</div>
+
+<!-- JOURNAL MODAL -->
+<div class="modal-overlay" id="journalModal" role="dialog" aria-modal="true" aria-labelledby="modalDay">
+  <div class="modal">
+    <div class="modal-header">
+      <button class="modal-nav" id="modalPrev" type="button" aria-label="Previous day">‹</button>
+      <div class="modal-title">
+        <div class="modal-day" id="modalDay">Day —</div>
+        <div class="modal-date" id="modalDate">—</div>
+      </div>
+      <button class="modal-nav" id="modalNext" type="button" aria-label="Next day">›</button>
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close journal">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="anchor-display empty" id="anchorDisplay">
+        <button type="button" class="anchor-edit-btn" id="anchorEditBtn">edit</button>
+        <span class="anchor-label">Anchor Prayer</span>
+        <span class="anchor-text" id="anchorText">No anchor yet — tap edit to name one.</span>
+      </div>
+      <div class="modal-prompt empty" id="modalPrompt">
+        <span class="modal-prompt-label">Evening Examination</span>
+        <span id="modalPromptText"></span>
+      </div>
+      <textarea
+        class="modal-textarea"
+        id="modalText"
+        placeholder="Write the day's account. What did the LORD show you? Where did you stand, where did you fall?"
+      ></textarea>
+      <div class="modal-saved" id="modalSaved"></div>
+    </div>
+    <div class="modal-footer">
+      <span class="footer-spacer"></span>
+      <button class="btn-export" id="btnExport" type="button">↓ Export All</button>
+    </div>
+  </div>
+</div>
+
+<!-- FEEDBACK SLIDE-UP MODAL -->
+<div class="feedback-overlay" id="feedbackOverlay" role="dialog" aria-modal="true" aria-labelledby="feedbackTrack">
+  <div class="feedback-modal">
+    <div class="feedback-header">
+      <div class="feedback-header-text">
+        <div class="feedback-track" id="feedbackTrack">Reading</div>
+        <div class="feedback-ref" id="feedbackRef"></div>
+      </div>
+      <button class="modal-close" id="feedbackClose" type="button" aria-label="Close">✕</button>
+    </div>
+    <div>
+      <label class="feedback-label" for="feedbackText">Your note or suggested edit</label>
+      <textarea class="feedback-textarea" id="feedbackText" placeholder="Flag an error, suggest a better passage, or add context for your review…"></textarea>
+    </div>
+    <div class="feedback-footer">
+      <button class="feedback-clear" id="feedbackClear" type="button">Clear</button>
+      <button class="feedback-save" id="feedbackSave" type="button">Save Note</button>
+    </div>
+  </div>
+</div>
 
 <script>
   // ─────────────────────────────────────
   // CONSTANTS
   // ─────────────────────────────────────
-  const START_DATE_KEY  = 'ow_start_date';
-  const DAILY_KEY       = 'ow_daily_';       // + YYYY-MM-DD
-  const STREAK_KEY      = 'ow_streak';
-  const LAST_CHECK_KEY  = 'ow_last_checked';
-  const TOTAL_ITEMS     = 11; // 5 readings + 6 disciplines
-  const READINGS_COUNT  = 5;
-  const DISC_COUNT      = 6;
+  // Storage keys are plan-namespaced as of v0.4 Pass B. Each plan keeps an
+  // independent start date, daily checks, journal, and last-checked toast
+  // dedupe under "ow_plan_{planId}_*". The active plan id lives in a single
+  // global key. Legacy unprefixed keys from v0.1-v0.3 are migrated on first
+  // load (see migrateLegacyData) and left in place for rollback safety.
+  const REGISTRY_URL    = 'content/plans/index.json';
+  const DEFAULT_PLAN_ID = 'watchman-90';
+  const ACTIVE_PLAN_KEY = 'ow_active_plan';
+  const MIGRATION_FLAG  = 'ow_migrated_v04';
+  const ONBOARD_FLAG    = 'ow_onboarded_v05';
+  const ANCHOR_MAX      = 500;
+
+  let registry = null;      // loaded from REGISTRY_URL; null falls back to DEFAULT_PLAN_ID
+  let plan = null;          // active plan content; null means "use theme fallbacks"
+  let activePlanId = DEFAULT_PLAN_ID;
+  let modalDateStr = null;  // YYYY-MM-DD currently displayed in journal modal
+  let saveTimer = null;     // debounce handle for journal autosave
+
+  // Storage key helpers — all per-active-plan
+  function planPrefix()       { return 'ow_plan_' + activePlanId + '_'; }
+  function keyStartDate()     { return planPrefix() + 'start_date'; }
+  function keyDaily(dateStr)  { return planPrefix() + 'daily_' + dateStr; }
+  function keyJournal(dateStr){ return planPrefix() + 'journal_' + dateStr; }
+  function keyLastCheck()     { return planPrefix() + 'last_checked'; }
+  function keyAnchor()        { return planPrefix() + 'anchor'; }
+  function keyBestStreak()    { return planPrefix() + 'best_streak'; }
+  function journalPrefix()    { return planPrefix() + 'journal_'; }
+  function feedbackPrefix()   { return planPrefix() + 'feedback_'; }
+  function keyFeedback(dayNum, readingKey) {
+    return feedbackPrefix() + 'day' + dayNum + '_' + readingKey;
+  }
+
+  // TTS state
+  let ttsActiveKey = null;
+  let ttsActiveBtn = null;
+
+  // Feedback modal state
+  let feedbackCurrentKey    = null;
+  let feedbackCurrentDayNum = null;
+
+  // ─────────────────────────────────────
+  // TEXT-TO-SPEECH (Web Speech API)
+  // ─────────────────────────────────────
+  function speakReading(key, btn) {
+    if (!('speechSynthesis' in window)) {
+      showToast('TTS not supported in this browser.');
+      return;
+    }
+    // Toggle off if already speaking this reading
+    if (ttsActiveKey === key) {
+      stopTTS();
+      return;
+    }
+    stopTTS();
+
+    const item   = document.querySelector(`.check-item[data-group="readings"][data-key="${key}"]`);
+    if (!item) return;
+    const label  = item.querySelector('.check-label');
+    const sub    = item.querySelector('.check-sub');
+    const title  = label ? label.childNodes[0].textContent.trim() : key;
+    const refNote = sub  ? sub.textContent.trim() : '';
+    const text   = refNote ? `${title}. ${refNote}.` : `${title}.`;
+
+    const utt = new SpeechSynthesisUtterance(text);
+    utt.rate  = 0.9;
+    utt.onend = utt.onerror = () => {
+      ttsActiveKey = null;
+      ttsActiveBtn = null;
+      btn.classList.remove('active');
+      btn.setAttribute('aria-label', 'Listen to reading');
+      btn.textContent = '▶';
+    };
+
+    ttsActiveKey = key;
+    ttsActiveBtn = btn;
+    btn.classList.add('active');
+    btn.setAttribute('aria-label', 'Stop');
+    btn.textContent = '■';
+    window.speechSynthesis.speak(utt);
+  }
+
+  function stopTTS() {
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    if (ttsActiveBtn) {
+      ttsActiveBtn.classList.remove('active');
+      ttsActiveBtn.setAttribute('aria-label', 'Listen to reading');
+      ttsActiveBtn.textContent = '▶';
+    }
+    ttsActiveKey = null;
+    ttsActiveBtn = null;
+  }
+
+  // ─────────────────────────────────────
+  // READING FEEDBACK
+  // ─────────────────────────────────────
+  function getFeedback(dayNum, key) {
+    return localStorage.getItem(keyFeedback(dayNum, key)) || '';
+  }
+
+  function persistFeedback(dayNum, key, text) {
+    const sk = keyFeedback(dayNum, key);
+    if (text && text.trim()) {
+      localStorage.setItem(sk, text.trim());
+    } else {
+      localStorage.removeItem(sk);
+    }
+    // Sync visual indicator on the flag button
+    const item = document.querySelector(`.check-item[data-group="readings"][data-key="${key}"]`);
+    if (item) {
+      const flagBtn = item.querySelector('.flag-btn');
+      if (flagBtn) {
+        const has = !!text.trim();
+        flagBtn.classList.toggle('has-feedback', has);
+        flagBtn.title = has ? 'Edit your note' : 'Flag this reading';
+      }
+    }
+  }
+
+  function openFeedback(key) {
+    stopTTS();
+    const dayNum = getDayNumber();
+    feedbackCurrentKey    = key;
+    feedbackCurrentDayNum = dayNum;
+
+    const item   = document.querySelector(`.check-item[data-group="readings"][data-key="${key}"]`);
+    const label  = item && item.querySelector('.check-label');
+    const sub    = item && item.querySelector('.check-sub');
+    const title  = label ? label.childNodes[0].textContent.trim() : key;
+    const refNote = sub  ? sub.textContent.trim() : '';
+
+    document.getElementById('feedbackTrack').textContent = title;
+    document.getElementById('feedbackRef').textContent   = refNote || `Day ${dayNum}`;
+    document.getElementById('feedbackText').value        = getFeedback(dayNum, key);
+
+    document.getElementById('feedbackOverlay').classList.add('visible');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('feedbackText').focus(), 60);
+  }
+
+  function closeFeedback() {
+    document.getElementById('feedbackOverlay').classList.remove('visible');
+    if (!document.getElementById('journalModal').classList.contains('visible') &&
+        !document.getElementById('plansModal').classList.contains('visible')) {
+      document.body.style.overflow = '';
+    }
+    feedbackCurrentKey    = null;
+    feedbackCurrentDayNum = null;
+  }
+
+  function saveFeedbackAndClose() {
+    if (feedbackCurrentKey === null) return;
+    const text = document.getElementById('feedbackText').value;
+    persistFeedback(feedbackCurrentDayNum, feedbackCurrentKey, text);
+    closeFeedback();
+    showToast(text.trim() ? 'Note saved.' : 'Note cleared.');
+  }
+
+  // One-time migration of v0.1-v0.3 unprefixed keys into the watchman-90
+  // namespace. Leaves the originals in place so a rollback to an older build
+  // would still find the user's data.
+  function migrateLegacyData() {
+    if (localStorage.getItem(MIGRATION_FLAG)) return;
+    const planId = DEFAULT_PLAN_ID;
+    const prefix = 'ow_plan_' + planId + '_';
+
+    // Collect first; modifying localStorage mid-iteration shifts indices.
+    const toCopy = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (!k || k.startsWith('ow_plan_')) continue;
+      if (k.startsWith('ow_daily_')) {
+        toCopy.push([prefix + 'daily_' + k.slice('ow_daily_'.length), localStorage.getItem(k)]);
+      } else if (k.startsWith('ow_journal_')) {
+        toCopy.push([prefix + 'journal_' + k.slice('ow_journal_'.length), localStorage.getItem(k)]);
+      }
+    }
+    for (const [newKey, value] of toCopy) {
+      if (localStorage.getItem(newKey) == null) localStorage.setItem(newKey, value);
+    }
+
+    const start = localStorage.getItem('ow_start_date');
+    if (start && localStorage.getItem(prefix + 'start_date') == null) {
+      localStorage.setItem(prefix + 'start_date', start);
+    }
+    const lastCheck = localStorage.getItem('ow_last_checked');
+    if (lastCheck && localStorage.getItem(prefix + 'last_checked') == null) {
+      localStorage.setItem(prefix + 'last_checked', lastCheck);
+    }
+
+    if (localStorage.getItem(ACTIVE_PLAN_KEY) == null) {
+      localStorage.setItem(ACTIVE_PLAN_KEY, planId);
+    }
+    localStorage.setItem(MIGRATION_FLAG, '1');
+  }
 
   // ─────────────────────────────────────
   // DATE HELPERS
   // ─────────────────────────────────────
+  // Local-time YYYY-MM-DD. toISOString() is UTC and would roll the day over
+  // at 4-8pm for users in the Americas, splitting checks/journal across the
+  // wrong dates and breaking streaks.
+  function toLocalISO(d) {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
+  }
+
   function todayStr() {
-    const d = new Date();
-    return d.toISOString().split('T')[0];
+    return toLocalISO(new Date());
   }
 
   function getStartDate() {
-    let sd = localStorage.getItem(START_DATE_KEY);
+    let sd = localStorage.getItem(keyStartDate());
     if (!sd) {
       sd = todayStr();
-      localStorage.setItem(START_DATE_KEY, sd);
+      localStorage.setItem(keyStartDate(), sd);
     }
     return sd;
   }
 
   function getDayNumber() {
+    return getDayNumberFor(todayStr());
+  }
+
+  // Day number (1-based) for an arbitrary YYYY-MM-DD relative to start_date.
+  // Returns 0 or negative for dates before start. Returns >duration_days
+  // past the end of the plan — graduation logic depends on that overshoot,
+  // so display sites clamp at render time instead.
+  function getDayNumberFor(dateStr) {
     const start = new Date(getStartDate() + 'T00:00:00');
-    const today = new Date(todayStr() + 'T00:00:00');
-    const diff = Math.floor((today - start) / 86400000) + 1;
-    return Math.min(diff, 90);
+    const d     = new Date(dateStr + 'T00:00:00');
+    return Math.floor((d - start) / 86400000) + 1;
+  }
+
+  // Shift a YYYY-MM-DD by N days (positive or negative). Returns YYYY-MM-DD.
+  function shiftDate(dateStr, deltaDays) {
+    const d = new Date(dateStr + 'T00:00:00');
+    d.setDate(d.getDate() + deltaDays);
+    return toLocalISO(d);
   }
 
   function formatDateDisplay(dateStr) {
@@ -500,100 +1569,174 @@
   // DATA LOAD / SAVE
   // ─────────────────────────────────────
   function getTodayData() {
-    const raw = localStorage.getItem(DAILY_KEY + todayStr());
+    const raw = localStorage.getItem(keyDaily(todayStr()));
     return raw ? JSON.parse(raw) : {};
   }
 
   function saveTodayData(data) {
-    localStorage.setItem(DAILY_KEY + todayStr(), JSON.stringify(data));
+    localStorage.setItem(keyDaily(todayStr()), JSON.stringify(data));
   }
 
   // ─────────────────────────────────────
   // STREAK CALCULATION
   // ─────────────────────────────────────
   function isDayComplete(dateStr) {
-    const raw = localStorage.getItem(DAILY_KEY + dateStr);
+    const raw = localStorage.getItem(keyDaily(dateStr));
     if (!raw) return false;
     const data = JSON.parse(raw);
-    // All 11 items must be checked
-    const keys = [
-      'morning_wisdom','husbands_post','fathers_charge','citizens_stand','evening_peace',
-      'cold_shower','fasting','no_alcohol','no_screens','prayer_morning','prayer_evening'
-    ];
+    const keys = planKeys();
+    if (keys.length === 0) return false;
     return keys.every(k => data[k] === true);
   }
 
+  function gracePerWeek() {
+    return (plan && plan.streak_grace_per_week) || 0;
+  }
+
+  // Streak with a weekly grace allowance. Walking back from yesterday, an
+  // incomplete day no longer breaks the run outright — it "spends" grace, so
+  // long as no more than gracePerWeek() misses fall within any trailing
+  // 7-day window. This keeps one missed cold shower on a travel day from
+  // zeroing a 40-day run, while still ending the streak when a man truly
+  // stops showing up (a second miss inside the same week breaks it). On-brand
+  // theologically: liberty, not license (LBCF 21).
   function calculateStreak() {
     let streak = 0;
+    const allowance = gracePerWeek();
+    const graceSpentAt = [];   // days-ago indices where grace covered a miss
     const today = new Date(todayStr() + 'T00:00:00');
-    // Walk backwards from yesterday (today might still be in progress)
-    for (let i = 1; i <= 90; i++) {
+    const start = getStartDate();
+    const horizon = planDuration();
+    for (let i = 1; i <= horizon; i++) {
       const d = new Date(today);
       d.setDate(d.getDate() - i);
-      const ds = d.toISOString().split('T')[0];
+      const ds = toLocalISO(d);
+      // Don't walk (or spend grace) before the campaign began.
+      if (ds < start) break;
       if (isDayComplete(ds)) {
         streak++;
-      } else {
-        break;
+        continue;
       }
+      // Incomplete: cover it with grace if we have any left in this window.
+      const spentInWindow = graceSpentAt.filter(g => i - g < 7).length;
+      if (spentInWindow < allowance) {
+        graceSpentAt.push(i);
+        streak++;
+        continue;
+      }
+      break;
     }
     // If today is already complete, add 1
     if (isDayComplete(todayStr())) streak++;
     return streak;
   }
 
+  // How much grace remains in the current trailing week, for the UI.
+  // null when the plan grants none.
+  function graceInfo() {
+    const allowance = gracePerWeek();
+    if (allowance <= 0) return null;
+    const base = new Date(todayStr() + 'T00:00:00');
+    const start = getStartDate();
+    let misses = 0;
+    for (let i = 1; i <= 7; i++) {
+      const d = new Date(base);
+      d.setDate(d.getDate() - i);
+      const ds = toLocalISO(d);
+      if (ds < start) break;            // before the campaign began
+      if (!isDayComplete(ds)) misses++;
+    }
+    return { allowance, left: Math.max(0, allowance - misses) };
+  }
+
   // ─────────────────────────────────────
   // RENDER
   // ─────────────────────────────────────
   function render() {
-    const today = todayStr();
-    const data  = getTodayData();
-    const dayNum = getDayNumber();
+    const today    = todayStr();
+    const data     = getTodayData();
+    const dayNum   = getDayNumber();
+    const duration = planDuration();
 
-    // Day banner
-    document.getElementById('dayBanner').childNodes[0].textContent = `Day ${dayNum} of 90`;
+    // Day banner — clamp the displayed day so it never shows "Day 95 of 90".
+    // The unclamped dayNum is still used below for graduation detection.
+    const displayDay = Math.max(1, Math.min(dayNum, duration));
+    document.getElementById('dayBanner').childNodes[0].textContent = `Day ${displayDay} of ${duration}`;
     document.getElementById('dayDate').textContent = formatDateDisplay(today);
     document.getElementById('dateDisplay').textContent = `Tracking: ${formatDateDisplay(today)}`;
 
     // Restore checkboxes
     document.querySelectorAll('.check-item').forEach(item => {
       const key = item.dataset.key;
-      if (data[key]) {
-        item.classList.add('checked');
-      } else {
-        item.classList.remove('checked');
-      }
+      const checked = !!data[key];
+      item.classList.toggle('checked', checked);
+      item.setAttribute('aria-checked', checked ? 'true' : 'false');
     });
 
-    // Update badges
-    const readingsDone = ['morning_wisdom','husbands_post','fathers_charge','citizens_stand','evening_peace']
-      .filter(k => data[k]).length;
-    const discDone = ['cold_shower','fasting','no_alcohol','no_screens','prayer_morning','prayer_evening']
-      .filter(k => data[k]).length;
+    // Update badges — counts are keyed to the active plan's items
+    const readingKeys = (plan && plan.readings)    ? plan.readings.map(r => r.key)    : [];
+    const discKeys    = (plan && plan.disciplines) ? plan.disciplines.map(d => d.key) : [];
+    const readingsDone = readingKeys.filter(k => data[k]).length;
+    const discDone     = discKeys.filter(k => data[k]).length;
 
     const rBadge = document.getElementById('readingsBadge');
-    rBadge.textContent = `${readingsDone} / 5`;
-    rBadge.className = 'badge' + (readingsDone === 5 ? ' done' : '');
-
+    if (readingKeys.length > 0) {
+      rBadge.textContent = `${readingsDone} / ${readingKeys.length}`;
+      rBadge.className = 'badge' + (readingsDone === readingKeys.length ? ' done' : '');
+    }
     const dBadge = document.getElementById('discBadge');
-    dBadge.textContent = `${discDone} / 6`;
-    dBadge.className = 'badge' + (discDone === 6 ? ' done' : '');
+    if (discKeys.length > 0) {
+      dBadge.textContent = `${discDone} / ${discKeys.length}`;
+      dBadge.className = 'badge' + (discDone === discKeys.length ? ' done' : '');
+    }
 
     // Streak
     const streak = calculateStreak();
     document.getElementById('streakNum').textContent = streak;
 
-    // Progress bar (days completed out of 90)
-    const pct = Math.round((dayNum / 90) * 100);
-    document.getElementById('progressFill').style.width = pct + '%';
-    document.getElementById('progressPct').textContent = `Day ${dayNum} of 90`;
+    // Track best streak (used by the graduation screen)
+    const prevBest = parseInt(localStorage.getItem(keyBestStreak()) || '0', 10);
+    if (streak > prevBest) localStorage.setItem(keyBestStreak(), String(streak));
 
-    // All done today toast check
-    if (readingsDone === 5 && discDone === 6) {
-      const lastCheck = localStorage.getItem(LAST_CHECK_KEY);
+    // Grace indicator
+    const gi = graceInfo();
+    const giEl = document.getElementById('graceInfo');
+    if (gi) {
+      giEl.textContent = gi.left > 0
+        ? `🛡 ${gi.left} grace ${gi.left === 1 ? 'day' : 'days'} left`
+        : '🛡 grace spent this week';
+      giEl.style.display = '';
+    } else {
+      giEl.style.display = 'none';
+    }
+
+    // Lord's Day banner — Sunday only, and not once the plan is finished
+    // (Day 91+ the graduation screen owns the top of the page).
+    const past = dayNum > duration;
+    document.getElementById('lordsDay').classList.toggle(
+      'visible',
+      new Date().getDay() === 0 && !past
+    );
+
+    // Weekly confession anchor
+    renderConfessionAnchor(dayNum);
+
+    // Graduation card (Day > duration) takes over the main flow
+    renderGraduation(dayNum, streak);
+
+    // Progress bar (days completed out of plan duration) — clamped 0-100.
+    const pct = Math.max(0, Math.min(100, Math.round((dayNum / duration) * 100)));
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPct').textContent = `Day ${displayDay} of ${duration}`;
+
+    // All done today toast check — only when the plan actually has items to check
+    const totalItems = readingKeys.length + discKeys.length;
+    if (totalItems > 0 && (readingsDone + discDone) === totalItems) {
+      const lastCheck = localStorage.getItem(keyLastCheck());
       if (lastCheck !== today) {
-        localStorage.setItem(LAST_CHECK_KEY, today);
-        setTimeout(() => showToast('🔥 Day ' + dayNum + ' Complete! Watchman stands.'), 400);
+        localStorage.setItem(keyLastCheck(), today);
+        const msg = (plan && plan.completion_message) || 'Watchman stands.';
+        setTimeout(() => showToast('🔥 Day ' + dayNum + ' Complete! ' + msg), 400);
       }
     }
   }
@@ -614,8 +1757,8 @@
   // ─────────────────────────────────────
   function resetDay() {
     if (!confirm('Reset all checks for today?')) return;
-    localStorage.removeItem(DAILY_KEY + todayStr());
-    localStorage.removeItem(LAST_CHECK_KEY);
+    localStorage.removeItem(keyDaily(todayStr()));
+    localStorage.removeItem(keyLastCheck());
     render();
     showToast('Today reset.');
   }
@@ -650,6 +1793,672 @@
   });
 
   // ─────────────────────────────────────
+  // PLAN LOADER & DYNAMIC RENDERING
+  // ─────────────────────────────────────
+  // Cache the original hardcoded .check-sub text so we can fall back cleanly
+  // when no plan loads at all. Once a plan is loaded, the checklist DOM is
+  // rebuilt from plan.readings / plan.disciplines, replacing this fallback.
+  function cacheThemeLabels() {
+    document.querySelectorAll('.check-item .check-sub').forEach(el => {
+      if (!el.dataset.fallback) el.dataset.fallback = el.textContent;
+    });
+  }
+
+  async function loadRegistry() {
+    try {
+      const res = await fetch(REGISTRY_URL, { cache: 'default' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      registry = await res.json();
+    } catch (e) {
+      console.warn('Registry load failed; falling back to single plan:', e);
+      registry = null;
+    }
+
+    // Resolve active plan id: user choice > registry default > hardcoded default.
+    const stored = localStorage.getItem(ACTIVE_PLAN_KEY);
+    if (stored) {
+      activePlanId = stored;
+    } else if (registry && registry.default_plan) {
+      activePlanId = registry.default_plan;
+    } else {
+      activePlanId = DEFAULT_PLAN_ID;
+    }
+  }
+
+  // Switch the active plan, persist the choice, and reload the page so all
+  // state (start date, checks, journal, streak) re-reads from the new plan's
+  // storage namespace cleanly.
+  function switchPlan(planId) {
+    if (planId === activePlanId) return;
+    flushSave();  // save any pending journal text in the current plan first
+    localStorage.setItem(ACTIVE_PLAN_KEY, planId);
+    location.reload();
+  }
+
+  async function loadPlan() {
+    // Resolve plan file from registry if present; otherwise use the legacy path.
+    let planUrl = 'content/plans/' + activePlanId + '.json';
+    if (registry && Array.isArray(registry.plans)) {
+      const entry = registry.plans.find(p => p.id === activePlanId);
+      if (entry && entry.file) planUrl = entry.file;
+    }
+    try {
+      const res = await fetch(planUrl, { cache: 'default' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      plan = await res.json();
+    } catch (e) {
+      console.warn('Plan load failed (' + planUrl + '); using theme fallbacks:', e);
+      plan = null;
+    }
+  }
+
+  // Build a .check-item element matching the hardcoded HTML shape so all the
+  // existing CSS continues to apply unchanged.
+  function buildCheckItem(group, key, title, theme) {
+    const item = document.createElement('div');
+    item.className   = 'check-item';
+    item.dataset.group = group;
+    item.dataset.key   = key;
+    item.setAttribute('role', 'checkbox');
+    item.setAttribute('aria-checked', 'false');
+    item.tabIndex = 0;
+
+    const box = document.createElement('div');
+    box.className = 'check-box';
+
+    const label = document.createElement('div');
+    label.className = 'check-label';
+    label.textContent = title;
+
+    if (theme) {
+      const sub = document.createElement('span');
+      sub.className   = 'check-sub';
+      sub.textContent = theme;
+      sub.dataset.fallback = theme;
+      label.appendChild(sub);
+    }
+
+    item.appendChild(box);
+    item.appendChild(label);
+    item.addEventListener('click', () => toggle(item));
+
+    if (group === 'readings') {
+      const actions = document.createElement('div');
+      actions.className = 'reading-actions';
+
+      const ttsBtn = document.createElement('button');
+      ttsBtn.type = 'button';
+      ttsBtn.className = 'read-btn';
+      ttsBtn.title = 'Listen';
+      ttsBtn.setAttribute('aria-label', 'Listen to reading');
+      ttsBtn.textContent = '▶';
+      ttsBtn.addEventListener('click', e => { e.stopPropagation(); speakReading(key, ttsBtn); });
+
+      const flagBtn = document.createElement('button');
+      flagBtn.type = 'button';
+      flagBtn.className = 'flag-btn';
+      flagBtn.setAttribute('aria-label', 'Flag this reading');
+      const dayNum = getDayNumber();
+      const hasFb  = !!localStorage.getItem(keyFeedback(dayNum, key));
+      flagBtn.title = hasFb ? 'Edit your note' : 'Flag this reading';
+      flagBtn.textContent = '✏';
+      if (hasFb) flagBtn.classList.add('has-feedback');
+      flagBtn.addEventListener('click', e => { e.stopPropagation(); openFeedback(key); });
+
+      actions.appendChild(ttsBtn);
+      actions.appendChild(flagBtn);
+      item.appendChild(actions);
+    }
+
+    return item;
+  }
+
+  // Render the readings and disciplines cards from plan data. Hides a card
+  // entirely when the plan has zero items of that kind (e.g. Proverbs-31 has
+  // no disciplines). Called once after the plan loads.
+  function renderChecklist() {
+    if (!plan) return;
+    const readingsCard = document.getElementById('readingsCard');
+    const discCard     = document.getElementById('discCard');
+    const readingsList = document.getElementById('readingsList');
+    const discList     = document.getElementById('discList');
+    const readingsBadge = document.getElementById('readingsBadge');
+    const discBadge    = document.getElementById('discBadge');
+
+    const readings    = Array.isArray(plan.readings)    ? plan.readings    : [];
+    const disciplines = Array.isArray(plan.disciplines) ? plan.disciplines : [];
+
+    // READINGS
+    if (readings.length > 0) {
+      readingsList.replaceChildren(...readings.map(r =>
+        buildCheckItem('readings', r.key, r.title, r.theme || '')
+      ));
+      readingsBadge.textContent = `0 / ${readings.length}`;
+      readingsCard.style.display = '';
+    } else {
+      readingsCard.style.display = 'none';
+    }
+
+    // DISCIPLINES
+    if (disciplines.length > 0) {
+      discList.replaceChildren(...disciplines.map(d =>
+        buildCheckItem('disc', d.key, d.title, d.theme || '')
+      ));
+      discBadge.textContent = `0 / ${disciplines.length}`;
+      discCard.style.display = '';
+    } else {
+      discCard.style.display = 'none';
+    }
+
+    // Header / banner / progress reflect the loaded plan
+    if (plan.name)     document.querySelector('header h1').textContent = plan.name;
+    if (plan.subtitle) document.querySelector('header h2').textContent = plan.subtitle;
+  }
+
+  function applyPlan() {
+    const dayNum   = getDayNumber();
+    const dayEntry = plan && plan.days && plan.days.find(d => d.day === dayNum);
+
+    // Update reading labels (refs from plan, or fall back to theme)
+    document.querySelectorAll('.check-item[data-group="readings"]').forEach(item => {
+      const key    = item.dataset.key;
+      const subEl  = item.querySelector('.check-sub');
+      if (!subEl) return;
+      const reading = dayEntry && dayEntry.readings && dayEntry.readings[key];
+      if (reading && reading.ref) {
+        subEl.textContent = reading.note
+          ? `${reading.ref} — ${reading.note}`
+          : reading.ref;
+      } else {
+        subEl.textContent = subEl.dataset.fallback || subEl.textContent;
+      }
+    });
+
+    // Update reflection prompt
+    const refWrap = document.getElementById('reflection');
+    const refText = document.getElementById('reflectionText');
+    const prompt  = dayEntry && dayEntry.reflection_prompt;
+    if (prompt) {
+      refText.textContent = prompt;
+      refWrap.classList.add('visible');
+    } else {
+      refWrap.classList.remove('visible');
+    }
+  }
+
+  // Return every check-item key the active plan demands for daily completion.
+  // Falls back to the legacy watchman-90 key list when no plan is loaded so
+  // streak calculations still work on first run with an empty cache.
+  function planKeys() {
+    if (plan && Array.isArray(plan.readings) && Array.isArray(plan.disciplines)) {
+      return [
+        ...plan.readings.map(r => r.key),
+        ...plan.disciplines.map(d => d.key)
+      ];
+    }
+    return [
+      'morning_wisdom','husbands_post','fathers_charge','citizens_stand','evening_peace',
+      'cold_shower','fasting','no_alcohol','no_screens','prayer_morning','prayer_evening'
+    ];
+  }
+
+  function planDuration() {
+    return (plan && plan.duration_days) || 90;
+  }
+
+  // ─────────────────────────────────────
+  // WEEKLY CONFESSION ANCHOR (LBCF 1689)
+  // ─────────────────────────────────────
+  // The plan defines an array of week-spanning anchors. Look up the one
+  // whose [day_start, day_end] contains today's plan day. Hidden cleanly
+  // when no anchors are defined or we're outside the plan window.
+  function renderConfessionAnchor(dayNum) {
+    const card = document.getElementById('confessionCard');
+    const anchors = plan && Array.isArray(plan.confession_anchors) ? plan.confession_anchors : [];
+    if (anchors.length === 0 || dayNum < 1 || dayNum > planDuration()) {
+      card.classList.remove('visible');
+      return;
+    }
+    const anchor = anchors.find(a => dayNum >= a.day_start && dayNum <= a.day_end);
+    if (!anchor) {
+      card.classList.remove('visible');
+      return;
+    }
+    document.getElementById('confTitle').textContent = anchor.title;
+    document.getElementById('confChapter').textContent =
+      ' · Chapter ' + anchor.chapter + ' · Week ' + anchor.week;
+    document.getElementById('confSummary').textContent = anchor.summary;
+    card.classList.add('visible');
+  }
+
+  // ─────────────────────────────────────
+  // GRADUATION (Day 91+)
+  // ─────────────────────────────────────
+  // When the user finishes the plan, swap the checklist for a debrief.
+  // Stats sourced from per-plan storage so each plan graduates independently.
+  function renderGraduation(dayNum, currentStreak) {
+    const card = document.getElementById('graduation');
+    const past = dayNum > planDuration();
+
+    // Hide / show the daily cards and reflection wholesale.
+    const readingsCard = document.getElementById('readingsCard');
+    const discCard    = document.getElementById('discCard');
+    const reflection  = document.getElementById('reflection');
+    const resetWrap   = document.querySelector('.reset-wrap');
+    const confession  = document.getElementById('confessionCard');
+
+    if (!past) {
+      card.classList.remove('visible');
+      return;
+    }
+
+    // Stats: completed days = days marked complete; best streak = persisted;
+    // entries = count of journal keys with content under this plan.
+    let completedDays = 0;
+    let entryCount    = 0;
+    const dailyPrefix   = planPrefix() + 'daily_';
+    const journalPref   = journalPrefix();
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (!k) continue;
+      if (k.startsWith(dailyPrefix)) {
+        const dateStr = k.slice(dailyPrefix.length);
+        if (isDayComplete(dateStr)) completedDays++;
+      } else if (k.startsWith(journalPref)) {
+        const v = localStorage.getItem(k);
+        if (v && v.trim()) entryCount++;
+      }
+    }
+    const bestStreak = Math.max(
+      parseInt(localStorage.getItem(keyBestStreak()) || '0', 10),
+      currentStreak
+    );
+
+    const grad = (plan && plan.graduation) || {};
+    document.getElementById('gradTitle').textContent =
+      grad.title || 'Watchman, you have stood your post.';
+    document.getElementById('gradBody').textContent =
+      grad.body  || 'The plan is complete. The post remains.';
+    document.getElementById('gradVerse').textContent =
+      grad.verse || '';
+
+    document.getElementById('gradStatDays').textContent    = completedDays;
+    document.getElementById('gradStatStreak').textContent  = bestStreak;
+    document.getElementById('gradStatEntries').textContent = entryCount;
+
+    if (readingsCard) readingsCard.style.display = 'none';
+    if (discCard)     discCard.style.display     = 'none';
+    if (reflection)   reflection.classList.remove('visible');
+    if (resetWrap)    resetWrap.style.display    = 'none';
+    if (confession)   confession.classList.remove('visible');
+
+    card.classList.add('visible');
+  }
+
+  // Reset the plan to start over from today. Confirmed via prompt. Clears
+  // start_date and last_checked but preserves journal entries and the
+  // anchor prayer — those are the user's history, not the plan's state.
+  function beginAgain() {
+    if (!confirm('Begin another 90 days from today?\n\nYour journal entries and anchor stay; check marks and start date reset.')) return;
+    localStorage.setItem(keyStartDate(), todayStr());
+    localStorage.removeItem(keyLastCheck());
+    // Wipe daily check records so the new round starts clean.
+    const toDelete = [];
+    const prefix = planPrefix() + 'daily_';
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith(prefix)) toDelete.push(k);
+    }
+    toDelete.forEach(k => localStorage.removeItem(k));
+    location.reload();
+  }
+
+  // ─────────────────────────────────────
+  // ANCHOR PRAYER
+  // ─────────────────────────────────────
+  function getAnchor()         { return localStorage.getItem(keyAnchor()) || ''; }
+  function setAnchor(text) {
+    const trimmed = (text || '').trim().slice(0, ANCHOR_MAX);
+    if (trimmed) localStorage.setItem(keyAnchor(), trimmed);
+    else         localStorage.removeItem(keyAnchor());
+  }
+
+  function renderAnchorDisplay() {
+    const wrap = document.getElementById('anchorDisplay');
+    const text = getAnchor();
+    const textEl = document.getElementById('anchorText');
+    if (text) {
+      textEl.textContent = text;
+      wrap.classList.remove('empty');
+    } else {
+      textEl.textContent = 'No anchor yet — tap edit to name one.';
+      wrap.classList.add('empty');
+    }
+  }
+
+  function editAnchor() {
+    const current = getAnchor();
+    const next = prompt(
+      'Your anchor prayer (what you are bringing before God across these 90 days):',
+      current
+    );
+    if (next === null) return;  // cancelled
+    setAnchor(next);
+    renderAnchorDisplay();
+    showToast(next.trim() ? 'Anchor saved.' : 'Anchor cleared.');
+  }
+
+  // ─────────────────────────────────────
+  // ONBOARDING (Day 0)
+  // ─────────────────────────────────────
+  function shouldShowOnboarding() {
+    return localStorage.getItem(ONBOARD_FLAG) !== '1';
+  }
+
+  function showOnboarding() {
+    document.getElementById('onboardAnchor').value = getAnchor();
+    document.getElementById('onboardOverlay').classList.add('visible');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('onboardAnchor').focus(), 100);
+  }
+
+  function finishOnboarding() {
+    const anchorText = document.getElementById('onboardAnchor').value;
+    setAnchor(anchorText);
+    localStorage.setItem(ONBOARD_FLAG, '1');
+    // Stamp the start date NOW so Day 1 is today, not whenever they first
+    // opened the app and bounced.
+    localStorage.setItem(keyStartDate(), todayStr());
+    document.getElementById('onboardOverlay').classList.remove('visible');
+    document.body.style.overflow = '';
+    render();
+    renderAnchorDisplay();
+    showToast('The post is yours. Stand watch.');
+  }
+
+  // ─────────────────────────────────────
+  // JOURNAL
+  // ─────────────────────────────────────
+  function getJournal(dateStr) {
+    return localStorage.getItem(keyJournal(dateStr)) || '';
+  }
+
+  function saveJournal(dateStr, text) {
+    if (text && text.length > 0) {
+      localStorage.setItem(keyJournal(dateStr), text);
+    } else {
+      localStorage.removeItem(keyJournal(dateStr));
+    }
+  }
+
+  function openJournal(dateStr) {
+    modalDateStr = dateStr || todayStr();
+    renderModal();
+    renderAnchorDisplay();  // anchor sits above the prompt
+    document.getElementById('journalModal').classList.add('visible');
+    document.body.style.overflow = 'hidden';
+    // Focus the textarea after the modal is visible
+    setTimeout(() => document.getElementById('modalText').focus(), 50);
+  }
+
+  function closeJournal() {
+    // Flush any pending save before closing
+    flushSave();
+    document.getElementById('journalModal').classList.remove('visible');
+    document.body.style.overflow = '';
+  }
+
+  function renderModal() {
+    const dateStr = modalDateStr;
+    const dayNum  = getDayNumberFor(dateStr);
+
+    // Header day/date
+    const dayEl  = document.getElementById('modalDay');
+    const dateEl = document.getElementById('modalDate');
+    const duration = planDuration();
+    if (dayNum >= 1 && dayNum <= duration) {
+      dayEl.textContent = `Day ${dayNum} of ${duration}`;
+    } else if (dayNum < 1) {
+      dayEl.textContent = 'Before Start';
+    } else {
+      dayEl.textContent = `Beyond Day ${duration}`;
+    }
+    dateEl.textContent = formatDateDisplay(dateStr);
+
+    // Prompt (only if plan has one for this day)
+    const promptWrap = document.getElementById('modalPrompt');
+    const promptText = document.getElementById('modalPromptText');
+    const dayEntry   = plan && plan.days && plan.days.find(d => d.day === dayNum);
+    const prompt     = dayEntry && dayEntry.reflection_prompt;
+    if (prompt) {
+      promptText.textContent = prompt;
+      promptWrap.classList.remove('empty');
+    } else {
+      promptText.textContent = '';
+      promptWrap.classList.add('empty');
+    }
+
+    // Body text
+    const textEl = document.getElementById('modalText');
+    textEl.value = getJournal(dateStr);
+
+    // Saved indicator: reset
+    document.getElementById('modalSaved').textContent = textEl.value ? 'Saved' : '';
+
+    // Nav buttons
+    const prev = document.getElementById('modalPrev');
+    const next = document.getElementById('modalNext');
+    prev.disabled = (dateStr <= getStartDate());
+    next.disabled = (dateStr >= todayStr());
+  }
+
+  function navigateJournal(delta) {
+    flushSave();
+    const next = shiftDate(modalDateStr, delta);
+    // Clamp to [startDate, today]
+    if (next < getStartDate()) return;
+    if (next > todayStr()) return;
+    modalDateStr = next;
+    renderModal();
+  }
+
+  function scheduleSave() {
+    document.getElementById('modalSaved').textContent = 'Saving...';
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(flushSave, 600);
+  }
+
+  function flushSave() {
+    if (saveTimer) {
+      clearTimeout(saveTimer);
+      saveTimer = null;
+    }
+    if (!modalDateStr) return;
+    const text = document.getElementById('modalText').value;
+    saveJournal(modalDateStr, text);
+    document.getElementById('modalSaved').textContent = text ? 'Saved' : '';
+  }
+
+  // Collect all journal entries for the active plan and trigger a markdown
+  // file download. Other plans' journals are not included; export only the
+  // plan you're currently in.
+  function exportJournal() {
+    const entries = [];
+    const prefix  = journalPrefix();
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith(prefix)) {
+        const dateStr = key.slice(prefix.length);
+        const text    = localStorage.getItem(key);
+        if (text && text.trim()) {
+          entries.push({ dateStr, text });
+        }
+      }
+    }
+    entries.sort((a, b) => a.dateStr.localeCompare(b.dateStr));
+
+    if (entries.length === 0) {
+      showToast('No journal entries yet.');
+      return;
+    }
+
+    const planName = (plan && plan.name) || 'Operation Watchman';
+    const lines = [
+      `# ${planName} — Journal`,
+      '',
+      `_Exported ${formatDateDisplay(todayStr())}_`,
+      `_Start date: ${formatDateDisplay(getStartDate())}_`,
+      '',
+      '---',
+      ''
+    ];
+    for (const { dateStr, text } of entries) {
+      const dayNum = getDayNumberFor(dateStr);
+      const dayLabel = (dayNum >= 1 && dayNum <= planDuration()) ? `Day ${dayNum}` : dateStr;
+      lines.push(`## ${dayLabel} — ${formatDateDisplay(dateStr)}`);
+      const dayEntry = plan && plan.days && plan.days.find(d => d.day === dayNum);
+      if (dayEntry && dayEntry.reflection_prompt) {
+        lines.push('');
+        lines.push(`> ${dayEntry.reflection_prompt}`);
+      }
+      lines.push('');
+      lines.push(text.trim());
+      lines.push('');
+      lines.push('---');
+      lines.push('');
+    }
+
+    // Append any reading feedback notes
+    const fbPrefix = feedbackPrefix();
+    const feedbackEntries = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith(fbPrefix)) {
+        const text = localStorage.getItem(k);
+        if (text && text.trim()) {
+          feedbackEntries.push({ label: k.slice(fbPrefix.length), text });
+        }
+      }
+    }
+    if (feedbackEntries.length > 0) {
+      feedbackEntries.sort((a, b) => a.label.localeCompare(b.label));
+      lines.push('## Reading Feedback Notes');
+      lines.push('');
+      lines.push('_Use these to refine the curriculum._');
+      lines.push('');
+      for (const { label, text } of feedbackEntries) {
+        lines.push(`### ${label}`);
+        lines.push('');
+        lines.push(text.trim());
+        lines.push('');
+      }
+      lines.push('---');
+      lines.push('');
+    }
+
+    const blob = new Blob([lines.join('\n')], { type: 'text/markdown' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = `${activePlanId}-journal-${todayStr()}.md`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    const fbCount = feedbackEntries.length;
+    const note    = fbCount > 0 ? ` + ${fbCount} feedback note${fbCount > 1 ? 's' : ''}` : '';
+    showToast(`Exported ${entries.length} entr${entries.length === 1 ? 'y' : 'ies'}${note}.`);
+  }
+
+  // ─────────────────────────────────────
+  // PLAN SWITCHER MODAL
+  // ─────────────────────────────────────
+  function openPlansModal() {
+    renderPlansModal();
+    document.getElementById('plansModal').classList.add('visible');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePlansModal() {
+    document.getElementById('plansModal').classList.remove('visible');
+    if (!document.getElementById('journalModal').classList.contains('visible')) {
+      document.body.style.overflow = '';
+    }
+  }
+
+  function renderPlansModal() {
+    const activeLabel = document.getElementById('plansActiveLabel');
+    const body        = document.getElementById('plansBody');
+    body.innerHTML    = '';
+
+    const plans = (registry && Array.isArray(registry.plans)) ? registry.plans : [];
+    if (plans.length === 0) {
+      activeLabel.textContent = 'No registry loaded';
+      const empty = document.createElement('div');
+      empty.className   = 'plan-card';
+      empty.textContent = 'Plan registry unavailable. Check your connection and reload.';
+      body.appendChild(empty);
+      return;
+    }
+
+    const active = plans.find(p => p.id === activePlanId);
+    activeLabel.textContent = active
+      ? 'Currently active: ' + active.name
+      : 'Currently active: ' + activePlanId;
+
+    for (const p of plans) {
+      const card = document.createElement('div');
+      card.className = 'plan-card' + (p.id === activePlanId ? ' active' : '');
+
+      const name = document.createElement('div');
+      name.className   = 'plan-name';
+      name.textContent = p.name || p.id;
+      card.appendChild(name);
+
+      if (p.subtitle) {
+        const sub = document.createElement('div');
+        sub.className   = 'plan-subtitle';
+        sub.textContent = p.subtitle;
+        card.appendChild(sub);
+      }
+      if (p.summary) {
+        const sum = document.createElement('div');
+        sum.className   = 'plan-summary';
+        sum.textContent = p.summary;
+        card.appendChild(sum);
+      }
+      if (p.duration_days) {
+        const meta = document.createElement('div');
+        meta.className   = 'plan-meta';
+        meta.textContent = p.duration_days + ' days';
+        card.appendChild(meta);
+      }
+
+      const actions = document.createElement('div');
+      actions.className = 'plan-actions';
+      if (p.id === activePlanId) {
+        const cur = document.createElement('span');
+        cur.className   = 'plan-current';
+        cur.textContent = 'Currently active';
+        actions.appendChild(cur);
+      } else {
+        const btn = document.createElement('button');
+        btn.className   = 'btn-activate';
+        btn.type        = 'button';
+        btn.textContent = 'Start this plan';
+        btn.addEventListener('click', () => {
+          if (confirm(`Switch to "${p.name || p.id}"?\n\nYour current plan's data stays saved. Switching reloads the app.`)) {
+            switchPlan(p.id);
+          }
+        });
+        actions.appendChild(btn);
+      }
+      card.appendChild(actions);
+      body.appendChild(card);
+    }
+  }
+
+  // ─────────────────────────────────────
   // SERVICE WORKER REGISTRATION
   // ─────────────────────────────────────
   if ('serviceWorker' in navigator) {
@@ -663,8 +2472,89 @@
   // ─────────────────────────────────────
   // INIT
   // ─────────────────────────────────────
-  getStartDate(); // ensure start date is set
-  render();
+  migrateLegacyData();  // copy v0.1-v0.3 keys into the watchman-90 namespace
+  cacheThemeLabels();   // preserve fallback text in case the plan never loads
+
+  // Make the hardcoded fallback check-items keyboard- and screen-reader-
+  // accessible (plan-rendered items get this in buildCheckItem).
+  document.querySelectorAll('.check-item').forEach(item => {
+    item.setAttribute('role', 'checkbox');
+    item.setAttribute('aria-checked', 'false');
+    item.tabIndex = 0;
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== ' ' && e.key !== 'Enter') return;
+    const item = e.target.closest && e.target.closest('.check-item');
+    if (!item) return;
+    e.preventDefault();  // stop Space from scrolling the page
+    toggle(item);
+  });
+  // First paint can't read user data yet — activePlanId resolves after the
+  // registry loads. So we delay the initial render until the chain completes.
+  loadRegistry()
+    .then(() => {
+      // Defer start_date stamping until the user finishes onboarding so
+      // Day 1 = the day they actually commit, not the day they peeked.
+      if (!shouldShowOnboarding()) getStartDate();
+      render();            // first paint with hardcoded HTML + empty state
+      return loadPlan();
+    })
+    .then(() => {
+      renderChecklist();   // rebuild readings + disciplines from plan
+      render();            // recompute badges, streak, banner with real counts
+      applyPlan();         // overlay scripture refs and reflection prompt
+      if (shouldShowOnboarding()) showOnboarding();
+    });
+
+  // Journal wiring (stop TTS when opening)
+  document.getElementById('journalBtn').addEventListener('click', () => { stopTTS(); openJournal(todayStr()); });
+  document.getElementById('modalClose').addEventListener('click', closeJournal);
+  document.getElementById('modalPrev').addEventListener('click', () => navigateJournal(-1));
+  document.getElementById('modalNext').addEventListener('click', () => navigateJournal(1));
+  document.getElementById('modalText').addEventListener('input', scheduleSave);
+  document.getElementById('btnExport').addEventListener('click', exportJournal);
+
+  // Plans modal wiring (stop TTS when opening)
+  document.getElementById('plansBtn').addEventListener('click', () => { stopTTS(); openPlansModal(); });
+  document.getElementById('plansClose').addEventListener('click', closePlansModal);
+
+  // Feedback modal wiring
+  document.getElementById('feedbackClose').addEventListener('click', closeFeedback);
+  document.getElementById('feedbackSave').addEventListener('click', saveFeedbackAndClose);
+  document.getElementById('feedbackClear').addEventListener('click', () => {
+    document.getElementById('feedbackText').value = '';
+  });
+
+  // Anchor prayer (inside the journal modal)
+  document.getElementById('anchorEditBtn').addEventListener('click', editAnchor);
+
+  // Onboarding
+  document.getElementById('onboardBegin').addEventListener('click', finishOnboarding);
+  document.getElementById('footerOnboard').addEventListener('click', (e) => {
+    e.preventDefault();
+    showOnboarding();
+  });
+
+  // Graduation actions
+  document.getElementById('gradAgainBtn').addEventListener('click', beginAgain);
+  document.getElementById('gradPlansBtn').addEventListener('click', openPlansModal);
+  document.getElementById('gradExportBtn').addEventListener('click', exportJournal);
+
+  // Close whichever modal is open with Escape; always stop TTS
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    stopTTS();
+    if (document.getElementById('feedbackOverlay').classList.contains('visible')) {
+      closeFeedback();
+    } else if (document.getElementById('plansModal').classList.contains('visible')) {
+      closePlansModal();
+    } else if (document.getElementById('journalModal').classList.contains('visible')) {
+      closeJournal();
+    }
+  });
+
+  // Save on page hide (mobile background, tab close)
+  window.addEventListener('pagehide', flushSave);
 </script>
 </body>
 </html>
