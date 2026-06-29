@@ -24,7 +24,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const PLAN_PATH = path.join('/home/user/operation-watchman', 'content/plans/watchman-90.json');
+const PLAN_PATH = path.join(__dirname, '..', 'content/plans/watchman-90.json');
 const existing = JSON.parse(fs.readFileSync(PLAN_PATH, 'utf8'));
 
 // ── Morning Wisdom: Proverbs 1-31, cycled, with a short note per chapter ──
@@ -172,52 +172,50 @@ const fathersCharge = [
 
 // ── Citizen's Stand — courage, civic righteousness, soldiering. Index 0-6 == days 1-7. ──
 const citizensStand = [
-  { ref: 'Romans 12', note: 'Be not conformed to this world.' },
-  { ref: 'Romans 13:1-7', note: 'Be subject to the governing authorities.' },
-  { ref: '1 Peter 2:13-17', note: 'Be subject for the Lord\'s sake to every human institution.' },
-  { ref: 'Daniel 3', note: 'Three men who would not bow.' },
-  { ref: 'Acts 5:29', note: 'We must obey God rather than men.' },
-  { ref: 'Matthew 5:13-16', note: 'You are the salt of the earth.' },
-  { ref: 'Jeremiah 29:4-7', note: 'Seek the welfare of the city.' },
-  // continue the arc
-  { ref: 'Daniel 1:8', note: 'Daniel resolved not to defile himself.' },
-  { ref: 'Joshua 1:9', note: 'Be strong and courageous. Do not be frightened.' },
-  { ref: 'Ephesians 6:10-18', note: 'Put on the whole armor of God.' },
-  { ref: 'Daniel 6:10', note: 'He got down on his knees as he had done previously.' },
-  { ref: '2 Timothy 2:3-4', note: 'Share in suffering as a good soldier of Christ Jesus.' },
-  { ref: 'Esther 4:14', note: 'For such a time as this.' },
-  { ref: 'Micah 6:8', note: 'Do justice, love kindness, walk humbly with your God.' },
-  { ref: 'Acts 4:18-20', note: 'We cannot but speak of what we have seen and heard.' },
-  { ref: 'Nehemiah 2:17-18', note: 'Let us rise up and build.' },
-  { ref: 'Proverbs 29:2', note: 'When the righteous increase, the people rejoice.' },
-  { ref: '1 Corinthians 16:13', note: 'Be watchful, stand firm, act like men, be strong.' },
-  { ref: 'Philippians 1:27', note: 'Let your manner of life be worthy of the gospel.' },
-  { ref: 'Matthew 22:21', note: 'Render to Caesar... and to God the things that are God\'s.' },
-  { ref: '1 Peter 2:9', note: 'A royal priesthood, that you may proclaim His excellencies.' },
-  { ref: 'Proverbs 21:1', note: 'The king\'s heart is a stream of water in the hand of the LORD.' },
-  { ref: 'Psalm 2', note: 'The nations rage, but the LORD holds them in derision.' },
-  { ref: 'Matthew 10:28', note: 'Do not fear those who kill the body but cannot kill the soul.' },
-  { ref: 'Romans 13:8-10', note: 'Love is the fulfilling of the law.' },
-  { ref: 'Titus 3:1-2', note: 'Be ready for every good work, speak evil of no one.' },
-  { ref: '1 Timothy 2:1-4', note: 'Pray for kings and all in high positions.' },
-  { ref: '1 Peter 3:14-16', note: 'Have no fear; honor Christ the Lord as holy.' },
-  { ref: 'Hebrews 11:32-34', note: 'Who through faith conquered kingdoms, enforced justice.' },
-  { ref: 'Proverbs 14:34', note: 'Righteousness exalts a nation.' },
-  { ref: 'Isaiah 1:17', note: 'Seek justice, correct oppression, bring justice to the fatherless.' },
-  { ref: 'Amos 5:24', note: 'Let justice roll down like waters.' },
-  { ref: 'Philippians 3:20', note: 'Our citizenship is in heaven.' },
-  { ref: 'James 1:27', note: 'Visit orphans and widows; keep oneself unstained from the world.' },
-  { ref: 'Proverbs 24:11-12', note: 'Rescue those who are being taken away to death.' },
-  { ref: 'Ecclesiastes 12:13-14', note: 'Fear God and keep His commandments; this is the whole duty of man.' },
-  { ref: '2 Chronicles 7:14', note: 'If My people humble themselves and pray, I will heal their land.' },
-  { ref: 'Psalm 33:12', note: 'Blessed is the nation whose God is the LORD.' },
-  { ref: 'Daniel 2:20-22', note: 'He removes kings and sets up kings.' },
-  { ref: 'Acts 17:26', note: 'He made from one man every nation, having determined their times.' },
-  { ref: 'Matthew 6:33', note: 'Seek first the kingdom of God and His righteousness.' },
-  { ref: 'Romans 14:17', note: 'The kingdom of God is righteousness, peace, and joy in the Holy Spirit.' },
-  { ref: 'Galatians 6:9-10', note: 'Let us not grow weary of doing good.' },
-  { ref: 'Colossians 3:23-24', note: 'Whatever you do, work heartily, as for the Lord.' },
-  { ref: 'Luke 19:13', note: 'Engage in business until I come.' },
+  { ref: "Ezekiel 33:1-9", note: "Set as a watchman: sound the trumpet, or their blood is on your hands." },
+  { ref: "Ezekiel 3:16-21", note: "I have made you a watchman for the house of Israel." },
+  { ref: "Ezekiel 2:1-7", note: "Son of man, stand on your feet; speak whether they hear or refuse." },
+  { ref: "Ezekiel 22:30", note: "I sought a man to stand in the gap before Me, but found none." },
+  { ref: "Daniel 1:8-21", note: "Daniel resolved that he would not defile himself." },
+  { ref: "Jeremiah 1:4-10", note: "Before I formed you in the womb I knew you; I appoint you over nations." },
+  { ref: "Ezekiel 1:1-3,26-28", note: "The likeness of the glory of the LORD by the river Chebar." },
+  { ref: "Ezekiel 34:1-10", note: "Woe to the shepherds who feed themselves and not the flock." },
+  { ref: "Ezekiel 34:11-16", note: "I Myself will search for My sheep and seek them out." },
+  { ref: "Ezekiel 36:24-28", note: "A new heart I will give you, and a new spirit I will put within you." },
+  { ref: "Ezekiel 37:1-14", note: "Son of man, can these dry bones live? Prophesy to the breath." },
+  { ref: "Ezekiel 18:30-32", note: "Repent and turn; why will you die, O house of Israel?" },
+  { ref: "Ezekiel 33:10-20", note: "I have no pleasure in the death of the wicked, but that he turn and live." },
+  { ref: "Ezekiel 13:1-9", note: "Woe to the prophets who have not gone up into the breaches." },
+  { ref: "Ezekiel 11:16-20", note: "I will give them one heart and put a new spirit within them." },
+  { ref: "Ezekiel 14:12-20", note: "Though Noah, Daniel, and Job were in it, they would deliver but themselves." },
+  { ref: "Ezekiel 16:60-63", note: "I will remember My covenant and establish an everlasting covenant." },
+  { ref: "Ezekiel 20:40-44", note: "You shall know that I am the LORD, when I deal with you for My name's sake." },
+  { ref: "Ezekiel 43:1-7", note: "The glory of the LORD filled the temple." },
+  { ref: "Ezekiel 47:1-12", note: "The river from the temple: everything will live where it flows." },
+  { ref: "Daniel 2:20-23", note: "He changes times and seasons; He removes kings and sets up kings." },
+  { ref: "Daniel 3:16-18", note: "Our God is able to deliver us; but if not, we will not serve your gods." },
+  { ref: "Daniel 4:34-37", note: "Those who walk in pride He is able to humble." },
+  { ref: "Daniel 6:10", note: "He got down on his knees three times a day, as he had done before." },
+  { ref: "Daniel 7:13-14", note: "To the Son of Man was given dominion and a kingdom that shall not pass away." },
+  { ref: "Daniel 9:3-19", note: "O Lord, hear; O Lord, forgive; for Your own sake, O my God." },
+  { ref: "Daniel 12:1-3", note: "Those who are wise shall shine like the brightness of the sky." },
+  { ref: "Jeremiah 6:16", note: "Stand by the roads; ask for the ancient paths, and walk in them." },
+  { ref: "Jeremiah 7:1-7", note: "Amend your ways; do not trust in deceptive words." },
+  { ref: "Jeremiah 17:5-8", note: "Blessed is the man who trusts in the LORD, like a tree planted by water." },
+  { ref: "Jeremiah 18:1-6", note: "Like clay in the potter's hand, so are you in My hand." },
+  { ref: "Jeremiah 20:9", note: "His word is in my heart like a burning fire shut up in my bones." },
+  { ref: "Jeremiah 23:1-6", note: "Woe to the shepherds who scatter; I will raise up a righteous Branch." },
+  { ref: "Jeremiah 29:4-7", note: "Seek the welfare of the city where I have sent you." },
+  { ref: "Jeremiah 31:31-34", note: "A new covenant: I will write My law on their hearts." },
+  { ref: "Lamentations 3:22-26", note: "His mercies are new every morning; great is Your faithfulness." },
+  { ref: "1 Corinthians 16:13", note: "Be watchful, stand firm, act like men, be strong." },
+  { ref: "Ephesians 6:10-18", note: "Put on the whole armor of God; stand against the schemes of the devil." },
+  { ref: "Acts 5:29", note: "We must obey God rather than men." },
+  { ref: "Matthew 5:13-16", note: "You are the salt of the earth and the light of the world." },
+  { ref: "2 Timothy 4:1-5", note: "Preach the word; be ready in season and out of season." },
+  { ref: "Hebrews 13:5-6", note: "The Lord is my helper; I will not fear what man can do to me." },
+  { ref: "1 Peter 3:14-16", note: "Honor Christ as holy, always ready to give a defense for the hope in you." },
+  { ref: "Revelation 2:10", note: "Be faithful unto death, and I will give you the crown of life." },
 ];
 
 // ── Evening Peace — a psalm for the night. Index 0-6 == days 1-7. ──
@@ -268,7 +266,24 @@ const eveningPeace = [
   { ref: 'Psalm 73', note: 'Whom have I in heaven but You?' },
   { ref: 'Psalm 27:13-14', note: 'Wait for the LORD; be strong, let your heart take courage.' },
   { ref: 'Psalm 18:1-3', note: 'I love You, O LORD, my strength.' },
+  // Gospels — the peace of Christ
+  { ref: "Matthew 11:28-30", note: "Come to Me, all who labor; My yoke is easy and My burden is light." },
+  { ref: "John 14:1-3", note: "Let not your hearts be troubled; I go to prepare a place for you." },
+  { ref: "John 14:27", note: "Peace I leave with you; My peace I give to you." },
+  { ref: "Matthew 6:25-34", note: "Do not be anxious; seek first the kingdom of God." },
+  { ref: "Philippians 4:4-9", note: "The peace of God will guard your hearts and minds in Christ Jesus." },
+  { ref: "Romans 8:31-39", note: "Nothing can separate us from the love of God in Christ Jesus." },
 ];
+
+// Evening Peace finale — Revelation across the graduation week (days 85-90).
+const eveningPeaceOverrides = {
+  85: { ref: "Revelation 1:9-18", note: "Fear not, I am the first and the last, the living One." },
+  86: { ref: "Revelation 5:9-14", note: "Worthy is the Lamb who was slain." },
+  87: { ref: "Revelation 7:9-17", note: "He will wipe away every tear from their eyes." },
+  88: { ref: "Revelation 19:6-9", note: "Blessed are those invited to the marriage supper of the Lamb." },
+  89: { ref: "Revelation 21:1-7", note: "Behold, I am making all things new." },
+  90: { ref: "Revelation 22:1-5,20", note: "No more night; they shall reign forever. Come, Lord Jesus." },
+};
 
 // ── Reflection prompts, 13 weekly blocks themed to the confession anchor. ──
 // Weeks 1-12 have 7 prompts; week 13 has 6 (days 85-90).
@@ -427,7 +442,7 @@ for (let day = 1; day <= 90; day++) {
       husbands_post:  pick(husbandsPost, day),
       fathers_charge: pick(fathersCharge, day),
       citizens_stand: pick(citizensStand, day),
-      evening_peace:  pick(eveningPeace, day),
+      evening_peace:  eveningPeaceOverrides[day] || pick(eveningPeace, day),
     },
   };
   days.push(entry);
@@ -439,13 +454,15 @@ const out = {
   name: existing.name,
   subtitle: existing.subtitle,
   duration_days: existing.duration_days,
-  version: 2,
+  version: 3,
   notes: 'Full 90-day curriculum (v0.6). Five reading tracks, each a curated scripture arc; days 1-7 preserve the original sample week. Reflection prompts are authored in 13 weekly blocks themed to that week\'s LBCF 1689 confession anchor. Generated by scripts/build-watchman-90.js — edit the arrays there and re-run, do not hand-edit this file.',
   completion_message: existing.completion_message,
   streak_grace_per_week: 1,
   graduation: existing.graduation,
   confession_anchors: existing.confession_anchors,
-  readings: existing.readings,
+  readings: existing.readings.map(r =>
+    r.key === 'citizens_stand' ? { ...r, theme: "Ezekiel \u00b7 Daniel \u00b7 Jeremiah \u00b7 The watchman's charge" } :
+    r.key === 'evening_peace'  ? { ...r, theme: 'Psalms \u00b7 Gospels \u00b7 Revelation \u00b7 Rest in Christ' } : r),
   disciplines: existing.disciplines,
   days,
 };
