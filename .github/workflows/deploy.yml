@@ -31,6 +31,9 @@ jobs:
           cp index.html manifest.json sw.js _site/
           cp -r icons _site/
           cp -r content _site/
+          # Custom domain — baked into every deploy so GitHub Pages doesn't
+          # drop it on the next run (Actions deploys can unset it otherwise).
+          echo 'watchman.usmcmin.org' > _site/CNAME
 
       - uses: actions/configure-pages@v5
 
