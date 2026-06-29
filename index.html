@@ -178,6 +178,21 @@
       background: rgba(212, 175, 55, 0.2);
       color: var(--gold);
     }
+    .card-header .voice-btn {
+      margin-left: auto;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+      line-height: 1;
+      transition: color 0.15s, background 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .card-header .voice-btn:hover { color: var(--gold); background: rgba(212,175,55,0.08); }
+    .card-header .voice-btn + .badge { margin-left: 8px; }
 
     /* CHECKLIST */
     .checklist { padding: 8px 0; }
@@ -986,6 +1001,26 @@
     }
     .feedback-save:hover { background: var(--gold-light); }
 
+    /* AUDIO SETTINGS CONTROLS */
+    .voice-select {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.88rem;
+      padding: 10px 12px;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .voice-select:focus { outline: none; border-color: var(--gold-dark); }
+    .rate-range {
+      width: 100%;
+      accent-color: var(--gold);
+      margin-top: 4px;
+    }
+
     /* FOOTER */
     .app-footer {
       text-align: center;
@@ -1056,6 +1091,7 @@
     <div class="card-header">
       <span class="icon">📖</span>
       <h3>Today's Readings</h3>
+      <button class="voice-btn" id="voiceBtn" type="button" aria-label="Audio settings" title="Audio settings">🔊</button>
       <span class="badge" id="readingsBadge">0 / 5</span>
     </div>
     <div class="checklist" id="readingsList">
@@ -1314,6 +1350,31 @@
   </div>
 </div>
 
+<!-- AUDIO SETTINGS SLIDE-UP MODAL -->
+<div class="feedback-overlay" id="audioOverlay" role="dialog" aria-modal="true" aria-labelledby="audioHeading">
+  <div class="feedback-modal">
+    <div class="feedback-header">
+      <div class="feedback-header-text">
+        <div class="feedback-track" id="audioHeading">Audio</div>
+        <div class="feedback-ref">Pick the reading voice and speed</div>
+      </div>
+      <button class="modal-close" id="audioClose" type="button" aria-label="Close">✕</button>
+    </div>
+    <div>
+      <label class="feedback-label" for="voiceSelect">Voice</label>
+      <select id="voiceSelect" class="voice-select" aria-label="Reading voice"></select>
+    </div>
+    <div>
+      <label class="feedback-label" for="rateRange">Speed — <span id="rateVal">0.95×</span></label>
+      <input type="range" id="rateRange" class="rate-range" min="0.6" max="1.4" step="0.05" value="0.95">
+    </div>
+    <div class="feedback-footer">
+      <button class="feedback-clear" id="voiceTest" type="button">▶ Test voice</button>
+      <button class="feedback-save" id="audioDone" type="button">Done</button>
+    </div>
+  </div>
+</div>
+
 <script>
   // ─────────────────────────────────────
   // CONSTANTS
@@ -1353,6 +1414,7 @@
   // TTS state
   let ttsActiveKey = null;
   let ttsActiveBtn = null;
+  let ttsVoices    = [];
 
   // Feedback modal state
   let feedbackCurrentKey    = null;
@@ -1361,9 +1423,90 @@
   // ─────────────────────────────────────
   // TEXT-TO-SPEECH (Web Speech API)
   // ─────────────────────────────────────
+  // Device-level prefs (not plan-namespaced — a voice is a property of the
+  // device/browser, shared across plans).
+  const TTS_VOICE_KEY = 'ow_tts_voice';
+  const TTS_RATE_KEY  = 'ow_tts_rate';
+
+  // Voices load asynchronously; getVoices() is often empty on first call and
+  // fills in after the 'voiceschanged' event. We cache them and rebuild the
+  // picker whenever the list changes.
+  function loadVoices() {
+    if (!('speechSynthesis' in window)) return;
+    ttsVoices = window.speechSynthesis.getVoices() || [];
+    if (document.getElementById('voiceSelect')) populateVoiceSelect();
+  }
+
+  function englishVoices() {
+    return ttsVoices.filter(v => /^en([-_]|$)/i.test(v.lang || ''));
+  }
+
+  // Heuristic quality ranking so the auto-picked default isn't the robotic
+  // fallback. Higher is better. Premium/neural names win, then known-good
+  // platform voices, then any en-US.
+  function rankVoice(v) {
+    const n = (v.name || '').toLowerCase();
+    let s = 0;
+    if (/natural|neural|enhanced|premium|siri/.test(n)) s += 100;
+    if (/google us english/.test(n))                    s += 60;
+    if (/\b(samantha|ava|allison|susan|evan|nathan|tom|alex|serena|karen|moira|daniel)\b/.test(n)) s += 40;
+    if (/en[-_]us/i.test(v.lang || ''))                 s += 20;
+    if (v.localService)                                 s += 5;   // offline-reliable
+    return s;
+  }
+
+  function bestVoices() {
+    return englishVoices().slice().sort((a, b) => rankVoice(b) - rankVoice(a));
+  }
+
+  function selectedVoice() {
+    const saved = localStorage.getItem(TTS_VOICE_KEY);
+    if (saved) {
+      const v = ttsVoices.find(x => x.name === saved);
+      if (v) return v;
+    }
+    const ranked = bestVoices();
+    return ranked[0] || ttsVoices[0] || null;
+  }
+
+  function ttsRate() {
+    const r = parseFloat(localStorage.getItem(TTS_RATE_KEY));
+    return (r >= 0.6 && r <= 1.4) ? r : 0.95;
+  }
+
+  function populateVoiceSelect() {
+    const sel = document.getElementById('voiceSelect');
+    if (!sel) return;
+    const ranked = bestVoices();
+    if (ranked.length === 0) {
+      sel.innerHTML = '<option value="">(no voices found yet)</option>';
+      return;
+    }
+    const current = selectedVoice();
+    sel.innerHTML = '';
+    ranked.forEach(v => {
+      const opt = document.createElement('option');
+      opt.value = v.name;
+      const tag = rankVoice(v) >= 100 ? ' ✦' : '';   // mark premium voices
+      opt.textContent = `${v.name} (${v.lang})${tag}`;
+      if (current && v.name === current.name) opt.selected = true;
+      sel.appendChild(opt);
+    });
+  }
+
+  // Apply the chosen voice/rate to an utterance. Replacing the em dash with a
+  // period gives the synth a real sentence break instead of a rushed run-on.
+  function configureUtterance(utt) {
+    const v = selectedVoice();
+    if (v) { utt.voice = v; utt.lang = v.lang; }
+    utt.rate  = ttsRate();
+    utt.pitch = 1.0;
+    return utt;
+  }
+
   function speakReading(key, btn) {
     if (!('speechSynthesis' in window)) {
-      showToast('TTS not supported in this browser.');
+      showToast('Audio not supported in this browser.');
       return;
     }
     // Toggle off if already speaking this reading
@@ -1378,11 +1521,10 @@
     const label  = item.querySelector('.check-label');
     const sub    = item.querySelector('.check-sub');
     const title  = label ? label.childNodes[0].textContent.trim() : key;
-    const refNote = sub  ? sub.textContent.trim() : '';
+    const refNote = sub  ? sub.textContent.trim().replace(/\s+—\s+/g, '. ') : '';
     const text   = refNote ? `${title}. ${refNote}.` : `${title}.`;
 
-    const utt = new SpeechSynthesisUtterance(text);
-    utt.rate  = 0.9;
+    const utt = configureUtterance(new SpeechSynthesisUtterance(text));
     utt.onend = utt.onerror = () => {
       ttsActiveKey = null;
       ttsActiveBtn = null;
@@ -1408,6 +1550,41 @@
     }
     ttsActiveKey = null;
     ttsActiveBtn = null;
+  }
+
+  // ─────────────────────────────────────
+  // AUDIO SETTINGS SHEET
+  // ─────────────────────────────────────
+  function openAudioSettings() {
+    stopTTS();
+    loadVoices();   // refresh in case voices arrived since load
+    const r = ttsRate();
+    document.getElementById('rateRange').value = r;
+    document.getElementById('rateVal').textContent = r.toFixed(2) + '×';
+    document.getElementById('audioOverlay').classList.add('visible');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeAudioSettings() {
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    document.getElementById('audioOverlay').classList.remove('visible');
+    const journalOpen = document.getElementById('journalModal').classList.contains('visible');
+    const plansOpen   = document.getElementById('plansModal').classList.contains('visible');
+    if (!journalOpen && !plansOpen) document.body.style.overflow = '';
+  }
+
+  function speakSample() {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const sel = document.getElementById('voiceSelect');
+    const utt = new SpeechSynthesisUtterance(
+      'The fear of the LORD is the beginning of wisdom. Stand your post.'
+    );
+    const v = ttsVoices.find(x => x.name === (sel && sel.value));
+    if (v) { utt.voice = v; utt.lang = v.lang; }
+    utt.rate  = parseFloat(document.getElementById('rateRange').value) || 0.95;
+    utt.pitch = 1.0;
+    window.speechSynthesis.speak(utt);
   }
 
   // ─────────────────────────────────────
@@ -2525,6 +2702,25 @@
     document.getElementById('feedbackText').value = '';
   });
 
+  // Audio settings wiring
+  if ('speechSynthesis' in window) {
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+  }
+  document.getElementById('voiceBtn').addEventListener('click', openAudioSettings);
+  document.getElementById('audioClose').addEventListener('click', closeAudioSettings);
+  document.getElementById('audioDone').addEventListener('click', closeAudioSettings);
+  document.getElementById('voiceTest').addEventListener('click', speakSample);
+  document.getElementById('voiceSelect').addEventListener('change', (e) => {
+    localStorage.setItem(TTS_VOICE_KEY, e.target.value);
+    speakSample();   // immediate preview of the new voice
+  });
+  document.getElementById('rateRange').addEventListener('input', (e) => {
+    const r = parseFloat(e.target.value);
+    document.getElementById('rateVal').textContent = r.toFixed(2) + '×';
+    localStorage.setItem(TTS_RATE_KEY, String(r));
+  });
+
   // Anchor prayer (inside the journal modal)
   document.getElementById('anchorEditBtn').addEventListener('click', editAnchor);
 
@@ -2544,7 +2740,9 @@
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
     stopTTS();
-    if (document.getElementById('feedbackOverlay').classList.contains('visible')) {
+    if (document.getElementById('audioOverlay').classList.contains('visible')) {
+      closeAudioSettings();
+    } else if (document.getElementById('feedbackOverlay').classList.contains('visible')) {
       closeFeedback();
     } else if (document.getElementById('plansModal').classList.contains('visible')) {
       closePlansModal();
